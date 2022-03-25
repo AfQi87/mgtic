@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActasController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -30,29 +28,20 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.table_list');
 	})->name('table');
 
-	Route::get('typography', function () {
-		return view('pages.typography');
-	})->name('typography');
+	Route::get('/actas',[ActasController::class, 'index'])->name('actas');
+	Route::post('/actas',[ActasController::class, 'guardarActa'])->name('actas');
+	Route::get('/responsables',[ActasController::class, 'responsables'])->name('responsables');
+	Route::get('/actas/eliminar/{id}',[ActasController::class, 'eliminar'])->name('elimActa');
 
 	Route::get('icons', function () {
 		return view('pages.icons');
 	})->name('icons');
 
-	Route::get('map', function () {
-		return view('pages.map');
-	})->name('map');
 
 	Route::get('notifications', function () {
 		return view('pages.notifications');
 	})->name('notifications');
 
-	Route::get('rtl-support', function () {
-		return view('pages.language');
-	})->name('language');
-
-	Route::get('upgrade', function () {
-		return view('pages.upgrade');
-	})->name('upgrade');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -61,4 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
+//Rutas usuarios
+Route::get('/user/formuser',[UserController::class, 'formuser'])->middleware(['auth']);
+Route::post('/user/formuser',[UserController::class, 'regusuario'])->middleware(['auth']);
+Route::get('/user/formactualizar/{id}',[UserController::class, 'formActualizar'])->middleware(['auth']);
+Route::post('/user/formactualizar/{id}',[UserController::class, 'actualizar'])->middleware(['auth']);
+Route::get('/user/delete/{id}', [UserController::class, 'delete'])->middleware(['auth']);
 
+// Route::get('/actas', [ActasController::class, 'show'])->middleware(['auth']);

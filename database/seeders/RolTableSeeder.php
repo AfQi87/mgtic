@@ -1,0 +1,28 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class RolTableSeeder extends Seeder
+{
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    DB::table('rol')->delete();
+    $rol = [
+      [
+        'id' => '1',
+        'rol' => 'Administrador'
+      ]
+
+    ];
+    DB::table('rol')->insert($rol);
+  }
+}

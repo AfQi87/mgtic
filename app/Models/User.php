@@ -21,6 +21,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'telefono',
+        'foto',
+        'cargo_id',
+        'rol_id',
+        'estado_id',
     ];
 
     /**
@@ -41,4 +46,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function estados(){
+        return $this->belongsTo(Estado::class,'estado_id','id');
+    }
+    public function roles(){
+        return $this->belongsTo(Rol::class,'rol_id','id');
+    }
+    public function cargos(){
+        return $this->belongsTo(Cargo::class,'cargo_id','id');
+    }
 }

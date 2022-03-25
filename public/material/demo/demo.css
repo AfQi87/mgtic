@@ -70,3 +70,7 @@
 {
   display:inline
 }
+
+.modal-backdrop.show {
+  position: relative !important;
+}

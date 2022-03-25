@@ -22,7 +22,7 @@
 
     <meta itemprop="image" content="https://s3.amazonaws.com/creativetim_bucket/products/154/opt_md_laravel_thumbnail.jpg">
 
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="product">
     <meta name="twitter:site" content="@creativetim">
@@ -48,12 +48,18 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
     <!-- CSS Files -->
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.3" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
-    <!-- Google Tag Manager -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
   </head>
 
@@ -68,13 +74,11 @@
       <div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
         <!--
                   Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-            
                   Tip 2: you can also add an image using data-image tag
               -->
         <div class="logo">
-          <a href="https://creative-tim.com/" class="simple-text logo-normal">
-            {{ __('Creative Tim') }}
-          </a>
+          <p class="simple-text logo-normal">Admin</p>
+
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
@@ -115,9 +119,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('typography') }}">
-                <i class="material-icons">library_books</i>
-                <p>{{ __('Typography') }}</p>
+              <a class="nav-link" href="{{ route('actas') }}">
+                <i class="material-icons">content_paste</i>
+                <p>{{ __('Actas') }}</p>
               </a>
             </li>
             <li class="nav-item">
@@ -127,21 +131,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('map') }}">
-                <i class="material-icons">location_ons</i>
-                <p>{{ __('Maps') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="{{ route('notifications') }}">
                 <i class="material-icons">notifications</i>
                 <p>{{ __('Notifications') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('language') }}">
-                <i class="material-icons">language</i>
-                <p>{{ __('RTL Support') }}</p>
               </a>
             </li>
 
@@ -163,7 +155,7 @@
               <span class="navbar-toggler-icon icon-bar"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end">
-              
+
               <ul class="navbar-nav">
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('home') }}">
@@ -173,22 +165,7 @@
                     </p>
                   </a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="material-icons">notifications</i>
-                    <span class="notification">5</span>
-                    <p class="d-lg-none d-md-block">
-                      Some Actions
-                    </p>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                    <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                    <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                    <a class="dropdown-item" href="#">Another Notification</a>
-                    <a class="dropdown-item" href="#">Another One</a>
-                  </div>
-                </li>
+
                 <li class="nav-item dropdown">
                   <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="material-icons">person</i>
@@ -214,65 +191,213 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header card-header-primary">
-                    <h4 class="card-title ">Users</h4>
-                    <p class="card-category"> Here you can manage users</p>
+                    <h4 class="card-title ">Usuarios</h4>
+                    <p class="card-category"> Usuarios registrados </p>
                   </div>
                   <div class="card-body">
                     <div class="row">
                       <div class="col-12 text-right">
-                        <a href="#" class="btn btn-sm btn-primary">Add user</a>
+                        <button type="button" id="btnreguser" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#ModalUsuario">
+                          Registrar
+                        </button>
                       </div>
                     </div>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead class=" text-primary">
-                          <tr>
-                            <th>
-                              Name
-                            </th>
-                            <th>
-                              Email
-                            </th>
-                            <th>
-                              Creation date
-                            </th>
-                            <th class="text-right">
-                              Actions
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              Admin Admin
-                            </td>
-                            <td>
-                              admin@material.com
-                            </td>
-                            <td>
-                              2020-02-24
-                            </td>
-                            <td class="td-actions text-right">
-                              <a rel="tooltip" class="btn btn-success btn-link" href="#" data-original-title="" title="">
-                                <i class="material-icons">edit</i>
-                                <div class="ripple-container"></div>
-                              </a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <!-- Modal Eliminar -->
+                    <div class="modal fade" id="actdesusuario" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel1">Eliminación</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            ¿Esta seguro que desea activar/desactivar el registro?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" id="btnActDesUsu" class="btn btn-danger">Confirmar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal Registro-->
+                    <div class="modal fade" id="ModalUsuario" tabindex="-1" aria-labelledby="ModalUsuarioLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="container">
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <form id="formreguser" class="form-horizontal">
+                                    @csrf
+                                    <div class="card ">
+                                      <div class="card-header card-header-primary">
+                                        <h4 class="card-title">Agregar Usuario</h4>
+                                      </div>
+                                      <div class="card-body ">
+                                        <div class="mb-3">
+                                          <label for="name" class="form-label">Nombre</label>
+                                          <input type="text" class="form-control" id="name" name="name" value="user1">
+                                        </div>
+                                        <div class="mb-3">
+                                          <label for="email" class="form-label">correo</label>
+                                          <input type="email" class="form-control" id="email" name="email" value="user1@gmail.com" aria-describedby="correoHelp">
+                                          <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
+                                        </div>
+                                        <div class="mb-3">
+                                          <label for="telefono" class="form-label">Teléfono</label>
+                                          <input type="number" class="form-control" id="telefono" name="telefono" value="111111">
+                                        </div>
+                                        <div class="mb-3">
+                                          <label for="foto" class="form-label">Imagen</label>
+                                          <input type="file" class="form-control" id="foto" name="foto">
+                                        </div>
+                                        <div class="mb-3">
+                                          <label for="password" class="form-label">Contraseña</label>
+                                          <input type="password" class="form-control" id="password" name="password">
+                                        </div>
+                                        <div class="mb-3">
+                                          <label class="form-label" for="cargo_id">Cargo</label>
+                                          <select class="form-select" id="cargo_id" name="cargo_id" required>
+                                            <option value="">Selecione un cargo</option>
+                                          </select>
+                                        </div>
+                                        <div class="mb-3">
+                                          <label class="form-label" for="rol_id">Rol</label>
+                                          <select class="form-select" id="rol_id" name="rol_id" required>
+                                            <option value="">Selecione un rol</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal fade" id="ModalUsuarioAct" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="container">
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <form id="formActUsuario" class="form-horizontal" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="card ">
+                                      <div class="card-header card-header-primary">
+                                        <h4 class="card-title">Agregar Usuario</h4>
+                                      </div>
+                                      <div class="card-body ">
+                                        <div class="row">
+                                          <div class="col-sm-8">
+                                            <div class="mb-3">
+                                              <label for="id_user_d" class="form-label">ID</label>
+                                              <input type="hidden" class="form-control" id="id_user" name="id_user">
+                                              <input type="text" class="form-control" id="id_user_d" name="id_user_d" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="name" class="form-label">Nombre</label>
+                                              <input type="text" class="form-control" id="name_act" name="name_act" value="user1">
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="telefono_act" class="form-label">Teléfono</label>
+                                              <input type="number" class="form-control" id="telefono_act" name="telefono_act" value="111111">
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="cargo_id_act">Cargo</label>
+                                              <select class="form-select" id="cargo_id_act" name="cargo_id_act" required>
+                                                <option value="">Selecione un cargo</option>
+                                              </select>
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="rol_id_act">Rol</label>
+                                              <select class="form-select" id="rol_id_act" name="rol_id_act" required>
+                                                <option value="">Selecione un rol</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            <div class="mb-3 .fotoact" id="fotoact">
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+
+
+                                      </div>
+                                    </div>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <div class="table-responsive">
+                    <table class="table" id="datatable_user" style="width: 90%;margin-left: 85px;">
+                      <thead class=" text-primary">
+                        <tr>
+                          <th>{{ __('id')}}</th>
+                          <th>{{ __('Name')}}</th>
+                          <th>{{ __('Email')}}</th>
+                          <th>{{ __('Phone')}}</th>
+                          <th>{{ __('Image')}}</th>
+                          <th>{{ __('Cargo')}}</th>
+                          <th>{{ __('Rol')}}</th>
+                          <th>{{ __('Estado')}}</th>
+                          <th>{{ __('Actions')}}</th>
+                        </tr>
+                      </thead>
+                      <tfoot class=" text-primary">
+                        <tr>
+                          <th>{{ __('Name')}}</th>
+                          <th>{{ __('Email')}}</th>
+                          <th>{{ __('Phone')}}</th>
+                          <th>{{ __('Image')}}</th>
+                          <th>{{ __('Cargo')}}</th>
+                          <th>{{ __('Rol')}}</th>
+                          <th>{{ __('Estado')}}</th>
+                          <th>{{ __('Actions')}}</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
                 </div>
-
               </div>
+
             </div>
           </div>
         </div>
-        <footer class="footer">
-          completar
-        </footer>
       </div>
+      <footer class="footer">
+        completar
+      </footer>
+    </div>
     </div>
 
 
@@ -320,36 +445,14 @@
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="{{ asset('material') }}/demo/demo.js"></script>
     <script src="{{ asset('material') }}/js/settings.js"></script>
-    <script>
-      // Facebook Pixel Code Don't Delete
-      ! function(f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function() {
-          n.callMethod ?
-            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = '2.0';
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s)
-      }(window,
-        document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-      try {
-        fbq('init', '111649226022273');
-        fbq('track', "PageView");
-      } catch (err) {
-        console.log('Facebook Track Error:', err);
-      }
-    </script>
-    <noscript>
-      <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
-    </noscript>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script><!-- Google Tag Manager -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="{{ url('/js/funciones.js')}}"></script>
+
     @stack('js')
   </body>
 

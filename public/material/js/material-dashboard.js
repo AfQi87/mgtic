@@ -165,16 +165,12 @@ md = {
   },
 
   showNotification: function(from, align) {
-    type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
-
-    color = Math.floor((Math.random() * 6) + 1);
-
     $.notify({
       icon: "add_alert",
-      message: "Welcome to <b>Material Dashboard Pro</b> - a beautiful admin panel for every web developer."
+      message: "Notificacion de prueba"
 
     }, {
-      type: type[color],
+      type: "success",
       timer: 3000,
       placement: {
         from: from,
@@ -732,3 +728,4 @@ function debounce(func, wait, immediate) {
     if (immediate && !timeout) func.apply(context, args);
   };
 };
+
