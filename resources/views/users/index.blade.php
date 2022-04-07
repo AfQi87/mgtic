@@ -42,9 +42,9 @@
     <meta property="og:description" content="Material Dashboard Laravel is a Free Material Bootstrap Admin Preset for Laravel with a fresh, new design inspired by Google's Material Design." />
     <meta property="og:site_name" content="Creative Tim" />
 
-    <title>{{ __('Material Dashboard Laravel - Free Frontend Preset for Laravel') }}</title>
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="{{ asset('material') }}/img/favicon.png">
+    <title>{{ __('MGTIC') }}</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="actas/logo.png">
+    <link rel="icon" type="image/png" href="actas/logo.png">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -68,7 +68,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-      <input type="hidden" name="_token" value="NKN81BvuQSzEbJlULUVrTDRewUlcAIJhPbOwli18">
+      @csrf
     </form>
     <div class="wrapper ">
       <div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
@@ -90,8 +90,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
-                <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
-                <p>{{ __('Laravel Examples') }}
+                <p>{{ __('Usuarios') }}
                   <b class="caret"></b>
                 </p>
               </a>
@@ -99,13 +98,13 @@
                 <ul class="nav">
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('profile.edit') }}">
-                      <span class="sidebar-mini"> UP </span>
+                      <span class="sidebar-mini"> PU </span>
                       <span class="sidebar-normal">{{ __('User profile') }} </span>
                     </a>
                   </li>
                   <li class="nav-item active">
                     <a class="nav-link" href="{{ route('user.index') }}">
-                      <span class="sidebar-mini"> UM </span>
+                      <span class="sidebar-mini"> LU </span>
                       <span class="sidebar-normal"> {{ __('User Management') }} </span>
                     </a>
                   </li>
@@ -145,7 +144,9 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand" href="#">User Management</a>
+              <a class="navbar-brand" href="#">
+                <img src="/actas/logo.png" alt="" width="80">
+              </a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
 
@@ -157,15 +158,7 @@
             <div class="collapse navbar-collapse justify-content-end">
 
               <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('home') }}">
-                    <i class="material-icons">dashboard</i>
-                    <p class="d-lg-none d-md-block">
-                      Stats
-                    </p>
-                  </a>
-                </li>
-
+                <div>{{ Auth::user()->name }}</div>
                 <li class="nav-item dropdown">
                   <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="material-icons">person</i>
@@ -175,9 +168,8 @@
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
                     <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
-                    <a class="dropdown-item" href="#">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log out</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar sesión</a>
                   </div>
                 </li>
               </ul>
@@ -287,7 +279,7 @@
                         </div>
                       </div>
                     </div>
-
+                    <!-- Actualizar Usuario  -->
                     <div class="modal fade" id="ModalUsuarioAct" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -335,16 +327,12 @@
                                             </div>
                                           </div>
                                           <div class="col-sm-4">
-                                            <div class="mb-3 .fotoact" id="fotoact">
-                                              
+                                            <div class="mb-3 fotoact" id="fotoact">
                                             </div>
                                           </div>
                                         </div>
-
-
                                       </div>
                                     </div>
-
                                 </div>
                               </div>
                             </div>
@@ -394,11 +382,34 @@
           </div>
         </div>
       </div>
-      <footer class="footer">
-        completar
-      </footer>
     </div>
     </div>
+    <footer style="position: absolute;bottom: 65px;width: 100%;height: 40px;">
+      <section class="">
+        <!-- Footer -->
+        <footer class="text-center text-white" style="background: linear-gradient(to right, #30b6d3, #5ca139, #f78c41);">
+          <!-- Grid container -->
+          <div class="container p-4 pb-0">
+            <!-- Section: CTA -->
+            <section class="">
+              <p class="d-flex justify-content-center align-items-center">
+                <span class="me-3">MGTIC - Universidad de Nariño</span>
+              </p>
+            </section>
+            <!-- Section: CTA -->
+          </div>
+          <!-- Grid container -->
+
+          <!-- Copyright -->
+          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-white" href="https://www.udenar.edu.co/">Universidad de Nariño</a>
+          </div>
+          <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+      </section>
+    </footer>
 
 
     <!--   Core JS Files   -->

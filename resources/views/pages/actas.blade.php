@@ -1,8 +1,8 @@
 @extends('layouts.app', ['activePage' => 'actas', 'titlePage' => __('Actas')])
 
 @section('content')
-<div class="content">
-  <div class="container-fluid">
+<div class="content mb-5">
+  <div class="container-fluid mb-5">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -11,8 +11,9 @@
           </div>
           <div class="card-body">
             <center><label class="col-sm-2 col-form-label">Acta No. {{ $acta->id }}</label></center>
-            <form action="{{url('actas')}}" class="form-horizontal" method="POST">
+            <form action="{{route('actas_guardar')}}" class="form-horizontal" method="POST">
               @csrf
+              <!-- Encabezado -->
               <div>
                 <div class="row">
                   <label class="col-sm-2 col-form-label">Tipo de reunion: </label>
@@ -39,21 +40,21 @@
                   <div class="col-sm-6">
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label class="col-form-label">Proceso </label>
-                        <input class="form-control" name="proceso" id="proceso" type="text" required>
+                        <label class="col-form-label" >Proceso </label>
+                        <input class="form-control" style="height: 60px;" name="proceso" id="proceso" type="text" required>
                       </div>
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label class="col-form-label">Lugar </label>
-                        <input class="form-control" name="lugar" id="lugar" type="text" required>
+                        <input class="form-control" style="height: 60px;" name="lugar" id="lugar" type="text" required>
                       </div>
                     </div>
                   </div>
                   <div class="col-sm-6"><br>
                     <div class="form-group">
                       <label class="col-form-label">Fecha Reunion</label><br>
-                      <input class="form-control" name="fecha" id="fecha" type="date" min="<?php echo date("Y-m-d"); ?>" value="<?php echo date("Y-m-d"); ?>" required>
+                      <input class="form-control" name="fecha" style="height: 60px;" id="fecha" type="date" min="<?php echo date("Y-m-d"); ?>" value="<?php echo date("Y-m-d"); ?>" required>
                     </div>
                   </div>
                 </div>
@@ -72,6 +73,7 @@
                   </div>
                 </div>
               </div>
+              <!-- Lista Asistentes -->
               <div>
                 <div class="row">
                   <div class="col-md-12">
@@ -110,6 +112,7 @@
                   </div>
                 </div>
               </div>
+              <!-- Orden del dia(programación) -->
               <div>
                 <div class="row">
                   <div class="col-md-12">
@@ -133,7 +136,7 @@
                             <tbody id="tabla_programacion">
                               <tr>
                                 <td>1</td>
-                                <td><input type="text" class="form-control" name="tematica[]" id="tematica[]"></td>
+                                <td><textarea name="tematica[]" id="tematica" class="form-control" cols="30" rows="4" required></textarea></td>
                                 <td>
                                   <select class="form-control" aria-label="Default select example" id="responsable1" name="responsable[]">
                                     <option selected>Seleccione una opción</option>
@@ -152,6 +155,7 @@
                   </div>
                 </div>
               </div>
+              <!-- Conclusiones -->
               <div>
                 <div class="row">
                   <div class="col-md-12">
@@ -175,7 +179,7 @@
                             <tbody id="tabla_conclusiones">
                               <tr>
                                 <td>1</td>
-                                <td><input type="text" class="form-control" name="conclusion[]" id="conclusion[]"></td>
+                                <td><textarea name="conclusion[]" id="conclusion" class="form-control" cols="30" rows="4" required></textarea></td>
                                 <td>
                                   <center><button type="button" class="btn btn-danger" onclick="eliminar_conclusion(1)">--</button></center>
                                 </td>
@@ -193,6 +197,7 @@
 
           <div class="text-center">
             <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{{ route('actas')}}" class="btn btn-danger">Cancelar</a>
           </div>
         </div>
         </form>
@@ -200,5 +205,5 @@
     </div>
   </div>
 </div>
-</div>
+
 @endsection

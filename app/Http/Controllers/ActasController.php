@@ -9,7 +9,9 @@ use App\Models\Conclusion;
 use App\Models\ListaAsistente;
 use App\Models\Programacion;
 use Illuminate\Support\Facades\Validator;
-
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Carbon;
 class ActasController extends Controller
 {
 	//
@@ -19,13 +21,21 @@ class ActasController extends Controller
 		return view('pages/lista_actas', compact('actas'));
 	}
 
-	public function pdf()
+	public function descargarPDF($id)
 	{
-		$actas = Acta::all();
-		$listaAsistentes = ListaAsistente::all();
-		$programacion = Programacion::all();
-		$conclusiones = conclusion::all();
-		return view('pages/actas', compact('acta', 'asistentes', 'programacion', 'conclusiones'));
+		$cont = 0;
+		$acta = Acta::findOrFail($id);
+		$listaAsistentes = ListaAsistente::where('acta_id', $id)->get();
+		$programaciones = Programacion::where('acta_id', $id)->get();
+		$conclusiones = conclusion::where('acta_id', $id)->get();
+		$fecha = Carbon::create($acta->fecha);
+		$horaIni = Carbon::create($acta->hora_inicio);
+		$horaFin = Carbon::create($acta->hora_fin);
+		$horaIni = $horaIni->format('h:i A');
+		$horaFin = $horaFin->format('h:i A');
+		$pdf = PDF::loadView('pages/pdfActas', compact('cont', 'acta', 'listaAsistentes', 'programaciones', 'conclusiones', 'fecha', 'horaIni', 'horaFin'));
+		return $pdf->download('Acta.pdf');
+		// return view('pages/pdfActas', compact('cont', 'acta', 'listaAsistentes', 'programaciones', 'conclusiones', 'fecha', 'horaIni', 'horaFin'));
 	}
 
 	public function formActa()
@@ -81,7 +91,7 @@ class ActasController extends Controller
 				$conclusion->save();
 			}
 		}
-		return redirect('table-list');
+		return redirect('acta');
 	}
 
 	public function responsables()
@@ -93,7 +103,18 @@ class ActasController extends Controller
 	public function eliminar($id)
 	{
 		$acta = Acta::findOrFail($id);
-		
+		$listaAsistentes = ListaAsistente::where('acta_id', $id)->get();
+		$programaciones = Programacion::where('acta_id', $id)->get();
+		$conclusiones = conclusion::where('acta_id', $id)->get();
+		foreach($listaAsistentes as $asistente){
+			$asistente->delete();
+		}
+		foreach($programaciones as $programacion){
+			$programacion->delete();
+		}
+		foreach($conclusiones as $conclusion){
+			$conclusion->delete();
+		}
 		$acta->delete();
 		return back()->withStatus(__('Acta eliminada correctamente'));
 	}

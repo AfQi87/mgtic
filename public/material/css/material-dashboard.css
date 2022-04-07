@@ -8773,23 +8773,23 @@ a.text-dark:focus {
 
 .btn.btn-primary {
   color: #fff;
-  background-color: #9c27b0;
-  border-color: #9c27b0;
+  background-color: #30b6d3;
+  border-color: #f78c41;
   box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
 }
 
 .btn.btn-primary:hover {
   color: #fff;
-  background-color: #9124a3;
-  border-color: #701c7e;
+  background-color: #5ca139;
+  border-color: #f78c41;
 }
 
 .btn.btn-primary:focus,
 .btn.btn-primary.focus,
 .btn.btn-primary:hover {
   color: #fff;
-  background-color: #9124a3;
-  border-color: #701c7e;
+  background-color: #5ca139;
+  border-color: #f78c41;
 }
 
 .btn.btn-primary:active,
@@ -8850,7 +8850,7 @@ a.text-dark:focus {
 
 .btn.btn-primary.btn-link {
   background-color: transparent;
-  color: #9c27b0;
+  color: #f78c41;
   box-shadow: none;
 }
 
@@ -8858,7 +8858,7 @@ a.text-dark:focus {
 .btn.btn-primary.btn-link:focus,
 .btn.btn-primary.btn-link:active {
   background-color: transparent;
-  color: #9c27b0;
+  color: #5ca139;
 }
 
 .btn.btn-secondary {
@@ -10879,7 +10879,7 @@ fieldset[disabled] .form-group.is-focused .form-check .form-check-label {
 }
 
 .form-check .form-check-input:checked+.form-check-sign .check {
-  background: #9c27b0;
+  background: linear-gradient(to bottom, #30b6d3, #5ca139, #f78c41);;
 }
 
 .form-check .form-check-input:checked+.form-check-sign .check:before {
@@ -16762,7 +16762,7 @@ label {
 .card.bg-primary,
 .card.card-rotate.bg-primary .front,
 .card.card-rotate.bg-primary .back {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  background: linear-gradient(60deg, #30b6d3, #5ca139, #f78c41);
 }
 
 .card .card-header-info .card-icon,

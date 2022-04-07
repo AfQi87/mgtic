@@ -28,10 +28,12 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.table_list');
 	})->name('table');
 
-	Route::get('/actas',[ActasController::class, 'index'])->name('actas');
-	Route::post('/actas',[ActasController::class, 'guardarActa'])->name('actas');
+	Route::get('/acta',[ActasController::class, 'index'])->name('actas');
+	Route::get('/formActa',[ActasController::class, 'formActa'])->name('formActa');
+	Route::post('/acta',[ActasController::class, 'guardarActa'])->name('actas_guardar');
 	Route::get('/responsables',[ActasController::class, 'responsables'])->name('responsables');
 	Route::get('/actas/eliminar/{id}',[ActasController::class, 'eliminar'])->name('elimActa');
+	Route::get('/descargarActa/{id}',[ActasController::class, 'descargarPDF'])->name('descargarActa');
 
 	Route::get('icons', function () {
 		return view('pages.icons');

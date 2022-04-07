@@ -322,7 +322,7 @@
   "Lithuania": "Lituania",
   "Load :perPage More": "Cargar :perPage Mas",
   "Log in": "Iniciar sesión",
-  "Log Out": "Finalizar sesión",
+  "Log Out": "Cerrar sesión",
   "Log Out Other Browser Sessions": "Cerrar las demás sesiones",
   "Login": "Iniciar sesión",
   "Logout": "Finalizar sesión",
@@ -725,5 +725,7 @@
   "Change password": "Cambiar contraseña",
   "Confirm New Password": "Confirmar nueva contraseña",
   "Edit Image": "Editar Imagen",
-  "User Image": "Imagen de Usuario"
+  "User Image": "Imagen de Usuario",
+  "User profile": "Perfil de usuario",
+  "User Management": "Lista usuarios"
 }

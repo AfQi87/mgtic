@@ -116,6 +116,14 @@ function editarUsuario(id) {
       }
 
       $('#fotoact').append('<center><img id="foto_mostrar" src="./images/' + datos.usuario.foto + '" alt="" width="280" height="335"></center><br><input type="file" class="form-control" id="foto_act" name="foto_act">');
+    } else {
+      var div = document.querySelector("#fotoact");
+      while (div.firstChild) {
+        div.removeChild(div.firstChild);
+      }
+
+      $('#fotoact').append('<center><img id="foto_mostrar" src="./avatar/avatar.png" alt="" width="280" height="335"></center><br><input type="file" class="form-control" id="foto_act" name="foto_act">');
+
     }
     const $cargo = document.querySelector("#cargo_id_act");
     for (let i = $cargo.options.length; i >= 0; i--) {
@@ -175,7 +183,7 @@ function agregar_conclusion() {
   cell1.innerHTML = cont;
 
   var cell2 = row.insertCell(1);
-  cell2.innerHTML = '<input type="text" class="form-control" name="conclusion[]" id="conclusion[]">';
+  cell2.innerHTML = '<textarea name="conclusion[]" id="conclusion" class="form-control" cols="30" rows="4" required></textarea>';
 
   var cell3 = row.insertCell(2);
   var button = document.createElement("button");
@@ -212,7 +220,7 @@ function agregar_programacion() {
   cell1.innerHTML = cont_prog - 1;
 
   var cell2 = row.insertCell(1);
-  cell2.innerHTML = '<input type="text" class="form-control" name="tematica[]" id="tematica[]">';
+  cell2.innerHTML = '<textarea name="tematica[]" id="tematica" class="form-control" cols="30" rows="4" required></textarea>';
 
   var cell3 = row.insertCell(2);
   cell3.innerHTML = '<select class="form-control" aria-label="Default select example" id="responsable' + (cont_prog - 1) + '" name="responsable[]"><option selected>Seleccione una opción</option>';
@@ -233,7 +241,7 @@ function agregar_programacion() {
   button.addEventListener("click", () => {
     if (bandera_prog <= 2) {
       toastr.success("Debe tener como minimo una tematica", 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     } else {
       event.target.parentNode.parentNode.remove();
       bandera_prog--;
@@ -245,7 +253,7 @@ function agregar_programacion() {
 function eliminar_programacion(x) {
   if (bandera_prog <= 2) {
     toastr.success("Debe tener como minimo una tematica", 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
   } else {
     console.log("Eliminar programacion")
     var table = document.getElementById("tabla_programacion");
