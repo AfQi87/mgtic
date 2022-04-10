@@ -161,7 +161,7 @@
                   <div class="col-md-12">
                     <div class="card">
                       <div class="card-header card-header-primary">
-                        <button type="button" class="btn btn-success" onclick="agregar_conclusion()" style="float: right;"><i class="bi bi-align-middle h5"></i></button>
+                        <button type="button" class="btn btn-success" onclick="agregarEstudio()" style="float: right;"><i class="bi bi-align-middle h5"></i></button>
                         <h4 class="card-title ">Conclusiones</h4>
                         <p class="card-category">escriba las conclusiones</p>
 

@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
       'email_verified_at' => now(),
       'password' => Hash::make('secret'),
       'telefono' => '1234567890',
-      'foto' => 'aaaaaaaaaaa',
+      'foto' => 'aaaa',
       'cargo_id' => 1,
       'rol_id' => 1,
       'estado_id' => 1,

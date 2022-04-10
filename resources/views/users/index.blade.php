@@ -124,15 +124,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('icons') }}">
-                <i class="material-icons">bubble_chart</i>
-                <p>{{ __('Icons') }}</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('notifications') }}">
-                <i class="material-icons">notifications</i>
-                <p>{{ __('Notifications') }}</p>
+              <a class="nav-link" href="{{ route('docentes') }}">
+                <i class="material-icons">content_paste</i>
+                <p>{{ __('Docentes') }}</p>
               </a>
             </li>
 
@@ -345,45 +339,44 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table" id="datatable_user" style="width: 90%;margin-left: 85px;">
-                      <thead class=" text-primary">
-                        <tr>
-                          <th>{{ __('id')}}</th>
-                          <th>{{ __('Name')}}</th>
-                          <th>{{ __('Email')}}</th>
-                          <th>{{ __('Phone')}}</th>
-                          <th>{{ __('Image')}}</th>
-                          <th>{{ __('Cargo')}}</th>
-                          <th>{{ __('Rol')}}</th>
-                          <th>{{ __('Estado')}}</th>
-                          <th>{{ __('Actions')}}</th>
-                        </tr>
-                      </thead>
-                      <tfoot class=" text-primary">
-                        <tr>
-                          <th>{{ __('Name')}}</th>
-                          <th>{{ __('Email')}}</th>
-                          <th>{{ __('Phone')}}</th>
-                          <th>{{ __('Image')}}</th>
-                          <th>{{ __('Cargo')}}</th>
-                          <th>{{ __('Rol')}}</th>
-                          <th>{{ __('Estado')}}</th>
-                          <th>{{ __('Actions')}}</th>
-                        </tr>
-                      </tfoot>
-                    </table>
+                    <div class="table-responsive">
+                      <table class="table" id="datatable_user">
+                        <thead class="text-primary text-center">
+                          <tr>
+                            <th>{{ __('id')}}</th>
+                            <th>{{ __('Name')}}</th>
+                            <th>{{ __('Email')}}</th>
+                            <th>{{ __('Phone')}}</th>
+                            <th>{{ __('Image')}}</th>
+                            <th>{{ __('Cargo')}}</th>
+                            <th>{{ __('Rol')}}</th>
+                            <th>{{ __('Estado')}}</th>
+                            <th>{{ __('Actions')}}</th>
+                          </tr>
+                        </thead>
+                        <tfoot class="text-primary">
+                          <tr>
+                            <th>{{ __('Name')}}</th>
+                            <th>{{ __('Email')}}</th>
+                            <th>{{ __('Phone')}}</th>
+                            <th>{{ __('Image')}}</th>
+                            <th>{{ __('Cargo')}}</th>
+                            <th>{{ __('Rol')}}</th>
+                            <th>{{ __('Estado')}}</th>
+                            <th>{{ __('Actions')}}</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
+
     <footer style="position: absolute;bottom: 65px;width: 100%;height: 40px;">
       <section class="">
         <!-- Footer -->

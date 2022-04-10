@@ -1,0 +1,8 @@
+.fotoDocente{
+  display: flex;
+  justify-content: center;
+}
+.zoom:hover {
+  transform: scale(1.5);
+  z-index: 1;
+}

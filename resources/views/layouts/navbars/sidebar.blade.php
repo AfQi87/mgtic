@@ -12,7 +12,7 @@
       <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('home') }}">
           <i class="material-icons">dashboard</i>
-            <p>{{ __('Dashboard') }}</p>
+          <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
@@ -41,25 +41,19 @@
       <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('table') }}">
           <i class="material-icons">content_paste</i>
-            <p>{{ __('Table List') }}</p>
+          <p>{{ __('Table List') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'actas' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('actas') }}">
           <i class="material-icons">content_paste</i>
-            <p>{{ __('Actas') }}</p>
+          <p>{{ __('Actas') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('icons') }}">
-          <i class="material-icons">bubble_chart</i>
-          <p>{{ __('Icons') }}</p>
-        </a>
-      </li>
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('notifications') }}">
-          <i class="material-icons">notifications</i>
-          <p>{{ __('Notifications') }}</p>
+      <li class="nav-item{{ $activePage == 'docentes' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('docentes') }}">
+          <i class="material-icons">content_paste</i>
+          <p>{{ __('Docentes') }}</p>
         </a>
       </li>
     </ul>

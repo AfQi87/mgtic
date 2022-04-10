@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Estado extends Model
+class Profesion extends Model
 {
     use HasFactory;
-    protected $table = 'estado';
-    public function user()
-    {
-        return $this->hasMany(User::class, 'id');
-    }
+
+    protected $table = 'profesion';
 
     public function docentes()
     {

@@ -28,7 +28,7 @@
             </div>
             @endif
             <div class="table-responsive">
-              <table class="table">
+              <table class="table" id="tablaActas">
                 <thead class=" text-primary">
                   <th class="text-center" style="width: 100px;">Acta</th>
                   <th class="text-center" style="width: 400px;">Reunion</th>

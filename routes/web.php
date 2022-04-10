@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActasController;
+use App\Http\Controllers\Docentes\DocenteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/home');
+	return redirect('/home');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
@@ -28,12 +29,12 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.table_list');
 	})->name('table');
 
-	Route::get('/acta',[ActasController::class, 'index'])->name('actas');
-	Route::get('/formActa',[ActasController::class, 'formActa'])->name('formActa');
-	Route::post('/acta',[ActasController::class, 'guardarActa'])->name('actas_guardar');
-	Route::get('/responsables',[ActasController::class, 'responsables'])->name('responsables');
-	Route::get('/actas/eliminar/{id}',[ActasController::class, 'eliminar'])->name('elimActa');
-	Route::get('/descargarActa/{id}',[ActasController::class, 'descargarPDF'])->name('descargarActa');
+	Route::get('/acta', [ActasController::class, 'index'])->name('actas');
+	Route::get('/formActa', [ActasController::class, 'formActa'])->name('formActa');
+	Route::post('/acta', [ActasController::class, 'guardarActa'])->name('actas_guardar');
+	Route::get('/responsables', [ActasController::class, 'responsables'])->name('responsables');
+	Route::get('/actas/eliminar/{id}', [ActasController::class, 'eliminar'])->name('elimActa');
+	Route::get('/descargarActa/{id}', [ActasController::class, 'descargarPDF'])->name('descargarActa');
 
 	Route::get('icons', function () {
 		return view('pages.icons');
@@ -43,7 +44,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('notifications', function () {
 		return view('pages.notifications');
 	})->name('notifications');
-
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -53,10 +53,21 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 //Rutas usuarios
-Route::get('/user/formuser',[UserController::class, 'formuser'])->middleware(['auth']);
-Route::post('/user/formuser',[UserController::class, 'regusuario'])->middleware(['auth']);
-Route::get('/user/formactualizar/{id}',[UserController::class, 'formActualizar'])->middleware(['auth']);
-Route::post('/user/formactualizar/{id}',[UserController::class, 'actualizar'])->middleware(['auth']);
+Route::get('/user/formuser', [UserController::class, 'formuser'])->middleware(['auth']);
+Route::post('/user/formuser', [UserController::class, 'regusuario'])->middleware(['auth']);
+Route::get('/user/formactualizar/{id}', [UserController::class, 'formActualizar'])->middleware(['auth']);
+Route::post('/user/formactualizar/{id}', [UserController::class, 'actualizar'])->middleware(['auth']);
 Route::get('/user/delete/{id}', [UserController::class, 'delete'])->middleware(['auth']);
 
-// Route::get('/actas', [ActasController::class, 'show'])->middleware(['auth']);
+///=================================================================================================docentes
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/docentes', [DocenteController::class, 'index'])->name('docentes');
+	Route::get('/docentes/form', [DocenteController::class, 'create'])->name('form');
+	Route::post('/docentes/form', [DocenteController::class, 'store'])->name('formStore');
+	Route::get('/docente/form/{id}', [DocenteController::class, 'edit'])->name('formEdit');
+	Route::post('/docente/actualizar/{id}', [DocenteController::class, 'update'])->name('formUpdate');
+	Route::get('/docente/delete/{id}', [DocenteController::class, 'delete'])->name('profesionDelete');
+	Route::get('/docente/show/{id}', [DocenteController::class, 'show'])->name('formShow');
+	Route::get('/docente/desactivar/{id}', [DocenteController::class, 'desactivar']);
+	Route::get('/docente/activar/{id}', [DocenteController::class, 'activar']);
+});

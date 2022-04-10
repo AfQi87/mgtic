@@ -18,7 +18,7 @@ class ActasController extends Controller
 	public function index()
 	{
 		$actas = Acta::all();
-		return view('pages/lista_actas', compact('actas'));
+		return view('pages/actas/lista_actas', compact('actas'));
 	}
 
 	public function descargarPDF($id)
@@ -33,7 +33,7 @@ class ActasController extends Controller
 		$horaFin = Carbon::create($acta->hora_fin);
 		$horaIni = $horaIni->format('h:i A');
 		$horaFin = $horaFin->format('h:i A');
-		$pdf = PDF::loadView('pages/pdfActas', compact('cont', 'acta', 'listaAsistentes', 'programaciones', 'conclusiones', 'fecha', 'horaIni', 'horaFin'));
+		$pdf = PDF::loadView('pages/actas/pdfActas', compact('cont', 'acta', 'listaAsistentes', 'programaciones', 'conclusiones', 'fecha', 'horaIni', 'horaFin'));
 		return $pdf->download('Acta.pdf');
 		// return view('pages/pdfActas', compact('cont', 'acta', 'listaAsistentes', 'programaciones', 'conclusiones', 'fecha', 'horaIni', 'horaFin'));
 	}
@@ -42,7 +42,7 @@ class ActasController extends Controller
 	{
 		$asistentes = Asistente::all();
 		$acta = Acta::latest()->first();
-		return view('pages/actas', compact('asistentes', 'acta'));
+		return view('pages/actas/actas', compact('asistentes', 'acta'));
 	}
 
 	public function guardarActa(Request $request)
