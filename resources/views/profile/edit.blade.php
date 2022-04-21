@@ -3,30 +3,29 @@
 @section('content')
 <div class="content">
   <div class="container-fluid">
+    @if (session('status'))
     <div class="row">
-      <div class="col-md-8">
-        <form method="post" action="{{ route('profile.update') }}" autocomplete="off" class="form-horizontal">
-          @csrf
-          @method('put')
-
+      <div class="col-sm-12">
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="material-icons">close</i>
+          </button>
+          <span>{{ session('status') }}</span>
+        </div>
+      </div>
+    </div>
+    @endif
+    <form method="post" action="{{ route('profile.update') }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
+      @csrf
+      @method('put')
+      <div class="row">
+        <div class="col-sm-8">
           <div class="card ">
             <div class="card-header card-header-primary">
               <h4 class="card-title">{{ __('Edit Profile') }}</h4>
               <p class="card-category">{{ __('User information') }}</p>
             </div>
             <div class="card-body ">
-              @if (session('status'))
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <i class="material-icons">close</i>
-                    </button>
-                    <span>{{ session('status') }}</span>
-                  </div>
-                </div>
-              </div>
-              @endif
               <div class="row">
                 <label class="col-sm-2 col-form-label">{{ __('Name') }}</label>
                 <div class="col-sm-7">
@@ -65,21 +64,22 @@
               <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
             </div>
           </div>
-        </form>
-      </div>
-      <div class="col-md-4">
-        <div class="card ">
-          <div class="card-header card-header-primary">
-            <h4 class="card-title">{{ __('Edit Image') }}</h4>
-            <p class="card-category">{{ __('User Image') }}</p>
+        </div>
+        <div class="col-sm-4">
+          <div class="card ">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">{{ __('Edit Image') }}</h4>
+            </div>
+            <div class="card-body" style="height: 233px; text-align:center">
+              <img src="images/{{auth()->user()->foto}}" alt="..."  height="190px" width="150px">
+            </div>
+            <div class="mb-1 p-1">
+              <input type="file" class="form-control" id="imagen" name="imagen">
+            </div>
           </div>
-          <div class="card-body" style="height: 233px; text-align:center">
-            <img src="images/{{auth()->user()->foto}}" alt="..." width="300px" height="200px">
-          </div>
-          <center><input type="file" name="imagen" id="imgen"></center>
         </div>
       </div>
-    </div>
+    </form>
 
     <div class="row">
       <div class="col-md-12">

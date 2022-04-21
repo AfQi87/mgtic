@@ -10,65 +10,57 @@
             <h4 class="card-title ">Formulario Actas</h4>
           </div>
           <div class="card-body">
-            <center><label class="col-sm-2 col-form-label">Acta No. {{ $acta->id }}</label></center>
+            {{-- <center><label class="col-sm-2 col-form-label">Acta No. {{ $acta->id }}</label></center> --}}
             <form action="{{route('actas_guardar')}}" class="form-horizontal" method="POST">
               @csrf
               <!-- Encabezado -->
               <div>
                 <div class="row">
                   <label class="col-sm-2 col-form-label">Tipo de reunion: </label>
-                  <label class="col-sm-1 col-form-label">Ordinaria </label>
+                  <label class="col-sm-2 col-form-label">Ordinaria </label>
                   <div class="col-sm-2">
                     <div class="form-group">
-                      <input class="form-control" value="1" name="reunion" id="ordinaria" type="radio" required>
+                      <input class="form-check-input" value="1" name="reunion" id="ordinaria" type="radio" required>
                     </div>
                   </div>
-                  <label class="col-sm-1 col-form-label">Extraordinaria </label>
-                  <div class="col-sm-2">
+                  <label class="col-sm-2 col-form-label">Extraordinaria </label>
+                  <div class="col-sm-1">
                     <div class="form-group">
-                      <input class="form-control" value="2" name="reunion" id="extraordinaria" type="radio" required>
+                      <input class="form-check-input" value="2" name="reunion" id="extraordinaria" type="radio" required>
                     </div>
                   </div>
-                  <label class="col-sm-1 col-form-label">Urgente </label>
-                  <div class="col-sm-2">
+                  <label class="col-sm-2 col-form-label">Urgente </label>
+                  <div class="col-sm-1">
                     <div class="form-group">
-                      <input class="form-control" value="3" name="reunion" id="urgente" type="radio" required>
+                      <input class="form-check-input" vclass="form-check-input"alue="3" name="reunion" id="urgente" type="radio" required>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="col-sm-12">
-                      <div class="form-group">
                         <label class="col-form-label" >Proceso </label>
                         <input class="form-control" style="height: 60px;" name="proceso" id="proceso" type="text" required>
-                      </div>
                     </div>
-                    <div class="col-sm-12">
-                      <div class="form-group">
+                    <div class="col-sm-12 mt-3">
                         <label class="col-form-label">Lugar </label>
                         <input class="form-control" style="height: 60px;" name="lugar" id="lugar" type="text" required>
-                      </div>
                     </div>
                   </div>
-                  <div class="col-sm-6"><br>
-                    <div class="form-group">
-                      <label class="col-form-label">Fecha Reunion</label><br>
+                  <div class="col-sm-6">
+                    <div class="col-sm-12">
+                      <label class="col-form-label">Fecha Reunion</label>
                       <input class="form-control" name="fecha" style="height: 60px;" id="fecha" type="date" min="<?php echo date("Y-m-d"); ?>" value="<?php echo date("Y-m-d"); ?>" required>
                     </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">Hora inicio </label>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <input class="form-control" name="hora_ini" id="hora_ini" type="time" required>
-                    </div>
-                  </div>
-                  <label class="col-sm-2 col-form-label">Hora finalizacion </label>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <input class="form-control" name="hora_fin" id="hora_fin" type="time" required>
+                    <div class="row p-3">
+                      <div class="col-sm-6">
+                        <label class="col-form-label">Hora inicio </label>
+                        <input class="form-control" name="hora_ini" id="hora_ini" type="time" style="height: 60px;" required>
+                      </div>
+                      <div class="col-sm-6">
+                          <label class="col-form-label">Hora finalizacion </label>
+                          <input class="form-control" name="hora_fin" id="hora_fin" type="time" style="height: 60px;" required>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -126,7 +118,6 @@
                         <div class="table-responsive">
                           <table class="table">
                             <thead class="text-primary">
-                              <th>No.</th>
                               <th>Tematica</th>
                               <th>Responsable</th>
                               <th>
@@ -135,10 +126,9 @@
                             </thead>
                             <tbody id="tabla_programacion">
                               <tr>
-                                <td>1</td>
                                 <td><textarea name="tematica[]" id="tematica" class="form-control" cols="30" rows="4" required></textarea></td>
                                 <td>
-                                  <select class="form-control" aria-label="Default select example" id="responsable1" name="responsable[]">
+                                  <select class="form-control" aria-label="Default select example" id="responsable1" name="responsable[]" required>
                                     <option selected>Seleccione una opción</option>
                                     @foreach($asistentes as $asistente)
                                     <option value="{{$asistente->id}}" class="form-control">{{$asistente->nombre}} - {{$asistente->dependencia}}</option>
@@ -161,7 +151,7 @@
                   <div class="col-md-12">
                     <div class="card">
                       <div class="card-header card-header-primary">
-                        <button type="button" class="btn btn-success" onclick="agregarEstudio()" style="float: right;"><i class="bi bi-align-middle h5"></i></button>
+                        <button type="button" class="btn btn-success" onclick="agregar_conclusion()" style="float: right;"><i class="bi bi-align-middle h5"></i></button>
                         <h4 class="card-title ">Conclusiones</h4>
                         <p class="card-category">escriba las conclusiones</p>
 
@@ -170,7 +160,6 @@
                         <div class="table-responsive">
                           <table class="table">
                             <thead class="text-primary">
-                              <th>No.</th>
                               <th>Conclusión</th>
                               <th>
                                 <center>Eliminar</center>
@@ -178,7 +167,6 @@
                             </thead>
                             <tbody id="tabla_conclusiones">
                               <tr>
-                                <td>1</td>
                                 <td><textarea name="conclusion[]" id="conclusion" class="form-control" cols="30" rows="4" required></textarea></td>
                                 <td>
                                   <center><button type="button" class="btn btn-danger" onclick="eliminar_conclusion(1)">--</button></center>

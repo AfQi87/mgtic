@@ -52,7 +52,7 @@
     <!-- CSS Files -->
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.3" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
+    <!-- <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" /> -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -129,7 +129,18 @@
                 <p>{{ __('Docentes') }}</p>
               </a>
             </li>
-
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('egresadosIndex') }}">
+                <i class="material-icons">content_paste</i>
+                <p>{{ __('Egresados') }}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('cortesIndex') }}">
+                <i class="material-icons">content_paste</i>
+                <p>{{ __('Cortes') }}</p>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -188,24 +199,6 @@
                         </button>
                       </div>
                     </div>
-                    <!-- Modal Eliminar -->
-                    <div class="modal fade" id="actdesusuario" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel1">Eliminación</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            ¿Esta seguro que desea activar/desactivar el registro?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" id="btnActDesUsu" class="btn btn-danger">Confirmar</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                     <!-- Modal Registro-->
                     <div class="modal fade" id="ModalUsuario" tabindex="-1" aria-labelledby="ModalUsuarioLabel" aria-hidden="true">
                       <div class="modal-dialog modal-xl">
@@ -225,38 +218,47 @@
                                         <h4 class="card-title">Agregar Usuario</h4>
                                       </div>
                                       <div class="card-body ">
-                                        <div class="mb-3">
-                                          <label for="name" class="form-label">Nombre</label>
-                                          <input type="text" class="form-control" id="name" name="name" value="user1">
-                                        </div>
-                                        <div class="mb-3">
-                                          <label for="email" class="form-label">correo</label>
-                                          <input type="email" class="form-control" id="email" name="email" value="user1@gmail.com" aria-describedby="correoHelp">
-                                          <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
-                                        </div>
-                                        <div class="mb-3">
-                                          <label for="telefono" class="form-label">Teléfono</label>
-                                          <input type="number" class="form-control" id="telefono" name="telefono" value="111111">
-                                        </div>
-                                        <div class="mb-3">
-                                          <label for="foto" class="form-label">Imagen</label>
-                                          <input type="file" class="form-control" id="foto" name="foto">
-                                        </div>
-                                        <div class="mb-3">
-                                          <label for="password" class="form-label">Contraseña</label>
-                                          <input type="password" class="form-control" id="password" name="password">
-                                        </div>
-                                        <div class="mb-3">
-                                          <label class="form-label" for="cargo_id">Cargo</label>
-                                          <select class="form-select" id="cargo_id" name="cargo_id" required>
-                                            <option value="">Selecione un cargo</option>
-                                          </select>
-                                        </div>
-                                        <div class="mb-3">
-                                          <label class="form-label" for="rol_id">Rol</label>
-                                          <select class="form-select" id="rol_id" name="rol_id" required>
-                                            <option value="">Selecione un rol</option>
-                                          </select>
+                                        <div class="row">
+                                          <div class="col-sm-8">
+                                            <div class="mb-3">
+                                              <label for="name" class="form-label">Nombre</label>
+                                              <input type="text" class="form-control" id="name" name="name" value="user1">
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="email" class="form-label">correo</label>
+                                              <input type="email" class="form-control" id="email" name="email" value="user1@gmail.com" aria-describedby="correoHelp">
+                                              <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="telefono" class="form-label">Teléfono</label>
+                                              <input type="number" class="form-control" id="telefono" name="telefono" value="111111">
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="password" class="form-label">Contraseña</label>
+                                              <input type="password" class="form-control" id="password" name="password">
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="cargo_id">Cargo</label>
+                                              <select class="form-select" id="cargo_id" name="cargo_id" required>
+                                                <option value="">Selecione un cargo</option>
+                                              </select>
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="rol_id">Rol</label>
+                                              <select class="form-select" id="rol_id" name="rol_id" required>
+                                                <option value="">Selecione un rol</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            <div>
+                                              <img id="imagenSeleccionada" style="max-width: 300px">
+                                            </div>
+                                            <div class="mb-3" >
+                                              <label for="foto" class="form-label">Imagen</label>
+                                              <input type="file" class="form-control" id="foto" name="foto">
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
@@ -354,8 +356,9 @@
                             <th>{{ __('Actions')}}</th>
                           </tr>
                         </thead>
-                        <tfoot class="text-primary">
+                        <tfoot class="text-primary text-center">
                           <tr>
+                            <th>{{ __('id')}}</th>
                             <th>{{ __('Name')}}</th>
                             <th>{{ __('Email')}}</th>
                             <th>{{ __('Phone')}}</th>
@@ -455,7 +458,10 @@
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="{{ url('/js/usuarios.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/funciones.js')}}"></script>
+    <script type="text/javascript" src="{{ url('/js/cortes.js')}}"></script>
 
     @stack('js')
   </body>

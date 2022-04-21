@@ -1,4 +1,4 @@
-<footer style="position: absolute;bottom: 50px;width: 100%;height: 40px;">
+<footer style="margin-top:100px">
   <section class="">
     <!-- Footer -->
     <footer class="text-center text-white" style="background: linear-gradient(to right, #30b6d3, #5ca139, #f78c41);">

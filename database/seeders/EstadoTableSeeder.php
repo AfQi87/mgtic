@@ -18,11 +18,11 @@ class EstadoTableSeeder extends Seeder
     DB::table('estado')->delete();
     $estado = [
       [
-        'id' => 0,
+        'id' => 1,
         'estado' => 'Inactivo'
       ],
       [
-        'id' => 1,
+        'id' => 2,
         'estado' => 'Activo'
       ]
 

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ActasController;
+use App\Http\Controllers\Cortes\CorteController;
 use App\Http\Controllers\Docentes\DocenteController;
+use App\Http\Controllers\Egresados\EgresadoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +59,8 @@ Route::get('/user/formuser', [UserController::class, 'formuser'])->middleware(['
 Route::post('/user/formuser', [UserController::class, 'regusuario'])->middleware(['auth']);
 Route::get('/user/formactualizar/{id}', [UserController::class, 'formActualizar'])->middleware(['auth']);
 Route::post('/user/formactualizar/{id}', [UserController::class, 'actualizar'])->middleware(['auth']);
-Route::get('/user/delete/{id}', [UserController::class, 'delete'])->middleware(['auth']);
+Route::get('/user/desactivar/{id}', [UserController::class, 'desactivar'])->middleware(['auth']);
+Route::get('/user/activar/{id}', [UserController::class, 'activar'])->middleware(['auth']);
 
 ///=================================================================================================docentes
 Route::group(['middleware' => 'auth'], function () {
@@ -70,4 +73,24 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/docente/show/{id}', [DocenteController::class, 'show'])->name('formShow');
 	Route::get('/docente/desactivar/{id}', [DocenteController::class, 'desactivar']);
 	Route::get('/docente/activar/{id}', [DocenteController::class, 'activar']);
+});
+
+///=================================================================================================egresados
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/egresados', [EgresadoController::class, 'index'])->name('egresadosIndex');
+	Route::get('/egresados/programas/{id}', [EgresadoController::class, 'programas'])->name('egresadosProg');
+	Route::post('/egresados/form', [EgresadoController::class, 'store'])->name('formStoreEgre');
+	Route::get('/egresados/form/{id}', [EgresadoController::class, 'edit'])->name('formEditEgre');
+	Route::post('/egresado/actualizar/{id}', [EgresadoController::class, 'update'])->name('formUpdateEgre');
+	Route::get('/egresado/desactivar/{id}', [EgresadoController::class, 'desactivar']);
+	Route::get('/egresado/activar/{id}', [EgresadoController::class, 'activar']);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/cortes', [CorteController::class, 'index'])->name('cortesIndex');
+	Route::post('/corte/form', [CorteController::class, 'store'])->name('formStoreCorte');
+	Route::get('/corte/form/{id}', [CorteController::class, 'edit'])->name('formEditCorte');
+	Route::post('/corte/actualizar/{id}', [CorteController::class, 'update'])->name('formUpdateCorte');
+	Route::get('/corte/desactivar/{id}', [CorteController::class, 'desactivar']);
+	Route::get('/corte/activar/{id}', [CorteController::class, 'activar']);
 });

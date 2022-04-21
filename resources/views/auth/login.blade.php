@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container" style="height: auto;">
-  <div class="mt-5 text-center">
-    <h3 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Maestría en Gestión de Tecnologías de la Información y del Conocimiento <br>
+  <div class=" text-center">
+    {{-- <h3 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Maestría en Gestión de Tecnologías de la Información y del Conocimiento <br>
       Departamento de Sistemas <br>
-      Universidad de Nariño</h3>
+      Universidad de Nariño</h3> --}}
   </div>
   <div class="row align-items-center">
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto mt-5">

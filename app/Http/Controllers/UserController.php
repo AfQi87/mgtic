@@ -27,9 +27,9 @@ class UserController extends Controller
         ->addColumn('accion', function ($user) {
           $acciones = '<a href="javascript:void(0)" onclick="editarUsuario(' . $user->id . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
           if ($user->estado_id == 1) {
-            $acciones .= '&nbsp<button type="button" id="' . $user->id . '" name="delete" class="actdesUser btn btn-danger"><i class="bi bi-x-lg"></i></button>';
+            $acciones .= '&nbsp<button type="button" id="' . $user->id . '" name="delete" class="desUser btn btn-danger"><i class="bi bi-x-lg"></i></button>';
           } else {
-            $acciones .= '&nbsp<button type="button" id="' . $user->id . '" name="delete" class="actdesUser btn btn-success"><i class="bi bi-check-lg"></i></button>';
+            $acciones .= '&nbsp<button type="button" id="' . $user->id . '" name="delete" class="actUser btn btn-success"><i class="bi bi-check-lg"></i></button>';
           }
           return $acciones;
         })
@@ -134,18 +134,19 @@ class UserController extends Controller
     }
   }
 
-  public function delete($id)
+  public function desactivar($id)
   {
     $user = User::findOrFail($id);
-    if ($user->estado_id == 0) {
-      $user->estado_id = 1;
-      $user->save();
-      return 0;
-    } else {
-      $user->estado_id = 0;
-      $user->save();
-      return 0;
-    }
-    return 1;
+    $user->estado_id = 0;
+    $user->save();
+    return 0;
+  }
+
+  public function activar($id)
+  {
+    $user = User::findOrFail($id);
+    $user->estado_id = 1;
+    $user->save();
+    return 0;
   }
 }

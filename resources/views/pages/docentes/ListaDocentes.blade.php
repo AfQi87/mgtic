@@ -208,7 +208,7 @@
 
             <!-- Tabla -->
             <div class="table-responsive">
-              <table class="table" id="tablaDocentes">
+              <table class="table table-hover" id="tablaDocentes">
                 <thead class=" text-primary text-center">
                   <th>ID</th>
                   <th>Foto</th>

@@ -2,6 +2,9 @@
   display: flex;
   justify-content: center;
 }
+.zoom{
+  border-radius: 45%;
+}
 .zoom:hover {
   transform: scale(1.5);
   z-index: 1;

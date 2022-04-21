@@ -1,5 +1,5 @@
-<footer>
-  <section class="">
+<footer >
+  <section>
     <!-- Footer -->
     <footer class="text-center text-white" style="background: rgb(58, 55, 55);">
       <!-- Grid container -->
