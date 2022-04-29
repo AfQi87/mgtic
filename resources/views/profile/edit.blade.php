@@ -71,10 +71,10 @@
               <h4 class="card-title">{{ __('Edit Image') }}</h4>
             </div>
             <div class="card-body" style="height: 233px; text-align:center">
-              <img src="images/{{auth()->user()->foto}}" alt="..."  height="190px" width="150px">
+              <img src="{{auth()->user()->foto != '' || auth()->user()->foto != null ? 'images/'.auth()->user()->foto : 'avatar/avatar.png'}}" alt="..." id="imagenSeleccionada" height="190px" width="150px">
             </div>
             <div class="mb-1 p-1">
-              <input type="file" class="form-control" id="imagen" name="imagen">
+              <input type="file" class="form-control" id="foto" name="foto">
             </div>
           </div>
         </div>

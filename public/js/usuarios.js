@@ -1,11 +1,4 @@
 $(document).ready(function () {
-
-  $("#tablaActas").dataTable({
-    "language": { "url": "//cdn.datatables.net/plug-ins/1.11.4/i18n/es_es.json" },
-    processing: true,
-    serversite: true,
-  });
-
   $("#datatable_user").dataTable({
     "language": { "url": "//cdn.datatables.net/plug-ins/1.11.4/i18n/es_es.json" },
     processing: true,
@@ -41,7 +34,6 @@ $(document).ready(function () {
     reader.readAsDataURL(this.files[0]);
   });
 
-  //=============================================================Registro actualizar
 
 });
 function cambiar() {
@@ -85,6 +77,10 @@ $('#formreguser').submit(function (e) {
     data: formData,
     contentType: false,
     processData: false,
+    beforeSend: function() {
+      toastr.warning("Validando datos por favor espere", 'Espere',
+      { timeOut: 5000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+    },
     success: function (response) {
       if (response == 0) {
         $('#formreguser')[0].reset();
@@ -100,7 +96,7 @@ $('#formreguser').submit(function (e) {
     error: function () {
       toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-    }
+    },
   });
 });
 //===============================================================Editar datos Usuario
@@ -111,7 +107,7 @@ function editarUsuario(id) {
     $('#id_user_d').val(datos.usuario.id);
     $('#name_act').val(datos.usuario.name);
     $('#telefono_act').val(datos.usuario.telefono);
-    if (datos.usuario.foto != '') {
+    if (datos.usuario.foto != '' || datos.usuario.foto != null) {
       var div = document.querySelector("#fotoact");
       while (div.firstChild) {
         div.removeChild(div.firstChild);

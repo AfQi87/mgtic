@@ -1,0 +1,105 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+h1{
+    font-family: 'Open Sans', sans-serif;
+}
+
+#titulo{
+    -webkit-text-stroke: 1px #0d244b;
+}
+
+
+h2{
+    font-family: 'Open Sans', sans-serif;
+    color: #0d244b;
+    text-transform:capitalize;
+}
+#seccion_azul{
+    background-color: #0d244b;
+    color: white;
+ 
+}
+#seccion_plan{
+    color: black;
+}
+
+#seccion_blanca{
+    background-color:white;
+    color: black;
+}
+
+#seccion_naranja{
+    background-color: #F9702B;;
+    color: white;
+    
+}
+
+
+.circulo{
+    background-color: #F9702B;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+    }
+
+.circulo img {
+    height: 60%; 
+}
+
+#img_pres{
+height: 600px;
+}
+
+#botones{
+    background-color: #F9702B;
+    text-transform:none;
+    font-size: 1.125rem;
+    
+}
+
+.card{
+    height: auto;
+}
+
+.card-img-top{
+    height: auto;
+
+}
+
+#formulario{
+    text-align: center;
+    font-size: large;
+    background-color:white;
+    color: black;
+}
+
+
+
+#pie{
+    color: white;
+    background-color: #0d244b;; 
+    
+}
+
+#pie2{
+    color: white;
+    background-color: #F9702B; 
+    
+}
+
+#titulo{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 70px;  
+}
+
+#etiqueta{
+    color: white;
+}
+
+#listas{
+    font-size: 16px;   
+}

@@ -26,8 +26,8 @@ class ProfileController extends Controller
    */
   public function update(ProfileRequest $request)
   {
-    if ($request->hasFile('imagen')) {
-      $file = $request->file('imagen');
+    if ($request->hasFile('foto')) {
+      $file = $request->file('foto');
       $extension = $file->getClientOriginalExtension();
       $filename = date('YmdHis') . '.' . $extension;
       $file->move('images/', $filename);

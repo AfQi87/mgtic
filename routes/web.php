@@ -4,7 +4,11 @@ use App\Http\Controllers\ActasController;
 use App\Http\Controllers\Cortes\CorteController;
 use App\Http\Controllers\Docentes\DocenteController;
 use App\Http\Controllers\Egresados\EgresadoController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Mail\ContactenosMailable;
+use FontLib\Table\Type\name;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,51 +22,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-	return redirect('/home');
-});
+// Route::get('/', function () {
+// 	return redirect('/home');
+// });
+
+Route::get('/', [HomeController::class, 'inicio']);
+Route::post('/', [HomeController::class, 'enviar'])->name('enviar');
+
 
 require __DIR__ . '/auth.php';
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function () {
-	Route::get('table-list', function () {
-		return view('pages.table_list');
-	})->name('table');
+Route::get('table-list', function () {
+	return view('pages.table_list');
+})->name('table')->middleware(['auth']);
 
+
+//=================================================================================================Usuarios
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
+	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
+	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+	Route::get('/user/formuser', [UserController::class, 'formuser']);
+	Route::post('/user/formuser', [UserController::class, 'regusuario']);
+	Route::get('/user/formactualizar/{id}', [UserController::class, 'formActualizar']);
+	Route::post('/user/formactualizar/{id}', [UserController::class, 'actualizar']);
+	Route::get('/user/desactivar/{id}', [UserController::class, 'desactivar']);
+	Route::get('/user/activar/{id}', [UserController::class, 'activar']);
+});
+
+//==================================================================================================Actas
+Route::group(['middleware' => 'auth'], function () {
 	Route::get('/acta', [ActasController::class, 'index'])->name('actas');
 	Route::get('/formActa', [ActasController::class, 'formActa'])->name('formActa');
 	Route::post('/acta', [ActasController::class, 'guardarActa'])->name('actas_guardar');
 	Route::get('/responsables', [ActasController::class, 'responsables'])->name('responsables');
 	Route::get('/actas/eliminar/{id}', [ActasController::class, 'eliminar'])->name('elimActa');
 	Route::get('/descargarActa/{id}', [ActasController::class, 'descargarPDF'])->name('descargarActa');
-
-	Route::get('icons', function () {
-		return view('pages.icons');
-	})->name('icons');
-
-
-	Route::get('notifications', function () {
-		return view('pages.notifications');
-	})->name('notifications');
 });
-
-Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
-});
-//Rutas usuarios
-Route::get('/user/formuser', [UserController::class, 'formuser'])->middleware(['auth']);
-Route::post('/user/formuser', [UserController::class, 'regusuario'])->middleware(['auth']);
-Route::get('/user/formactualizar/{id}', [UserController::class, 'formActualizar'])->middleware(['auth']);
-Route::post('/user/formactualizar/{id}', [UserController::class, 'actualizar'])->middleware(['auth']);
-Route::get('/user/desactivar/{id}', [UserController::class, 'desactivar'])->middleware(['auth']);
-Route::get('/user/activar/{id}', [UserController::class, 'activar'])->middleware(['auth']);
-
-///=================================================================================================docentes
+///=================================================================================================Docentes
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/docentes', [DocenteController::class, 'index'])->name('docentes');
 	Route::get('/docentes/form', [DocenteController::class, 'create'])->name('form');
@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/egresado/activar/{id}', [EgresadoController::class, 'activar']);
 });
 
+///=================================================================================================cortes
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/cortes', [CorteController::class, 'index'])->name('cortesIndex');
 	Route::post('/corte/form', [CorteController::class, 'store'])->name('formStoreCorte');

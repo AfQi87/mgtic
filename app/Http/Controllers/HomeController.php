@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactenosMailable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+  public function inicio()
+  {
+    return view('inicio.index');
+  }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        return view('dashboard');
-    }
+  public function enviar(Request $request)
+  {
+    $correo = new ContactenosMailable($request->all());
+    Mail::to('mtic@udenar.edu.co')->send($correo);
+    return 0;
+  }
 }

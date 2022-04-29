@@ -111,36 +111,36 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('table') }}">
                 <i class="material-icons">content_paste</i>
                 <p>{{ __('Table List') }}</p>
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{ route('actas') }}">
                 <i class="material-icons">content_paste</i>
                 <p>{{ __('Actas') }}</p>
               </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('docentes') }}">
                 <i class="material-icons">content_paste</i>
                 <p>{{ __('Docentes') }}</p>
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{ route('egresadosIndex') }}">
                 <i class="material-icons">content_paste</i>
                 <p>{{ __('Egresados') }}</p>
               </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('cortesIndex') }}">
                 <i class="material-icons">content_paste</i>
                 <p>{{ __('Cortes') }}</p>
               </a>
-            </li>
+            </li> --}}
           </ul>
         </div>
       </div>
@@ -237,22 +237,28 @@
                                               <label for="password" class="form-label">Contraseña</label>
                                               <input type="password" class="form-control" id="password" name="password">
                                             </div>
-                                            <div class="mb-3">
-                                              <label class="form-label" for="cargo_id">Cargo</label>
-                                              <select class="form-select" id="cargo_id" name="cargo_id" required>
-                                                <option value="">Selecione un cargo</option>
-                                              </select>
-                                            </div>
-                                            <div class="mb-3">
-                                              <label class="form-label" for="rol_id">Rol</label>
-                                              <select class="form-select" id="rol_id" name="rol_id" required>
-                                                <option value="">Selecione un rol</option>
-                                              </select>
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <div class="mb-3">
+                                                  <label class="form-label" for="cargo_id">Cargo</label>
+                                                  <select class="form-select" id="cargo_id" name="cargo_id" required>
+                                                    <option value="">Selecione un cargo</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <div class="mb-3">
+                                                  <label class="form-label" for="rol_id">Rol</label>
+                                                  <select class="form-select" id="rol_id" name="rol_id" required>
+                                                    <option value="">Selecione un rol</option>
+                                                  </select>
+                                                </div>
+                                              </div>
                                             </div>
                                           </div>
                                           <div class="col-sm-4">
-                                            <div>
-                                              <img id="imagenSeleccionada" style="max-width: 300px">
+                                            <div class="rounded img-responsive" style="max-width: 300px">
+                                              <img id="imagenSeleccionada" src="avatar/avatar.png"  style="max-width: 300px">
                                             </div>
                                             <div class="mb-3" >
                                               <label for="foto" class="form-label">Imagen</label>
@@ -262,7 +268,6 @@
                                         </div>
                                       </div>
                                     </div>
-
                                 </div>
                               </div>
                             </div>
