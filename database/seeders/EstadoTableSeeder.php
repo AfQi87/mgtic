@@ -19,11 +19,11 @@ class EstadoTableSeeder extends Seeder
     $estado = [
       [
         'id' => 1,
-        'estado' => 'Inactivo'
+        'estado' => 'Activo'
       ],
       [
         'id' => 2,
-        'estado' => 'Activo'
+        'estado' => 'Inactivo'
       ]
 
     ];

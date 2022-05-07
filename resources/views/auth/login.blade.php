@@ -2,13 +2,20 @@
 
 @section('content')
 <div class="container" style="height: auto;">
-  <div class=" text-center">
-    {{-- <h3 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Maestría en Gestión de Tecnologías de la Información y del Conocimiento <br>
-      Departamento de Sistemas <br>
-      Universidad de Nariño</h3> --}}
-  </div>
   <div class="row align-items-center">
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto mt-5">
+      @if (session('status'))
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <i class="material-icons">close</i>
+            </button>
+            <span>{{ session('status') }}</span>
+          </div>
+        </div>
+      </div>
+      @endif
       <form class="form" method="POST" action="{{ route('login') }}">
         @csrf
         <div class="card card-login card-hidden mb-3">
@@ -20,7 +27,7 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    <i class="material-icons">email</i>
+                    <i class="material-icons">Correo</i>
                   </span>
                 </div>
                 <input type="email" name="email" class="form-control" placeholder="{{ __('Email') }}" value="{{ old('email', 'admin@material.com') }}" required>
@@ -35,7 +42,7 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    <i class="material-icons">lock_outline</i>
+                    <i class="material-icons">Contraseña</i>
                   </span>
                 </div>
                 <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" value="{{ !$errors->has('password') ? "secret" : "" }}" required>
@@ -56,7 +63,7 @@
             </div>
           </div>
           <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-primary btn-link btn-lg">{{ __('Lets Go') }}</button>
+            <button type="submit" class="btn btn-primary btn-link btn-lg" style="text-decoration: none;">{{ __('Lets Go') }}</button>
           </div>
           <div class="row">
             <div class="col-6 text-center">

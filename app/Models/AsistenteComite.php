@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Asistente extends Model
+class AsistenteComite extends Model
 {
     use HasFactory;
-    protected $table = 'asistente';
+    protected $table = 'asistente_comite';
     public function ListaAsistentes(){
         return $this->hasMany(ListaAsistente::class,'id');
     }
@@ -17,6 +17,6 @@ class Asistente extends Model
     }
 
     public function Tareas(){
-        return $this->hasMany(Tarea::class,'id');
+        return $this->hasMany(TareaComite::class,'id');
     }
 }

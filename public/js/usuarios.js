@@ -17,7 +17,6 @@ $(document).ready(function () {
       { data: "name" },
       { data: "email" },
       { data: "telefono" },
-      { data: "foto" },
       { data: "cargo" },
       { data: "rol" },
       { data: "estado" },
@@ -54,15 +53,8 @@ $('#btnreguser').click(function () {
     for (let i = ($cargo.options.length) + 1; i >= 0; i--) {
       $cargo.remove(i);
     }
-    const $rol = document.querySelector("#rol_id");
-    for (let i = ($rol.options.length) + 1; i >= 0; i--) {
-      $rol.remove(i);
-    }
     for (i = 0; i < datos.cargos.length; i++) {
       $("#cargo_id").append('<option value="' + datos.cargos[i].id + '">' + datos.cargos[i].cargo + '</option>');
-    }
-    for (i = 0; i < datos.roles.length; i++) {
-      $("#rol_id").append('<option value="' + datos.roles[i].id + '">' + datos.roles[i].rol + '</option>');
     }
   })
 })
@@ -107,7 +99,7 @@ function editarUsuario(id) {
     $('#id_user_d').val(datos.usuario.id);
     $('#name_act').val(datos.usuario.name);
     $('#telefono_act').val(datos.usuario.telefono);
-    if (datos.usuario.foto != '' || datos.usuario.foto != null) {
+    if (datos.usuario.foto != '' && datos.usuario.foto != null) {
       var div = document.querySelector("#fotoact");
       while (div.firstChild) {
         div.removeChild(div.firstChild);
@@ -212,7 +204,7 @@ $(document).on('click', '.desUser', function () {
   })
 });
 
-//=============================================================================================Activar Egresado
+//=============================================================================================Activar Usuario
 
 $(document).on('click', '.actUser', function () {
   idUser = $(this).attr('id');

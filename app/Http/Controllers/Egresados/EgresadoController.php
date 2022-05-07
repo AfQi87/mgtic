@@ -21,11 +21,7 @@ class EgresadoController extends Controller
         ->addColumn('accion', function ($persona) {
           $acciones = '';
           $acciones .= '<a href="javascript:void(0)" onclick="editarEgresado(' . $persona->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
-          if ($persona->estado_id == 1) {
-            $acciones .= '&nbsp<button type="button" id="' . $persona->ced_persona . '" name="delete" class="desEgresado btn btn-danger"><i class="bi bi-x-lg"></i></button>';
-          } else {
-            $acciones .= '&nbsp<button type="button" id="' . $persona->ced_persona . '" name="delete" class="actEgresado btn btn-success"><i class="bi bi-check-lg"></i></button>';
-          }
+          $acciones .= '&nbsp<button type="button" id="' . $persona->ced_persona . '" name="delete" class="deleteEgresado btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
         })
         ->addColumn('institucion', function ($persona) {
@@ -35,10 +31,6 @@ class EgresadoController extends Controller
         ->addColumn('programa', function ($persona) {
           $programa = $persona->programas->nom_programa;
           return $programa;
-        })
-        ->addColumn('estado', function ($persona) {
-          $estado = $persona->estados->estado;
-          return $estado;
         })
         ->rawColumns(['accion', 'institucion', 'programa', 'estado'])
         ->make(true);
@@ -76,7 +68,6 @@ class EgresadoController extends Controller
       $persona->email_persona = $request->correo;
       $persona->tel_persona = $request->telefono;
       $persona->programa = $request->programa;
-      $persona->estado_id = 1;
       $persona->save();
       return 0;
     }
@@ -122,22 +113,8 @@ class EgresadoController extends Controller
 
   public function destroy($id)
   {
-    //
-  }
-
-  public function desactivar($id)
-  {
-    $persona = Persona::findOrFail($id);
-    $persona->estado_id = 0;
-    $persona->save();
-    return 0;
-  }
-
-  public function activar($id)
-  {
-    $persona = Persona::findOrFail($id);
-    $persona->estado_id = 1;
-    $persona->save();
+    $egresado = Persona::findOrFail($id);
+    $egresado->delete();
     return 0;
   }
 }

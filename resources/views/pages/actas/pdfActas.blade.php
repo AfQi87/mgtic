@@ -6,11 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acta</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
     @page {
       margin: 0cm 0cm 0cm 0cm;
@@ -43,9 +40,16 @@
               <img src="../public/actas/logo.png" alt="" width="120" height="80">
             </td>
             <td class="text-center" rowspan="3" style="border:  1px solid">
+              @if($asistentes != 0)
               <b>Maestría en Gestión de Tecnologías de la Información y del Conocimiento</b><br>
               <b>Departamento de Sistemas</b><br>
               <b>Universidad de Nariño</b>
+              @else
+              <b>Departamento de Sistemas</b><br>
+              <b>Maestría en Gestión de Tecnologías de la Información y del Conocimiento</b><br>
+              <b>Maestría en Ingeniería de Sistemas y Computación </b><br>
+              <b>Universidad de Nariño</b>
+              @endif
             </td>
             <td style="border: rgb(197, 194, 194) 1px solid"></td>
           </tr>
@@ -130,10 +134,10 @@
         </tr>
         @foreach($listaAsistentes as $key => $asistente)
         <tr>
-          <td style="border: black 1px solid" align="center">{{ $key + 1 }}</td>
-          <td style="border: black 1px solid" align="center">{{ $asistente->asistentes->nombre }}</td>
+          <td style="border: black 1px solid; width:50px;" align="center">{{ $key + 1 }}</td>
+          <td style="border: black 1px solid; width:270px; padding-left:10px">{{ $asistente->asistentes->nombre }}</td>
           <td style="border: black 1px solid" align="center">{{ $asistente->asistentes->cargo }}</td>
-          <td style="border: black 1px solid" align="center">{{ $asistente->asistentes->dependencia }}</td>
+          <td style="border: black 1px solid; width:150px;" align="center">{{ $asistente->asistentes->dependencia }}</td>
         </tr>
         @endforeach
       </tbody>
@@ -155,9 +159,9 @@
         </tr>
         @foreach($programaciones as $key => $programacion)
         <tr>
-          <td style="border: black 1px solid" align="center">{{ $key + 1 }}</td>
-          <td style="border: black 1px solid">{{ $programacion->tematica }}</td>
-          <td style="border: black 1px solid" align="center">{{ $programacion->asistentes->dependencia }}</td>
+          <td style="border: black 1px solid; width:50px;" align="center">{{ $key + 1 }}</td>
+          <td style="border: black 1px solid; width:400px; padding-left:10px">{{ $programacion->tematica }}</td>
+          <td style="border: black 1px solid" align="center">{{ $asistentes != 0 ? 'Comité Curricular MGTIC' : 'Comité Curricular Maestrías Departamento de Sistemas'}}</td>
         </tr>
         @endforeach
       </tbody>
@@ -175,14 +179,37 @@
         </tr>
         @foreach($conclusiones as $key => $conclusion)
         <tr>
-          <td style="border: black 1px solid" align="center">{{ $key + 1 }}</td>
-          <td style="border: black 1px solid">{{ $conclusion->conclusion }}</td>
+          <td style="border: black 1px solid; width:50px;" align="center">{{ $key + 1 }}</td>
+          <td style="border: black 1px solid; padding-left:10px">{{ $conclusion->conclusion }}</td>
         </tr>
         @endforeach
       </tbody>
     </table>
   </div>
 
+  <!-- Tareas-->
+
+  <div class="mt-3">
+    <table class="table" style="border: black 1px solid" align="center">
+      <thead>
+        <th colspan="3" class="text-center">Tareas</th>
+      </thead>
+      <tbody>
+        <tr>
+          <th style="border: black 1px solid" class="text-center">No.</th>
+          <th style="border: black 1px solid" class="text-center">Tarea</th>
+          <th style="border: black 1px solid" class="text-center">Responsabole</th>
+        </tr>
+        @foreach($tareas as $key => $tarea)
+        <tr>
+          <td style="border: black 1px solid; width:50px;" align="center">{{ $key + 1 }}</td>
+          <td style="border: black 1px solid; width:400px; padding-left:10px">{{ $tarea->tarea }}</td>
+          <td style="border: black 1px solid" align="center">{{ $tarea->asistentes->cargo }}</td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
   <!-- Firmas -->
 
   <div class="mt-3">
@@ -191,31 +218,27 @@
     <table class="table" style="border: black 1px solid" align="center">
       <tbody>
         <tr>
-          <td style="height: 200px;width: 50%; border: black 1px solid"></td>
-          <td style="height: 200px;width: 50%; border: black 1px solid"></td>
-        </tr>
-        <tr>
-          <td style="border: black 1px solid" align="center" class="mt-10">
-            <b>LUIS OBEYMAR ESTRADA</b><br>
-            UDENAR – Presidente Comité Curricular <br>
-            MGTIC
+          <td style="height: 200px;width: 50%; border: black 1px solid;">
+            <div style="border-top: 1px solid #000;margin-top: 40%; height: 60px;" class="text-center">
+              <b>LUIS OBEYMAR ESTRADA</b><br>
+              UDENAR – Presidente Comité Curricular <br>
+              MGTIC
+            </div>
           </td>
-          <td style="border: black 1px solid" align="center" class="mt-100">
-            <b>RICARDO TIMARAN PEREIRA</b><br>
-            UDENAR – Coordinador MGTIC
+          <td style="height: 200px;width: 50%; border: black 1px solid">
+            <div style="border-top: 1px solid #000;margin-top: 40%; height: 60px;" class="text-center">
+              <b>RICARDO TIMARAN PEREIRA</b><br>
+              UDENAR – Coordinador MGTIC
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   <script type="text/php">
-      if ( isset($pdf) ) {
+    if ( isset($pdf) ) {
           $pdf->page_script('
               $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
               $pdf->text(474, 45, "Pagina: $PAGE_NUM de $PAGE_COUNT", $font, 9);

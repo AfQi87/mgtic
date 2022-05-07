@@ -103,7 +103,7 @@ class CorteController extends Controller
   public function desactivar($id)
   {
     $corte = Corte::findOrFail($id);
-    $corte->estado_id = 0;
+    $corte->estado_id = 2;
     $corte->save();
     return 0;
   }

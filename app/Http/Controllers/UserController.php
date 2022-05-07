@@ -61,13 +61,12 @@ class UserController extends Controller
   public function regusuario(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'name' => 'required|max:150',
-      'email' => 'required|unique:users,email|max:150|email',
-      'password' => 'required|min:8',
+      'nombre' => 'required|max:150',
+      'correo' => 'required|unique:users,email|max:150|email',
+      'documento' => 'required|min:8',
       'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
       'telefono' => 'required|min:10',
-      'cargo_id' => 'required',
-      'rol_id' => 'required',
+      'cargo' => 'required'
     ]);
     if ($validator->fails()) {
       return ($validator->errors());
@@ -81,13 +80,13 @@ class UserController extends Controller
         $filename = '';
       }
       $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
+        'name' => $request->nombre,
+        'email' => $request->correo,
+        'password' => Hash::make($request->documento),
         'telefono' => $request->telefono,
         'foto' => $filename,
-        'cargo_id' => $request->cargo_id,
-        'rol_id' => $request->rol_id,
+        'cargo_id' => $request->cargo,
+        'rol_id' => 1,
         'estado_id' => 1,
       ]);
       event(new Registered($user));
@@ -115,15 +114,15 @@ class UserController extends Controller
     if ($validator->fails()) {
       return ($validator->errors());
     } else {
+      $user = User::findOrFail($id);
       if ($request->hasFile('foto_act')) {
         $file = $request->file('foto_act');
         $extension = $file->getClientOriginalExtension();
         $filename = date('YmdHis') . '.' . $extension;
         $file->move('images/', $filename);
       }else{
-        $filename = '';
+        $filename = $user->foto;
       }
-      $user = User::findOrFail($id);
       $user->name = $request->name_act;
       $user->telefono = $request->telefono_act;
       $user->foto = $filename;
@@ -137,7 +136,7 @@ class UserController extends Controller
   public function desactivar($id)
   {
     $user = User::findOrFail($id);
-    $user->estado_id = 0;
+    $user->estado_id = 2;
     $user->save();
     return 0;
   }

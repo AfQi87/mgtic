@@ -7,10 +7,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Formulario Acta MGTIC</h4>
+            <h4 class="card-title ">Formulario Acta Comite</h4>
           </div>
           <div class="card-body">
-            <form action="{{route('actas_guardar')}}" class="form-horizontal" method="POST" id="acta">
+            <form action="{{route('actas_guardarComite')}}" class="form-horizontal" method="POST" id="actaComite">
               @csrf
               <!-- Encabezado -->
               <div>
@@ -80,7 +80,7 @@
                               <th>Id</th>
                               <th>Nombre</th>
                               <th>Cargo</th>
-                              <th>Dependencia</th>
+                              <th class="text-center">Dependencia</th>
                               <th>Seleccionar</th>
                             </thead>
                             <tbody>
@@ -89,7 +89,7 @@
                                 <td>{{ $asistente->id }}</td>
                                 <td>{{ $asistente->nombre }}</td>
                                 <td>{{ $asistente->cargo }}</td>
-                                <td>{{ $asistente->dependencia }}</td>
+                                <td style="max-width: 300px;" class="text-center">{{ $asistente->dependencia }}</td>
                                 <td class="text-center">
                                   <input type="checkbox" style="width: 15px;" class="asistente" value="{{ $asistente->id }}" name="asistente[]" id="asistente">
                                 </td>
@@ -177,7 +177,7 @@
                   <div class="col-md-12">
                     <div class="card">
                       <div class="card-header card-header-primary">
-                        <button type="button" class="btn btn-success" onclick="agregar_tarea()" style="float: right;"><i class="bi bi-align-middle h5"></i></button>
+                        <button type="button" class="btn btn-success" onclick="agregar_tareaC()" style="float: right;"><i class="bi bi-align-middle h5"></i></button>
                         <h4 class="card-title ">Tareas</h4>
                         <p class="card-category">Escriba las tareas</p>
                       </div>
@@ -201,7 +201,7 @@
                                     @endforeach
                                   </select>
                                 </td>
-                                <td class="text-center"><button type="button" class="btn btn-danger" onclick="eliminar_tarea(1)">--</button></td>
+                                <td class="text-center"><button type="button" class="btn btn-danger" onclick="eliminar_tareaC(1)">--</button></td>
                               </tr>
                             </tbody>
                           </table>

@@ -172,7 +172,7 @@ class DocenteController extends Controller
   public function desactivar($id)
   {
     $docente = Docente::findOrFail($id);
-    $docente->estado_id = 0;
+    $docente->estado_id = 2;
     $docente->save();
     return 0;
   }

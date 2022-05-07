@@ -12,6 +12,10 @@ $('#enviar').submit(function (e) {
     data: formData,
     contentType: false,
     processData: false,
+    beforeSend: function() {
+      toastr.warning("Validando datos por favor espere", 'Espere',
+      { timeOut: 2000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+    },
     success: function (response) {
       if (response == 0) {
         $('#enviar')[0].reset();

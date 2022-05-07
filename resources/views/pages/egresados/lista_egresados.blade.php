@@ -40,7 +40,7 @@
                                 <div class="row">
                                   <div class="col-sm-6">
                                     <div class="mb-3">
-                                      <label for="cedula" class="form-label">Cedula</label>
+                                      <label for="cedula" class="form-label">Cédula</label>
                                       <input type="number" class="form-control" id="cedula" name="cedula" placeholder="Ingrese Cedula" required>
                                     </div>
                                     <div class="mb-3">
@@ -49,7 +49,7 @@
                                       <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
                                     </div>
                                     <div class="mb-3">
-                                      <label class="form-label" for="institucion">Institucion</label>
+                                      <label class="form-label" for="institucion">Institución</label>
                                       <input list="instituciones" autocomplete="off" id="institucion" name="institucion" class="form-control" placeholder="Busca/Selecciona">
                                       <datalist name="instituciones" id="instituciones" class="instEgresado" onclick="selectProgram()" required>
                                         @foreach($instituciones as $institucion)
@@ -82,7 +82,7 @@
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
-                    <button type="button" class="btn btn-danger cerrar" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger cerrar" data-bs-dismiss="modal">Cerrar</button>
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@
                                 <div class="row">
                                   <div class="col-sm-6">
                                     <div class="mb-3">
-                                      <label for="cedula" class="form-label">Cedula</label>
+                                      <label for="cedula" class="form-label">Cédula</label>
                                       <input type="hidden" class="form-control" id="cedulaAct" name="cedulaAct" required>
                                       <input type="number" disabled class="form-control" id="cedulaActDis" name="cedula" required>
                                     </div>
@@ -120,7 +120,7 @@
                                       <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
                                     </div>
                                     <div class="mb-3">
-                                      <label class="form-label" for="institucionAct">Institucion</label>
+                                      <label class="form-label" for="institucionAct">Institución</label>
                                       <input list="institucionesAct" autocomplete="off" id="institucionAct" name="institucion" class="form-control">
                                       <datalist name="institucionesAct" id="institucionesAct" class="instEgresado" required>
                                         @foreach($instituciones as $institucion)
@@ -153,7 +153,7 @@
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                   </div>
                 </div>
               </div>
@@ -163,23 +163,21 @@
             <div class="table-responsive">
               <table class="table table-hover" id="tablaEgresados">
                 <thead class=" text-primary text-center">
-                  <th>Cedula</th>
+                  <th>Cédula</th>
                   <th>Nombre</th>
                   <th>Correo</th>
                   <th>Telefono</th>
                   <th>Institución</th>
                   <th>Programa</th>
-                  <th>Estado</th>
                   <th>Más</th>
                 </thead>
                 <tfoot class=" text-primary">
-                  <th>Cedula</th>
+                  <th>Cédula</th>
                   <th>Nombre</th>
                   <th>Correo</th>
                   <th>Telefono</th>
                   <th>Institución</th>
                   <th>Programa</th>
-                  <th>Estado</th>
                   <th>Más</th>
                 </tfoot>
               </table>

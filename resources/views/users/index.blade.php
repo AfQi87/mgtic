@@ -82,40 +82,19 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('home') }}">
+
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="material-icons">dashboard</i>
-                <p>{{ __('Dashboard') }}</p>
+                <span class="sidebar-normal"> {{ __('Usuarios') }} </span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
-                <p>{{ __('Usuarios') }}
-                  <b class="caret"></b>
-                </p>
-              </a>
-              <div class="collapse show" id="laravelExample">
-                <ul class="nav">
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ route('profile.edit') }}">
-                      <span class="sidebar-mini"> PU </span>
-                      <span class="sidebar-normal">{{ __('User profile') }} </span>
-                    </a>
-                  </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('user.index') }}">
-                      <span class="sidebar-mini"> LU </span>
-                      <span class="sidebar-normal"> {{ __('User Management') }} </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
+
             {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('table') }}">
-                <i class="material-icons">content_paste</i>
-                <p>{{ __('Table List') }}</p>
-              </a>
+            <i class="material-icons">content_paste</i>
+            <p>{{ __('Table List') }}</p>
+            </a>
             </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{ route('actas') }}">
@@ -125,9 +104,9 @@
             </li>
             {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('docentes') }}">
-                <i class="material-icons">content_paste</i>
-                <p>{{ __('Docentes') }}</p>
-              </a>
+            <i class="material-icons">content_paste</i>
+            <p>{{ __('Docentes') }}</p>
+            </a>
             </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{ route('egresadosIndex') }}">
@@ -137,9 +116,9 @@
             </li>
             {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('cortesIndex') }}">
-                <i class="material-icons">content_paste</i>
-                <p>{{ __('Cortes') }}</p>
-              </a>
+            <i class="material-icons">content_paste</i>
+            <p>{{ __('Cortes') }}</p>
+            </a>
             </li> --}}
           </ul>
         </div>
@@ -172,7 +151,7 @@
                     </p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                    <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
+                    <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar sesión</a>
                   </div>
@@ -222,46 +201,41 @@
                                           <div class="col-sm-8">
                                             <div class="mb-3">
                                               <label for="name" class="form-label">Nombre</label>
-                                              <input type="text" class="form-control" id="name" name="name" value="user1">
+                                              <input type="text" class="form-control" id="name" name="nombre" placeholder="Ingrese nombre">
                                             </div>
                                             <div class="mb-3">
-                                              <label for="email" class="form-label">correo</label>
-                                              <input type="email" class="form-control" id="email" name="email" value="user1@gmail.com" aria-describedby="correoHelp">
+                                              <label for="email" class="form-label">Correo</label>
+                                              <input type="email" class="form-control" id="correo" name="correo" aria-describedby="correoHelp" placeholder="Ingrese correo electronico">
                                               <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
                                             </div>
                                             <div class="mb-3">
                                               <label for="telefono" class="form-label">Teléfono</label>
-                                              <input type="number" class="form-control" id="telefono" name="telefono" value="111111">
+                                              <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingrese teléfono">
                                             </div>
-                                            <div class="mb-3">
-                                              <label for="password" class="form-label">Contraseña</label>
-                                              <input type="password" class="form-control" id="password" name="password">
-                                            </div>
+
                                             <div class="row">
                                               <div class="col-sm-6">
                                                 <div class="mb-3">
+                                                  <label for="documento" class="form-label">Documento de identidad</label>
+                                                  <input type="number" class="form-control" id="documento" name="documento" placeholder="Ingrese documento de identidad">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <div class="mb-3">
                                                   <label class="form-label" for="cargo_id">Cargo</label>
-                                                  <select class="form-select" id="cargo_id" name="cargo_id" required>
+                                                  <select class="form-select" id="cargo_id" name="cargo" required>
                                                     <option value="">Selecione un cargo</option>
                                                   </select>
                                                 </div>
                                               </div>
-                                              <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                  <label class="form-label" for="rol_id">Rol</label>
-                                                  <select class="form-select" id="rol_id" name="rol_id" required>
-                                                    <option value="">Selecione un rol</option>
-                                                  </select>
-                                                </div>
-                                              </div>
+
                                             </div>
                                           </div>
                                           <div class="col-sm-4">
                                             <div class="rounded img-responsive" style="max-width: 300px">
-                                              <img id="imagenSeleccionada" src="avatar/avatar.png"  style="max-width: 300px">
+                                              <img id="imagenSeleccionada" src="avatar/avatar.png" style="max-width: 300px">
                                             </div>
-                                            <div class="mb-3" >
-                                              <label for="foto" class="form-label">Imagen</label>
+                                            <div class="mb-3 mt-2">
                                               <input type="file" class="form-control" id="foto" name="foto">
                                             </div>
                                           </div>
@@ -275,7 +249,7 @@
                           <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             </form>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                           </div>
                         </div>
                       </div>
@@ -341,7 +315,7 @@
                           <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             </form>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                           </div>
                         </div>
                       </div>
@@ -354,7 +328,6 @@
                             <th>{{ __('Name')}}</th>
                             <th>{{ __('Email')}}</th>
                             <th>{{ __('Phone')}}</th>
-                            <th>{{ __('Image')}}</th>
                             <th>{{ __('Cargo')}}</th>
                             <th>{{ __('Rol')}}</th>
                             <th>{{ __('Estado')}}</th>
@@ -367,7 +340,6 @@
                             <th>{{ __('Name')}}</th>
                             <th>{{ __('Email')}}</th>
                             <th>{{ __('Phone')}}</th>
-                            <th>{{ __('Image')}}</th>
                             <th>{{ __('Cargo')}}</th>
                             <th>{{ __('Rol')}}</th>
                             <th>{{ __('Estado')}}</th>
@@ -385,7 +357,7 @@
       </div>
     </div>
 
-    <footer style="position: absolute;bottom: 65px;width: 100%;height: 40px;">
+    <footer >
       <section class="">
         <!-- Footer -->
         <footer class="text-center text-white" style="background: linear-gradient(to right, #30b6d3, #5ca139, #f78c41);">

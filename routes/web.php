@@ -57,9 +57,13 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/acta', [ActasController::class, 'index'])->name('actas');
 	Route::get('/formActa', [ActasController::class, 'formActa'])->name('formActa');
+	Route::get('/formActaComite', [ActasController::class, 'formActaComite'])->name('formActaComite');
 	Route::post('/acta', [ActasController::class, 'guardarActa'])->name('actas_guardar');
+	Route::post('/actaComite', [ActasController::class, 'guardarActaComite'])->name('actas_guardarComite');
 	Route::get('/responsables', [ActasController::class, 'responsables'])->name('responsables');
-	Route::get('/actas/eliminar/{id}', [ActasController::class, 'eliminar'])->name('elimActa');
+	Route::get('/responsablesComite', [ActasController::class, 'responsablesComite'])->name('responsablesComite');
+
+	Route::delete('/actas/eliminar/{id}', [ActasController::class, 'eliminar'])->name('elimActa');
 	Route::get('/descargarActa/{id}', [ActasController::class, 'descargarPDF'])->name('descargarActa');
 });
 ///=================================================================================================Docentes
@@ -82,8 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/egresados/form', [EgresadoController::class, 'store'])->name('formStoreEgre');
 	Route::get('/egresados/form/{id}', [EgresadoController::class, 'edit'])->name('formEditEgre');
 	Route::post('/egresado/actualizar/{id}', [EgresadoController::class, 'update'])->name('formUpdateEgre');
-	Route::get('/egresado/desactivar/{id}', [EgresadoController::class, 'desactivar']);
-	Route::get('/egresado/activar/{id}', [EgresadoController::class, 'activar']);
+	Route::get('/egresado/delete/{id}', [EgresadoController::class, 'destroy']);
 });
 
 ///=================================================================================================cortes

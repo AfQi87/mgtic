@@ -21,7 +21,6 @@ $(document).ready(function () {
       { data: "tel_persona", className: "text-center" },
       { data: "institucion", className: "text-center" },
       { data: "programa", className: "text-center" },
-      { data: "estado", className: "text-center" },
       { data: "accion", orderable: false, className: "text-center" },
     ]
   });
@@ -221,64 +220,28 @@ function copiarCorreo() {
   )
 }
 
-//=============================================================================================Desactivar Egresado
+var idEgresado;
+//=============================================================================================Eliminar Egresado
 
-var idDocente;
-$(document).on('click', '.desEgresado', function () {
-  idDocente = $(this).attr('id');
+$(document).on('click', '.deleteEgresado', function () {
+  idEgresado = $(this).attr('id');
   Swal.fire({
-    title: 'Desactivar Egresado',
-    text: "¿Esta seguro que desea desactivar el egresado?",
+    title: 'Eliminar Egresado',
+    text: "¿Esta seguro que desea eliminar el egresado definitivamente?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, desactivar!'
+    confirmButtonText: 'Si, eliminar!'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: "/egresado/desactivar/" + idDocente,
+        url: "/egresado/delete/" + idEgresado,
         method: "GET",
         success: function (response) {
           if (response == 0) {
             $('#tablaEgresados').DataTable().ajax.reload();
-            toastr.success("Registro Desactivado Correctamente", 'Correcto',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-          } else {
-            toastr.error("El egresado no se desactivo", 'Error',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-          }
-        },
-        error: function () {
-          toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-        }
-      });
-    }
-  })
-});
-
-//=============================================================================================Activar Egresado
-
-$(document).on('click', '.actEgresado', function () {
-  idDocente = $(this).attr('id');
-  Swal.fire({
-    title: 'Activar Egresado',
-    text: "¿Esta seguro que desea activar el egresado?",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, activar!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      $.ajax({
-        url: "/egresado/activar/" + idDocente,
-        method: "GET",
-        success: function (response) {
-          if (response == 0) {
-            $('#tablaEgresados').DataTable().ajax.reload();
-            toastr.success("Registro Activado Correctamente", 'Correcto',
+            toastr.success("Registro Eliminado Correctamente", 'Correcto',
               { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           } else {
             toastr.error("El egresado no se activo", 'Error',

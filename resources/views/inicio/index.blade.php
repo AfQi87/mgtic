@@ -49,7 +49,7 @@
   <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="" rel="tooltip" title="MGTIC" data-placement="bottom">
+        <a class="navbar-brand" href="{{route('login')}}" rel="tooltip" title="MGTIC" data-placement="bottom">
           <img class="n-logo" src="./assets/img/Logo.png" alt="" width="60px" height="30px">
         </a>
         <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
           <span class="navbar-toggler-bar bottom-bar"></span>
         </button>
       </div>
-      <div class="collapse navbar-collapse justify-content-end" id="navigation" >
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="javascript:void(0)" onclick="scrollPresentation()">
@@ -734,13 +734,13 @@
                       <div class="col-lg-1"></div>
                       <div class="col-lg-5">
                         <div class="form-group">
-                          <input type="text" value="" name="nombres" id="nombres" placeholder="Nombres" class="form-control" required/>
+                          <input type="text" value="" name="nombres" id="nombres" placeholder="Nombres" class="form-control" required />
                         </div>
                       </div>
 
                       <div class="col-lg-5">
                         <div class="form-group">
-                          <input type="text" value="" name="apellidos" id="apellidos" placeholder="Apellidos" class="form-control" required/>
+                          <input type="text" value="" name="apellidos" id="apellidos" placeholder="Apellidos" class="form-control" required />
                         </div>
                       </div>
                       <div class="col-lg-1"></div>
@@ -751,13 +751,13 @@
                       <div class="col-lg-1"></div>
                       <div class="col-lg-5">
                         <div class="form-group">
-                          <input type="email" value="" name="correo" id="correo" placeholder="Correo" class="form-control" required/>
+                          <input type="email" value="" name="correo" id="correo" placeholder="Correo" class="form-control" required />
                         </div>
                       </div>
 
                       <div class="col-lg-5">
                         <div class="form-group">
-                          <input type="text" id="telefono" name="telefono" placeholder="Teléfono" class="form-control" required/>
+                          <input type="text" id="telefono" name="telefono" placeholder="Teléfono" class="form-control" required />
                         </div>
                       </div>
                       <div class="col-lg-1"></div>
@@ -778,8 +778,8 @@
                       </div>
 
                       <div class="col-lg-5">
-                        <div class="form-group" >
-                          <input type="text" value="" name="documento" id="documento" placeholder="Número de Documento" class="form-control" required/>
+                        <div class="form-group">
+                          <input type="text" value="" name="documento" id="documento" placeholder="Número de Documento" class="form-control" required />
                         </div>
                       </div>
                       <div class="col-lg-1"></div>
@@ -905,25 +905,25 @@
   <!--  End Modal -->
 
   <!--   Core JS Files   -->
-  <script src="{{url('/assets/js/core/jquery.min.js')}}" type="text/javascript"></script>
-  <script src="{{url('/assets/js/core/popper.min.js')}}" type="text/javascript"></script>
-  <script src="{{url('/assets/js/core/bootstrap.min.js')}}" type="text/javascript"></script>
+  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
   <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="{{url('/assets/js/plugins/bootstrap-switch.js')}}"></script>
+  <script src="./assets/js/plugins/bootstrap-switch.js"></script>
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="{{url('/assets/js/plugins/nouislider.min.js')}}" type="text/javascript"></script>
+  <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
   <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-  <script src="{{url('/assets/js/plugins/bootstrap-datepicker.js')}}" type="text/javascript"></script>
+  <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 
-  <script src="{{url('/assets/js/now-ui-kit.js?v=1.3.0')}}" type="text/javascript"></script>
-  <script src="{{url('/assets/js/functions.js')}}" type="text/javascript"></script>
-  <script src="{{url('/assets/js/mdb.min.js')}}" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="./assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
+  <script src="./assets/js/functions.js" type="text/javascript"></script>
+  <script src="./assets/js/mdb.min.js" type="text/javascript"></script>
 
-  <script src="{{url('/js/correo.js')}}" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="./js/correo.js" type="text/javascript"></script>
 
 </body>
 

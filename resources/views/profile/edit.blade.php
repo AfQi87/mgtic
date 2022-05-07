@@ -71,7 +71,7 @@
               <h4 class="card-title">{{ __('Edit Image') }}</h4>
             </div>
             <div class="card-body" style="height: 233px; text-align:center">
-              <img src="{{auth()->user()->foto != '' || auth()->user()->foto != null ? 'images/'.auth()->user()->foto : 'avatar/avatar.png'}}" alt="..." id="imagenSeleccionada" height="190px" width="150px">
+              <img src="{{auth()->user()->foto != '' && auth()->user()->foto != null ? 'images/'.auth()->user()->foto : 'avatar/avatar.png'}}" alt="..." id="imagenSeleccionada" height="190px" width="150px">
             </div>
             <div class="mb-1 p-1">
               <input type="file" class="form-control" id="foto" name="foto">
@@ -119,10 +119,10 @@
               <div class="row">
                 <label class="col-sm-2 col-form-label" for="input-password">{{ __('New Password') }}</label>
                 <div class="col-sm-7">
-                  <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="input-password" type="password" placeholder="{{ __('New Password') }}" value="" required />
-                    @if ($errors->has('password'))
-                    <span id="password-error" class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
+                  <div class="form-group{{ $errors->has('contraseña') ? ' has-danger' : '' }}">
+                    <input class="form-control{{ $errors->has('contraseña') ? ' is-invalid' : '' }}" name="contraseña" id="input-password" type="password" placeholder="{{ __('New Password') }}" value="" required />
+                    @if ($errors->has('contraseña'))
+                    <span id="password-error" class="error text-danger" for="input-password">{{ $errors->first('contraseña') }}</span>
                     @endif
                   </div>
                 </div>
@@ -131,7 +131,7 @@
                 <label class="col-sm-2 col-form-label" for="input-password-confirmation">{{ __('Confirm New Password') }}</label>
                 <div class="col-sm-7">
                   <div class="form-group">
-                    <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirm New Password') }}" value="" required />
+                    <input class="form-control" name="contraseña_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirm New Password') }}" value="" required />
                   </div>
                 </div>
               </div>

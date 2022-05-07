@@ -12,7 +12,8 @@
           <div class="card-body">
             <div class="row">
               <div class="col-12 text-right">
-                <a href="{{ route('formActa')}}" class="btn btn-sm btn-primary text-white">Registrar</a>
+                <a href="{{ route('formActa')}}" class="btn btn-sm btn-primary text-white">Acta MGTIC</a>
+                <a href="{{ route('formActaComite')}}" class="btn btn-sm btn-primary text-white">Acta Comite</a>
               </div>
             </div>
             @if (session('status'))
@@ -30,22 +31,28 @@
             <div class="table-responsive">
               <table class="table table-hover" id="tablaActas">
                 <thead class=" text-primary">
-                  <th class="text-center" style="width: 100px;">Acta</th>
+                  <th class="text-center" style="width: 100px;">ID</th>
+                  <!-- <th class="text-center" style="width: 100px;">Acta</th> -->
                   <th class="text-center" style="width: 400px;">Reunion</th>
                   <th class="text-center" style="width: 800px;">Proceso</th>
                   <th class="text-center" style="width: 250px;">Fecha</th>
-                  <th class="text-center" style="width: 250px;">Más</th>
+                  <th class="text-center" style="width: 300px;">Más</th>
                 </thead>
                 <tbody>
                   @foreach($actas as $acta)
                   <tr>
                     <td class="text-center">{{ $acta->id }}</td>
+                    <!-- <td class="text-center">{{ $acta->asistentes }}</td> -->
                     <td class="text-center">{{ $acta->reuniones->tipo }}</td>
                     <td class="text-center">{{ $acta->proceso }}</td>
                     <td class="text-center">{{ $acta->fecha }}</td>
                     <td class="text-center">
                       <a href="{{route('descargarActa', $acta->id)}}" class="btn btn-warning">PDF</a>
-                      <a href="{{route('elimActa', $acta->id)}}" class="btn btn-danger"><i class="bi bi-trash3"></i></a>
+                      <form action="{{route('elimActa', $acta->id)}}" class="confirmar" method="POST" style="display:inline">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                      </form>
                     </td>
                   </tr>
                   @endforeach

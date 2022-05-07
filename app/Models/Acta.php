@@ -12,4 +12,7 @@ class Acta extends Model
     public function reuniones(){
         return $this->belongsTo(Reunion::class,'reunion_id','id');
     }
+    public function asistentes(){
+        return $this->hasMany(ListaAsistente::class,'id');
+    }
 }
