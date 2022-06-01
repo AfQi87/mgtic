@@ -27,24 +27,30 @@
           <p>{{ __('Actas') }}</p>
         </a>
       </li>
-      {{-- <li class="nav-item{{ $activePage == 'docentes' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('docentes') }}">
-          <i class="material-icons">content_paste</i>
-          <p>{{ __('Docentes') }}</p>
-        </a>
-      </li> --}}
       <li class="nav-item{{ $activePage == 'egresados' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('egresadosIndex') }}">
           <i class="material-icons">content_paste</i>
           <p>{{ __('Egresados') }}</p>
         </a>
       </li>
-      {{-- <li class="nav-item{{ $activePage == 'cortes' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'docentes' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('docentes') }}">
+          <i class="material-icons">content_paste</i>
+          <p>{{ __('Docentes') }}</p>
+        </a>
+      </li>
+      <li class="nav-item{{ $activePage == 'cortes' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('cortesIndex') }}">
           <i class="material-icons">content_paste</i>
           <p>{{ __('Cortes') }}</p>
         </a>
-      </li> --}}
+      </li>
+      <li class="nav-item{{ $activePage == 'estudiantes' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('estudiantesIndexs') }}">
+          <i class="material-icons">content_paste</i>
+          <p>{{ __('Estudiantes') }}</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

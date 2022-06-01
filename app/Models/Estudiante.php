@@ -14,4 +14,8 @@ class Estudiante extends Model
   {
     return $this->belongsTo(Estado::class, 'estado_id', 'id');
   }
+  public function cortes()
+  {
+    return $this->belongsTo(Corte::class, 'corte_id', 'id');
+  }
 }

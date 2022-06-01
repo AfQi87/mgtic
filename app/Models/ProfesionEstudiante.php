@@ -5,15 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Corte extends Model
+class ProfesionEstudiante extends Model
 {
     use HasFactory;
-    protected $table = 'Corte';
-
-    public function estados()
-    {
-        return $this->belongsTo(Estado::class, 'estado_id', 'id');
-    }
+    protected $table = 'profesion_estudiante';
 
     public function estudiantes()
     {

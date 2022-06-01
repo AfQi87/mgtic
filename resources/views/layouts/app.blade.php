@@ -92,6 +92,8 @@
     <script type="text/javascript" src="{{ url('/js/cortes.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/actas.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/egresados.js')}}"></script>
+    <script type="text/javascript" src="{{ url('/js/docentes.js')}}"></script>
+    <script type="text/javascript" src="{{ url('/js/estudiantes.js')}}"></script>
 
 </body>
 

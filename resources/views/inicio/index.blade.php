@@ -49,7 +49,7 @@
   <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="{{route('login')}}" rel="tooltip" title="MGTIC" data-placement="bottom">
+        <a class="navbar-brand" href="" rel="tooltip" title="MGTIC" data-placement="bottom">
           <img class="n-logo" src="./assets/img/Logo.png" alt="" width="60px" height="30px">
         </a>
         <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

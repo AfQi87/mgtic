@@ -16,7 +16,7 @@ $(document).ready(function () {
     },
     columns: [
       { data: "nombre", className: "text-center" },
-      { data: "estudiantes", className: "text-center" },
+      { data: "numEstudiantes", className: "text-center" },
       { data: "fecha_ini", className: "text-center correoCopiar" },
       { data: "fecha_fin", className: "text-center" },
       { data: "estado", className: "text-center" },

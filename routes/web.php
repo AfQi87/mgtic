@@ -4,6 +4,7 @@ use App\Http\Controllers\ActasController;
 use App\Http\Controllers\Cortes\CorteController;
 use App\Http\Controllers\Docentes\DocenteController;
 use App\Http\Controllers\Egresados\EgresadoController;
+use App\Http\Controllers\Estudiante\EstudianteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Mail\ContactenosMailable;
@@ -97,4 +98,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/corte/actualizar/{id}', [CorteController::class, 'update'])->name('formUpdateCorte');
 	Route::get('/corte/desactivar/{id}', [CorteController::class, 'desactivar']);
 	Route::get('/corte/activar/{id}', [CorteController::class, 'activar']);
+});
+
+///=================================================================================================Estudiantes
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/estudiantes', [EstudianteController::class, 'index'])->name('estudiantesIndexs');
+	Route::post('/estudiante/form', [EstudianteController::class, 'store'])->name('formStore');
+	Route::get('/estudiante/delete/{id}', [EstudianteController::class, 'destroy']);
+
 });

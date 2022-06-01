@@ -102,24 +102,30 @@
                 <p>{{ __('Actas') }}</p>
               </a>
             </li>
-            {{-- <li class="nav-item">
-              <a class="nav-link" href="{{ route('docentes') }}">
-            <i class="material-icons">content_paste</i>
-            <p>{{ __('Docentes') }}</p>
-            </a>
-            </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{ route('egresadosIndex') }}">
                 <i class="material-icons">content_paste</i>
                 <p>{{ __('Egresados') }}</p>
               </a>
             </li>
-            {{-- <li class="nav-item">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('docentes') }}">
+                <i class="material-icons">content_paste</i>
+                <p>{{ __('Docentes') }}</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ route('cortesIndex') }}">
-            <i class="material-icons">content_paste</i>
-            <p>{{ __('Cortes') }}</p>
-            </a>
-            </li> --}}
+                <i class="material-icons">content_paste</i>
+                <p>{{ __('Cortes') }}</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('estudiantesIndexs') }}">
+                <i class="material-icons">content_paste</i>
+                <p>{{ __('Estudiantes') }}</p>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -357,7 +363,7 @@
       </div>
     </div>
 
-    <footer >
+    <footer>
       <section class="">
         <!-- Footer -->
         <footer class="text-center text-white" style="background: linear-gradient(to right, #30b6d3, #5ca139, #f78c41);">
@@ -439,7 +445,8 @@
     <script type="text/javascript" src="{{ url('/js/usuarios.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/funciones.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/cortes.js')}}"></script>
-
+    <script type="text/javascript" src="{{ url('/js/docentes.js')}}"></script>
+    <script type="text/javascript" src="{{ url('/js/estudiantes.js')}}"></script>
     @stack('js')
   </body>
 

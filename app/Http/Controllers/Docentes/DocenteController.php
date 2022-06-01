@@ -29,7 +29,11 @@ class DocenteController extends Controller
           return $acciones;
         })
         ->addColumn('fotoD', function ($docente) {
-          $foto = '<img src="/images/docentes/' . $docente->foto . '" alt="" class="zoom" width="80" height="80">';
+          if ($docente->foto != null || $docente->foto != '') {
+            $foto = '<img src="/images/docentes/' . $docente->foto . '" alt="" class="zoom" width="80" height="80">';
+          } else {
+            $foto = '<img src="/avatar/avatar.png" alt="" class="zoom" width="80" height="80">';
+          }
           return $foto;
         })
         ->addColumn('estado', function ($docente) {

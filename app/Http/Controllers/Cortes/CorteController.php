@@ -26,16 +26,12 @@ class CorteController extends Controller
           }
           return $acciones;
         })
-        ->addColumn('estudiantes', function ($corte) {
-          $estudiantes = Estudiante::where('corte_id', $corte->id);
-          $conteo = $estudiantes->count();
-          return $conteo;
-        })
+        
         ->addColumn('estado', function ($corte) {
           $estado = $corte->estados->estado;
           return $estado;
         })
-        ->rawColumns(['accion', 'estado', 'estudiantes'])
+        ->rawColumns(['accion', 'estado'])
         ->make(true);
     }
     return view('pages/cortes/lista_cortes');
