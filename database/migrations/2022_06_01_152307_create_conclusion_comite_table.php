@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCargosTable extends Migration
+class CreateConclusionComiteTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,9 +13,13 @@ class CreateCargosTable extends Migration
    */
   public function up()
   {
-    Schema::create('cargoUser', function (Blueprint $table) {
-      $table->increments('id');
-      $table->string('cargo');
+    Schema::create('conclusion_comite', function (Blueprint $table) {
+      $table->increments('id_conclusion');
+      $table->unsignedInteger('acta');
+      $table->text('conclusion');
+
+      $table->foreign('acta')->references('id_acta')->on('acta_comite');
+
       $table->timestamps();
     });
   }
@@ -27,6 +31,6 @@ class CreateCargosTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('cargoUser');
+    Schema::dropIfExists('conclusion_comite');
   }
 }

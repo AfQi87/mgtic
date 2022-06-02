@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCargosTable extends Migration
+class CreateTipoIdTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,9 +13,11 @@ class CreateCargosTable extends Migration
    */
   public function up()
   {
-    Schema::create('cargoUser', function (Blueprint $table) {
-      $table->increments('id');
-      $table->string('cargo');
+    Schema::create('tipo_id', function (Blueprint $table) {
+      $table->increments('id_tipo');
+      $table->string('nom_tipo', 3);
+      $table->string('descripcion', 60);
+
       $table->timestamps();
     });
   }
@@ -27,6 +29,6 @@ class CreateCargosTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('cargoUser');
+    Schema::dropIfExists('tipo_id');
   }
 }
