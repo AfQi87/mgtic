@@ -14,7 +14,7 @@ class TipoSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('Tipo')->delete();
+    DB::table('tipo_inst')->delete();
     $tipos = [
       [
         'nom_tipo' => 'Institución Técnica Profesional'
@@ -29,6 +29,6 @@ class TipoSeeder extends Seeder
         'nom_tipo' => 'Universidad'
       ]
     ];
-    DB::table('Tipo')->insert($tipos);
+    DB::table('tipo_inst')->insert($tipos);
   }
 }

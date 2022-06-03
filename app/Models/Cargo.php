@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cargo extends Model
 {
     use HasFactory;
-    protected $table = 'cargo';
+    protected $table = 'cargoUser';
     public function user(){
         return $this->hasMany(User::class,'id');
     }

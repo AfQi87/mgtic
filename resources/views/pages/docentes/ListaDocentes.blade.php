@@ -37,19 +37,19 @@
                               </div>
                               <div class="card-body ">
                                 <div class="row">
-                                  <div class="col-sm-6">
+                                  <div class="col-sm-8">
                                     <div class="mb-3">
                                       <label for="nombre" class="form-label">Nombre</label>
-                                      <input type="text" class="form-control" id="nombre" name="nombre" value="user1">
+                                      <input type="text" class="form-control" id="nombre" name="nombre">
                                     </div>
                                     <div class="mb-3">
                                       <label for="correo" class="form-label">Correo</label>
-                                      <input type="email" class="form-control" id="correo" name="correo" value="user1@gmail.com" aria-describedby="correoHelp">
+                                      <input type="email" class="form-control" id="correo" name="correo" aria-describedby="correoHelp">
                                       <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
                                     </div>
                                     <div class="mb-3">
                                       <label for="telefono" class="form-label">Teléfono</label>
-                                      <input type="number" class="form-control" id="telefono" name="telefono" value="111111">
+                                      <input type="number" class="form-control" id="telefono" name="telefono">
                                     </div>
                                     <div class="mb-3">
                                       <label class="form-label" for="cargo_id">Campo</label>
@@ -57,9 +57,11 @@
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="foto" class="form-label">Imagen</label>
+                                  <div class="col-sm-4">
+                                    <div class="rounded img-responsive" style="max-width: 300px">
+                                      <img id="imagenSeleccionada" src="avatar/avatar.png" style="max-width: 300px">
+                                    </div>
+                                    <div class="mb-3 mt-2">
                                       <input type="file" class="form-control" id="foto" name="foto">
                                     </div>
                                   </div>

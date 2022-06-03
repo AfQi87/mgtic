@@ -14,15 +14,15 @@ class SectorSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('Sector')->delete();
+    DB::table('sector')->delete();
     $sectores = [
       [
-        'nom_sector' => 'Oficial'
+        'descripcion' => 'Oficial'
       ],
       [
-        'nom_sector' => 'Privado'
+        'descripcion' => 'Privado'
       ]
     ];
-    DB::table('Sector')->insert($sectores);
+    DB::table('sector')->insert($sectores);
   }
 }

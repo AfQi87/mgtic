@@ -13,7 +13,7 @@ class CreateCargosTable extends Migration
    */
   public function up()
   {
-    Schema::create('cargo', function (Blueprint $table) {
+    Schema::create('cargoUser', function (Blueprint $table) {
       $table->increments('id');
       $table->string('cargo');
       $table->timestamps();
@@ -27,6 +27,6 @@ class CreateCargosTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('cargo');
+    Schema::dropIfExists('cargoUser');
   }
 }

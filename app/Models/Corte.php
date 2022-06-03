@@ -8,15 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Corte extends Model
 {
     use HasFactory;
-    protected $table = 'Corte';
+    protected $table = 'cohorte';
 
-    public function estados()
-    {
-        return $this->belongsTo(Estado::class, 'estado_id', 'id');
-    }
-
+    
     public function estudiantes()
     {
-        return $this->hasMany(Estudiante::class, 'id');
+        return $this->hasMany(Estudiante::class, 'id_cohorte');
     }
 }

@@ -15,7 +15,7 @@ class CargoTableSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('cargo')->delete();
+    DB::table('cargoUser')->delete();
     $cargo = [
       [
         'id' => '1',
@@ -31,6 +31,6 @@ class CargoTableSeeder extends Seeder
       ]
 
     ];
-    DB::table('cargo')->insert($cargo);
+    DB::table('cargoUser')->insert($cargo);
   }
 }

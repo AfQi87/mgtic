@@ -14,7 +14,7 @@ class ProgramaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Programa')->delete();
+        DB::table('programa')->delete();
         $institucion = [
             [
                 'id_programa' => '1',
@@ -24,6 +24,6 @@ class ProgramaSeeder extends Seeder
             ]
 
         ];
-        DB::table('Programa')->insert($institucion);
+        DB::table('programa')->insert($institucion);
     }
 }

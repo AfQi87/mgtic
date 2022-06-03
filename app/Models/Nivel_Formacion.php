@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Nivel_Formacion extends Model
 {
     use HasFactory;
-    protected $table = 'Nivel_Formacion';
+    protected $table = 'nivel';
 }

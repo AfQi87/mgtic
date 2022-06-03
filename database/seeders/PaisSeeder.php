@@ -14,7 +14,7 @@ class PaisSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('Pais')->delete();
+    DB::table('pais')->delete();
     $pais = [
       [
         'id_pais' => '1',
@@ -22,6 +22,6 @@ class PaisSeeder extends Seeder
       ]
 
     ];
-    DB::table('Pais')->insert($pais);
+    DB::table('pais')->insert($pais);
   }
 }

@@ -3,9 +3,22 @@
 namespace App\Http\Controllers\Estudiante;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barrio;
+use App\Models\Beca;
 use App\Models\Corte;
+use App\Models\EstadoCivil;
 use App\Models\Estudiante;
+use App\Models\EstudianteEstudio;
+use App\Models\Estudio;
+use App\Models\Institucion;
+use App\Models\LugarNacimiento;
+use App\Models\Municipio;
+use App\Models\Nivel_Formacion;
+use App\Models\Persona;
 use App\Models\ProfesionEstudiante;
+use App\Models\Sexo;
+use App\Models\TipoDoc;
+use App\Models\TipoSangre;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -35,68 +48,105 @@ class EstudianteController extends Controller
           $corte = $estudiante->cortes->nombre;
           return $corte;
         })
-        ->addColumn('estado', function ($docente) {
-          $estado = $docente->estados->estado;
-          return $estado;
-        })
         ->rawColumns(['accion', 'fotoD', 'campo'])
         ->make(true);
     }
+    $tipos = TipoDoc::all();
     $cortes = Corte::all();
-    return view('pages/estudiantes/Lista_estudiantes', compact('cortes'));
+    $becas = Beca::all();
+    $sexos = Sexo::all();
+    $sangres = TipoSangre::all();
+    $nacimientos = Municipio::all();
+    $barrios = Barrio::all();
+    $estadosCivil = EstadoCivil::all();
+    $instituciones = Institucion::all();
+    $niveles = Nivel_Formacion::all();
+    return view('pages/estudiantes/lista_estudiantes', compact('tipos', 'cortes', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'barrios', 'niveles', 'instituciones'));
   }
 
-  public function create()
-  {
-    //
-  }
+  public function instituciones()
+	{
+		$instituciones = Institucion::all();
+		return response()->json(['instituciones' => $instituciones]);
+	}
 
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'nombre' => 'required|max:150',
+      'tipo_doc' => 'required',
+      'documento' => 'required|max:15',
+      'nombre' => 'required|max:100',
       'codigo' => 'required|max:15',
-      'correo' => 'required|unique:Estudiante,correo|max:150|email',
+      'correo' => 'required|unique:persona,email_persona|max:100|email',
       'telefono' => 'required|min:7|max:20',
+      'celular' => 'required|min:7|max:20',
       'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+      'sexo' => 'required',
+      'estado_civil' => 'required',
+      'tipo_sangre' => 'required',
+      'nacimiento' => 'required',
+      'barrio' => 'required',
+      'fecha' => 'required',
       'corte' => 'required',
-      'profesion' => 'required'
+      'beca' => 'required',
+      'profesion' => 'required',
+      'nivel' => 'required',
+      'institucion' => 'required',
+      'semestre' => 'required',
     ]);
     if ($validator->fails()) {
       return ($validator->errors());
     } else {
       if ($request->hasFile('foto')) {
-        $file = $request->file('foto');
-        $extension = $file->getClientOriginalExtension();
-        $filename = date('YmdHis') . '.' . $extension;
-        $file->move('images/estudiantes', $filename);
+        // $file = $request->file('foto');
+        // $extension = $file->getClientOriginalExtension();
+        // $filename = date('YmdHis') . '.' . $extension;
+        // $file->move('images/estudiantes', $filename);
       } else {
         $filename = '';
       }
-      $docente = new Estudiante();
-      $docente->nombre = $request->nombre;
-      $docente->codigo = $request->codigo;
-      $docente->correo = $request->correo;
-      $docente->telefono = $request->telefono;
-      $docente->foto = $filename;
-      $docente->corte_id = $request->corte;
-      $docente->estado_id = 1;
-      $docente->save();
+      $persona = new Persona();
+      $persona->ced_persona = $request->documento;
+      $persona->tipo_doc = $request->tipo_doc;
+      $persona->nom_persona = $request->nombre;
+      $persona->email_persona = $request->correo;
+      $persona->tel_persona = $request->telefono;
+      $persona->cel_persona = $request->celular;
+      $persona->sexo = $request->sexo;
+      $persona->estado_civil = $request->estado_civil;
+      $persona->tipo_sangre = $request->tipo_sangre;
+      $persona->fecha_nac = $request->fecha;
+      $persona->lugar_nac = $request->nacimiento;
+      $persona->direccion = $request->direccion;
+      $persona->barrio = $request->barrio;
+      $persona->save();
 
-      $idEst = Estudiante::get()->last();
+      $estudiante = new Estudiante();
+      $estudiante->ced_persona = $request->documento;
+      $estudiante->codigo = $request->codigo;
+      $estudiante->semestre = $request->semestre;
+      $estudiante->cohorte = $request->corte;
+      $estudiante->beca = $request->beca;
+      $estudiante->save();
+
       $cont = count($request->profesion);
       for ($i = 0; $i < $cont; $i++) {
-        if ($request->profesion[$i] == NULL) {
-        } else {
-          $profesion = new ProfesionEstudiante();
-          $profesion->estudiante_id = $idEst->id;
-          $profesion->estudios = $request->profesion[$i];
-          $profesion->save();
+        if ($request->profesion[$i] != NULL) {
+          $estudio = new Estudio();
+          $estudio->nom_estudio = $request->profesion[$i];
+          $estudio->nivel_estudio = $request->nivel[$i];
+          $estudio->save();
+
+          $estudios = Estudio::get()->last();
+
+          $est_estudio = new EstudianteEstudio();
+          $est_estudio->estudiante = $request->documento;
+          $est_estudio->estudio = $estudios->id_estudio;
+          $est_estudio->institucion = $request->institucion[$i];
+          $est_estudio->save();
         }
       }
-      $corte = Corte::findOrFail($request->corte);
-      $corte->numEstudiantes = ($corte->numEstudiantes)+1;
-      $corte->save();
+
 
       return 0;
     }
@@ -123,12 +173,12 @@ class EstudianteController extends Controller
 
     $profesiones = ProfesionEstudiante::where('estudiante_id', $estudiante->id)->get();
 
-		foreach($profesiones as $profesion){
-			$profesion->delete();
-		}
+    foreach ($profesiones as $profesion) {
+      $profesion->delete();
+    }
 
     $corte = Corte::findOrFail($estudiante->corte_id);
-    $corte->numEstudiantes = ($corte->numEstudiantes)-1;
+    $corte->numEstudiantes = ($corte->numEstudiantes) - 1;
     $corte->save();
     $estudiante->delete();
 

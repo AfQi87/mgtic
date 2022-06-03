@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Institucion extends Model
 {
     use HasFactory;
-    protected $table = 'Institucion';
+    protected $table = 'institucion';
     public function programas(){
         return $this->hasMany(Programa::class,'id_institucion');
     }

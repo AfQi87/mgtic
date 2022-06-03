@@ -51,21 +51,39 @@ function agregarProfesion() {
   var table = document.getElementById("tablaProfesion");
   var row = table.insertRow(table.rows.length);
 
-  var cell2 = row.insertCell(0);
-  cell2.innerHTML = '<textarea name="profesion[]" id="profesion" class="form-control" cols="30" rows="2" required></textarea>';
+  var cell1 = row.insertCell(0);
+  cell1.innerHTML = '<textarea name="profesion[]" id="profesion" class="form-control" cols="30" rows="1" required></textarea>';
 
-  var cell3 = row.insertCell(1);
+  var cell2 = row.insertCell(1);
+  cell2.innerHTML = '<select class="form-select nivel" id="nivel' + (contProfesion - 1) + '" required name="nivel[]" ><option selected>Seleccione una opción</option>';
+  $.get('/responsables', function (datos) {
+    for (i = 0; i < datos.responsables.length; i++) {
+      $("#nivel" + (contProfesion - 1)).append('<option value="' + datos.responsables[i].id + '">' + datos.responsables[i].nombre + ' - ' + datos.responsables[i].dependencia + '</option>');
+    }
+  })
+
+  var cell3 = row.insertCell(2);
+  cell3.innerHTML = '<input list="instituciones" autocomplete="off" id="institucion' + (contProfesion - 1) + '" name="institucion[]" class="form-control institucion" required placeholder="Busca/Selecciona">'+
+   '<datalist name="instituciones[]" id="instituciones" class="instEgresado" onclick="selectProgram()" required>';
+  // cell3.innerHTML = '<select class="form-select" id="institucion' + (contProfesion - 1) + '" name="institucion[]" required><option selected>Seleccione una opción</option>';
+  // $.get('/responsables', function (datos) {
+  //   for (i = 0; i < datos.responsables.length; i++) {
+  //     $("#institucion" + (contProfesion - 1)).append('<option value="' + datos.responsables[i].id + '">' + datos.responsables[i].nombre + ' - ' + datos.responsables[i].dependencia + '</option>');
+  //   }
+  // })
+
+
+  var cell4 = row.insertCell(3);
   var button = document.createElement("button");
   button.textContent = "--";
   button.type = "button";
   button.className = "btn btn-danger"
-  cell3.appendChild(button);
-  cell3.className = "text-center";
+  cell4.appendChild(button);
+  cell4.className = "text-center";
 
   button.addEventListener("click", () => {
     if (banderaProfesion <= 2) {
-      toastr.error("Debe tener como minimo una Profesión", 'Error',
-        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+      toastr.error("Debe tener como minimo una Profesión", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     } else {
       event.target.parentNode.parentNode.remove();
       banderaProfesion--;
@@ -75,8 +93,7 @@ function agregarProfesion() {
 
 function eliminarProfesion(x) {
   if (banderaProfesion <= 2) {
-    toastr.error("Debe tener como minimo una Profesión", 'Error',
-      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+    toastr.error("Debe tener como minimo una Profesión", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
   } else {
     console.log("Eliminar Profesión")
     var table = document.getElementById("tablaProfesion");
@@ -102,11 +119,9 @@ $('#formregDocente').submit(function (e) {
         $('#formregDocente')[0].reset();
         $('.btn-close').click();
         $('#tablaDocentes').DataTable().ajax.reload();
-        toastr.success("El Docente se registro de forma correcta", 'Correcto',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        toastr.success("El Docente se registro de forma correcta", 'Correcto', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
       } else {
-        Object.keys(response).forEach(key => toastr.error(response[key], 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" }));
+        Object.keys(response).forEach(key => toastr.error(response[key], 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" }));
       }
     }
   });
@@ -133,8 +148,7 @@ function agregarProfesionact() {
       n++;
     });
     if (n <= 1) {
-      toastr.error("Debe tener como minimo una Profesión", 'Error',
-        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+      toastr.error("Debe tener como minimo una Profesión", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     } else {
       event.target.parentNode.parentNode.remove();
     }
@@ -203,8 +217,7 @@ function editarDocente(id) {
 
       button.addEventListener("click", () => {
         if (x <= 1) {
-          toastr.error("Debe tener como minimo una Profesión", 'Error',
-            { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          toastr.error("Debe tener como minimo una Profesión", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
         } else {
           s = event.target.parentNode.parentNode;
           Swal.fire({
@@ -224,11 +237,9 @@ function editarDocente(id) {
                   if (response == 0) {
                     s.remove();
                     x--;
-                    toastr.success("Registro eliminado Correctamente", 'Correcto',
-                      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+                    toastr.success("Registro eliminado Correctamente", 'Correcto', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
                   } else {
-                    toastr.error("El registro no se elimino", 'Error',
-                      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+                    toastr.error("El registro no se elimino", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
                   }
                 }
               });
@@ -254,11 +265,9 @@ $('#formDocenteAct').submit(function (e) {
       if (response == 0) {
         $('#ModalDocenteAct').modal('hide');
         $('#tablaDocentes').DataTable().ajax.reload();
-        toastr.success("Docente actualizado correctamente", 'Correcto',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        toastr.success("Docente actualizado correctamente", 'Correcto', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
       } else {
-        Object.keys(response).forEach(key => toastr.error(response[key], 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" }));
+        Object.keys(response).forEach(key => toastr.error(response[key], 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" }));
       }
     }
   });
@@ -285,11 +294,9 @@ $(document).on('click', '.desDocente', function () {
         success: function (response) {
           if (response == 0) {
             $('#tablaDocentes').DataTable().ajax.reload();
-            toastr.success("Registro Desactivado Correctamente", 'Correcto',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+            toastr.success("Registro Desactivado Correctamente", 'Correcto', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           } else {
-            toastr.error("El docente no se desactivo", 'Error',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+            toastr.error("El docente no se desactivo", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           }
         }
       });
@@ -315,11 +322,9 @@ $(document).on('click', '.actDocente', function () {
         success: function (response) {
           if (response == 0) {
             $('#tablaDocentes').DataTable().ajax.reload();
-            toastr.success("Registro Activado Correctamente", 'Correcto',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+            toastr.success("Registro Activado Correctamente", 'Correcto', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           } else {
-            toastr.error("El docente no se activo", 'Error',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+            toastr.error("El docente no se activo", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           }
         }
       });

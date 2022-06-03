@@ -14,7 +14,7 @@ class InstitucionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Institucion')->delete();
+        DB::table('institucion')->delete();
         $institucion = [
             [
                 'id_institucion' => '1',
@@ -25,6 +25,6 @@ class InstitucionSeeder extends Seeder
             ]
 
         ];
-        DB::table('Institucion')->insert($institucion);
+        DB::table('institucion')->insert($institucion);
     }
 }
