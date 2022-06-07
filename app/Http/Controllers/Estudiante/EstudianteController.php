@@ -32,23 +32,32 @@ class EstudianteController extends Controller
       return DataTables::of($estudiante)
         ->addColumn('accion', function ($estudiante) {
           $acciones = '';
-          $acciones .= '<a href="javascript:void(0)" onclick="editarEstudiante(' . $estudiante->id . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
-          $acciones .= '&nbsp<button type="button" id="' . $estudiante->id . '" name="delete" class="deleteEstudiante btn btn-danger"><i class="bi bi-trash"></i></button>';
+          $acciones .= '<a href="javascript:void(0)" onclick="editarEstudiante(' . $estudiante->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
+          $acciones .= '&nbsp<button type="button" id="' . $estudiante->ced_persona . '" name="delete" class="deleteEstudiante btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
         })
         ->addColumn('fotoD', function ($estudiante) {
-          if ($estudiante->foto != null || $estudiante->foto != '') {
-            $foto = '<img src="/images/estudiantes/' . $estudiante->foto . '" alt="" class="zoom" width="80" height="80">';
-          } else {
-            $foto = '<img src="/avatar/avatar.png" alt="" class="zoom" width="80" height="80">';
-          }
+          // if ($estudiante->foto != null || $estudiante->foto != '') {
+          //   $foto = '<img src="/images/estudiantes/' . $estudiante->foto . '" alt="" class="zoom" width="80" height="80">';
+          // } else {
+          //   $foto = '<img src="/avatar/avatar.png" alt="" class="zoom" width="80" height="80">';
+          // }
+          $foto = '<img src="/avatar/avatar.png" alt="" class="zoom" width="80" height="80">';
           return $foto;
         })
         ->addColumn('corte', function ($estudiante) {
-          $corte = $estudiante->cortes->nombre;
+          $corte = $estudiante->cortes->desc_cohorte;
           return $corte;
         })
-        ->rawColumns(['accion', 'fotoD', 'campo'])
+        ->addColumn('nombre', function ($estudiante) {
+          $nombre = $estudiante->personas->nom_persona;
+          return $nombre;
+        })
+        ->addColumn('correo', function ($estudiante) {
+          $correo = $estudiante->personas->email_persona;
+          return $correo;
+        })
+        ->rawColumns(['accion', 'fotoD', 'campo', 'corte', 'nombre', 'correo'])
         ->make(true);
     }
     $tipos = TipoDoc::all();
@@ -64,11 +73,11 @@ class EstudianteController extends Controller
     return view('pages/estudiantes/lista_estudiantes', compact('tipos', 'cortes', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'barrios', 'niveles', 'instituciones'));
   }
 
-  public function instituciones()
-	{
-		$instituciones = Institucion::all();
-		return response()->json(['instituciones' => $instituciones]);
-	}
+  public function niveles()
+  {
+    $niveles = Nivel_Formacion::all();
+    return response()->json(['niveles' => $niveles]);
+  }
 
   public function store(Request $request)
   {
@@ -78,6 +87,7 @@ class EstudianteController extends Controller
       'nombre' => 'required|max:100',
       'codigo' => 'required|max:15',
       'correo' => 'required|unique:persona,email_persona|max:100|email',
+      'correo' => "required|unique:Persona,email_persona,$request->correo,email_persona|max:100|email",
       'telefono' => 'required|min:7|max:20',
       'celular' => 'required|min:7|max:20',
       'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
@@ -91,7 +101,7 @@ class EstudianteController extends Controller
       'beca' => 'required',
       'profesion' => 'required',
       'nivel' => 'required',
-      'institucion' => 'required',
+      'instituciones' => 'required',
       'semestre' => 'required',
     ]);
     if ($validator->fails()) {
@@ -142,7 +152,7 @@ class EstudianteController extends Controller
           $est_estudio = new EstudianteEstudio();
           $est_estudio->estudiante = $request->documento;
           $est_estudio->estudio = $estudios->id_estudio;
-          $est_estudio->institucion = $request->institucion[$i];
+          $est_estudio->institucion = $request->instituciones[$i];
           $est_estudio->save();
         }
       }
@@ -159,28 +169,114 @@ class EstudianteController extends Controller
 
   public function edit($id)
   {
-    //
+    $estudiante = Estudiante::findOrFail($id);
+    $estudiante->personas;
+    $estudiante->personas->barrios;
+    $estudiante->personas->municipios;
+    // $profesiones = EstudianteEstudio::where('estudiante', $id)->get();
+    $profesiones = EstudianteEstudio::select('id_institucion', 'nom_institucion', 'id_estudio', 'nom_estudio', 'id_nivel', 'desc_nivel')
+      ->join('institucion', 'id_institucion', 'like', 'institucion')
+      ->join('estudio', 'id_estudio', 'like', 'estudio')
+      ->join('nivel', 'nivel_estudio', 'like', 'id_nivel')
+      ->where('estudiante', $id)->get();
+    // $profesiones->intituciones;
+    return response()->json(['estudiante' => $estudiante, 'profesiones' => $profesiones]);
   }
 
   public function update(Request $request, $id)
   {
-    //
+    $validator = Validator::make($request->all(), [
+      'tipo_doc' => 'required',
+      'documento' => "required|unique:persona,ced_persona,$request->documento,ced_persona|max:15",
+      'nombre' => 'required|max:100',
+      'codigo' => "required|unique:estudiante,codigo,$request->codigo,codigo|max:15",
+      'correo' => "required|unique:persona,email_persona,$request->correo,email_persona|max:100|email",
+      'telefono' => 'required|min:7|max:20',
+      'celular' => 'required|min:7|max:20',
+      'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+      'sexo' => 'required',
+      'estado_civil' => 'required',
+      'tipo_sangre' => 'required',
+      'nacimiento' => 'required',
+      'barrio' => 'required',
+      'fecha' => 'required',
+      'corte' => 'required',
+      'beca' => 'required',
+      'profesion' => 'required',
+      'nivel' => 'required',
+      'instituciones' => 'required',
+      'semestre' => 'required',
+    ]);
+    if ($validator->fails()) {
+      return ($validator->errors());
+    } else {
+      if ($request->hasFile('foto')) {
+        // $file = $request->file('foto');
+        // $extension = $file->getClientOriginalExtension();
+        // $filename = date('YmdHis') . '.' . $extension;
+        // $file->move('images/estudiantes', $filename);
+      } else {
+        $filename = '';
+      }
+      $persona = Persona::findOrFail($id);
+      $persona->ced_persona = $request->documento;
+      $persona->tipo_doc = $request->tipo_doc;
+      $persona->nom_persona = $request->nombre;
+      $persona->email_persona = $request->correo;
+      $persona->tel_persona = $request->telefono;
+      $persona->cel_persona = $request->celular;
+      $persona->sexo = $request->sexo;
+      $persona->estado_civil = $request->estado_civil;
+      $persona->tipo_sangre = $request->tipo_sangre;
+      $persona->fecha_nac = $request->fecha;
+      $persona->lugar_nac = $request->nacimiento;
+      $persona->direccion = $request->direccion;
+      $persona->barrio = $request->barrio;
+      $persona->save();
+
+      $estudiante = Estudiante::findOrFail($id);
+      $estudiante->ced_persona = $request->documento;
+      $estudiante->codigo = $request->codigo;
+      $estudiante->semestre = $request->semestre;
+      $estudiante->cohorte = $request->corte;
+      $estudiante->beca = $request->beca;
+      $estudiante->save();
+
+      $cont = count($request->profesionact);
+      for ($i = 0; $i < $cont; $i++) {
+        if ($request->profesionact[$i] != NULL) {
+          $estudio = Estudio::where('id_estudio', $request->profesion[$i])->first();
+          if ($estudio == null) {
+            $estudio = new Estudio();
+            $estudio->nom_estudio = $request->profesionact[$i];
+            $estudio->nivel_estudio = $request->nivel[$i];
+            $estudio->save();
+
+            $estudios = Estudio::get()->last();
+
+            $est_estudio = new EstudianteEstudio();
+            $est_estudio->estudiante = $request->documento;
+            $est_estudio->estudio = $estudios->id_estudio;
+            $est_estudio->institucion = $request->instituciones[$i];
+            $est_estudio->save();
+          }else{
+            $estudio->nom_estudio = $request->profesionact[$i];
+            $estudio->nivel_estudio = $request->nivel[$i];
+            $estudio->save();
+          }
+        }
+      }
+      return 0;
+    }
   }
 
-  public function destroy($id)
+  public function destroy($id, $est)
   {
-    $estudiante = Estudiante::findOrFail($id);
+    $estudio = EstudianteEstudio::where('estudiante', $est)->where('estudio', $id)->first();
+    $estudio->delete();
 
-    $profesiones = ProfesionEstudiante::where('estudiante_id', $estudiante->id)->get();
-
-    foreach ($profesiones as $profesion) {
-      $profesion->delete();
-    }
-
-    $corte = Corte::findOrFail($estudiante->corte_id);
-    $corte->numEstudiantes = ($corte->numEstudiantes) - 1;
-    $corte->save();
-    $estudiante->delete();
+    $estudio = Estudio::findOrFail($id);
+    $estudio->delete();
 
     return 0;
   }

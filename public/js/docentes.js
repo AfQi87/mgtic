@@ -55,10 +55,10 @@ function agregarProfesion() {
   cell1.innerHTML = '<textarea name="profesion[]" id="profesion" class="form-control" cols="30" rows="1" required></textarea>';
 
   var cell2 = row.insertCell(1);
-  cell2.innerHTML = '<select class="form-select nivel" id="nivel' + (contProfesion - 1) + '" required name="nivel[]" ><option selected>Seleccione una opción</option>';
-  $.get('/responsables', function (datos) {
-    for (i = 0; i < datos.responsables.length; i++) {
-      $("#nivel" + (contProfesion - 1)).append('<option value="' + datos.responsables[i].id + '">' + datos.responsables[i].nombre + ' - ' + datos.responsables[i].dependencia + '</option>');
+  cell2.innerHTML = '<select class="form-select nivel" id="nivel' + (contProfesion - 1) + '" required name="nivel[]" style="max-width: 250px" ><option selected>Seleccione una opción</option>';
+  $.get('/niveles', function (datos) {
+    for (i = 0; i < datos.niveles.length; i++) {
+      $("#nivel" + (contProfesion - 1)).append('<option value="' + datos.niveles[i].id_nivel + '">' + datos.niveles[i].desc_nivel + '</option>');
     }
   })
 
@@ -127,33 +127,33 @@ $('#formregDocente').submit(function (e) {
   });
 });
 //============================================================================Editar Docente
-function agregarProfesionact() {
-  var table = document.getElementById("tablaProfesionAct");
-  var row = table.insertRow(table.rows.length);
+// function agregarProfesionact() {
+//   var table = document.getElementById("tablaProfesionAct");
+//   var row = table.insertRow(table.rows.length);
 
-  var cell2 = row.insertCell(0);
-  cell2.innerHTML = '<input type="hidden" class="form-control" id="profesion_id" value="-1" name="profesion_id[]"><textarea name="profesionact[]" id="profesionact" class="form-control" cols="30" rows="2" required></textarea>';
+//   var cell2 = row.insertCell(0);
+//   cell2.innerHTML = '<input type="hidden" class="form-control" id="profesion_id" value="-1" name="profesion_id[]"><textarea name="profesionact[]" id="profesionact" class="form-control" cols="30" rows="2" required></textarea>';
 
-  var cell3 = row.insertCell(1);
-  var button = document.createElement("button");
-  button.textContent = "--";
-  button.type = "button";
-  button.className = "btn btn-danger"
-  cell3.appendChild(button);
-  cell3.className = "text-center";
+//   var cell3 = row.insertCell(1);
+//   var button = document.createElement("button");
+//   button.textContent = "--";
+//   button.type = "button";
+//   button.className = "btn btn-danger"
+//   cell3.appendChild(button);
+//   cell3.className = "text-center";
 
-  button.addEventListener("click", () => {
-    var n = 0;
-    $("#tablaDoc tbody tr").each(function () {
-      n++;
-    });
-    if (n <= 1) {
-      toastr.error("Debe tener como minimo una Profesión", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-    } else {
-      event.target.parentNode.parentNode.remove();
-    }
-  })
-}
+//   button.addEventListener("click", () => {
+//     var n = 0;
+//     $("#tablaDoc tbody tr").each(function () {
+//       n++;
+//     });
+//     if (n <= 1) {
+//       toastr.error("Debe tener como minimo una Profesión", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+//     } else {
+//       event.target.parentNode.parentNode.remove();
+//     }
+//   })
+// }
 
 function editarDocente(id) {
   $.get('/docente/form/' + id, function (datos,) {

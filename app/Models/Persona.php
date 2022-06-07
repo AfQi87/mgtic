@@ -11,13 +11,18 @@ class Persona extends Model
     protected $table = 'persona';
     protected $primaryKey = 'ced_persona';
 
-    public function programas()
+    public function estudiantes()
     {
-        return $this->belongsTo(Programa::class, 'programa', 'id_programa');
+        return $this->hasMany(Estudiante::class, 'ced_persona');
     }
 
-    public function estados()
+    public function municipios()
     {
-        return $this->belongsTo(Estado::class, 'estado_id', 'id');
+        return $this->belongsTo(Municipio::class, 'lugar_nac', 'id_municipio');
+    }
+
+    public function barrios()
+    {
+        return $this->belongsTo(Barrio::class, 'barrio', 'id_barrio');
     }
 }

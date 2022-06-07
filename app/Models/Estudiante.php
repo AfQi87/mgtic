@@ -9,6 +9,8 @@ class Estudiante extends Model
 {
   use HasFactory;
   protected $table = 'estudiante';
+  protected $primaryKey = 'ced_persona';
+
 
   public function estados()
   {
@@ -16,6 +18,10 @@ class Estudiante extends Model
   }
   public function cortes()
   {
-    return $this->belongsTo(Corte::class, 'corte_id', 'id');
+    return $this->belongsTo(Corte::class, 'cohorte', 'id_cohorte');
+  }
+  public function personas()
+  {
+    return $this->belongsTo(Persona::class, 'ced_persona', 'ced_persona');
   }
 }

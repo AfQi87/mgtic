@@ -103,8 +103,11 @@ Route::group(['middleware' => 'auth'], function () {
 ///=================================================================================================Estudiantes
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/estudiantes', [EstudianteController::class, 'index'])->name('estudiantesIndexs');
-	Route::get('/instituciones', [EstudianteController::class, 'instituciones'])->name('estudiantesInstituciones');
+	Route::get('/niveles', [EstudianteController::class, 'niveles'])->name('estudiantesNiveles');
 	Route::post('/estudiante/form', [EstudianteController::class, 'store'])->name('formStore');
-	Route::get('/estudiante/delete/{id}', [EstudianteController::class, 'destroy']);
+	Route::post('/estudiante/act/{id}', [EstudianteController::class, 'update'])->name('formUpdate');
+	Route::get('/estudiante/actu/{id}', [EstudianteController::class, 'edit'])->name('formEdit');
 
+
+	Route::get('/estudiante/delete/{id}/{est}', [EstudianteController::class, 'destroy']);
 });
