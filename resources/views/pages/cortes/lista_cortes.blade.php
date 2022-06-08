@@ -120,7 +120,7 @@
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
@@ -131,18 +131,14 @@
               <table class="table table-hover" id="tablaCortes">
                 <thead class=" text-primary text-center">
                   <th>Nombre</th>
-                  <th>Estudiantes</th>
                   <th>Fecha Inicio</th>
                   <th>Fecha Fin</th>
-                  <th>Estado</th>
                   <th>Más</th>
                 </thead>
                 <tfoot class=" text-primary">
                   <th>Nombre</th>
-                  <th>Estudiantes</th>
                   <th>Fecha Inicio</th>
                   <th>Fecha Fin</th>
-                  <th>Estado</th>
                   <th>Más</th>
                 </tfoot>
               </table>

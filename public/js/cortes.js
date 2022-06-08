@@ -15,11 +15,9 @@ $(document).ready(function () {
       console.log("response");
     },
     columns: [
-      { data: "nombre", className: "text-center" },
-      { data: "numEstudiantes", className: "text-center" },
-      { data: "fecha_ini", className: "text-center correoCopiar" },
+      { data: "desc_cohorte", className: "text-center" },
+      { data: "fecha_inicio", className: "text-center correoCopiar" },
       { data: "fecha_fin", className: "text-center" },
-      { data: "estado", className: "text-center" },
       { data: "accion", orderable: false, className: "text-center" },
     ]
   });
@@ -59,10 +57,10 @@ $('#formregCorte').submit(function (e) {
 function editarCorte(id) {
   $.get('/corte/form/' + id, function (datos,) {
     console.log(datos)
-    $('#id_corte').val(datos.corte.id);
-    $('#id_corte_dis').val(datos.corte.id);
-    $('#nombre_act').val(datos.corte.nombre);
-    $('#fecha_inicio_act').val(datos.corte.fecha_ini);
+    $('#id_corte').val(datos.corte.id_cohorte);
+    $('#id_corte_dis').val(datos.corte.id_cohorte);
+    $('#nombre_act').val(datos.corte.desc_cohorte);
+    $('#fecha_inicio_act').val(datos.corte.fecha_inicio);
     $('#fecha_finalizacion_act').val(datos.corte.fecha_fin);
 
     $('#ModalCorteAct').modal('toggle');
@@ -99,17 +97,17 @@ var idCorte;
 $(document).on('click', '.desCorte', function () {
   idCorte = $(this).attr('id');
   Swal.fire({
-    title: 'Desactivar Corte',
-    text: "¿Esta seguro que desea desactivar la corte?",
+    title: 'Eliminar Corte',
+    text: "¿Esta seguro que desea eliminar la corte?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, desactivar!'
+    confirmButtonText: 'Si, eliminar!'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: "/corte/desactivar/" + idCorte,
+        url: "/corte/destroy/" + idCorte,
         method: "GET",
         success: function (response) {
           if (response == 0) {

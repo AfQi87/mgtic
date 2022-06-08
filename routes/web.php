@@ -96,8 +96,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/corte/form', [CorteController::class, 'store'])->name('formStoreCorte');
 	Route::get('/corte/form/{id}', [CorteController::class, 'edit'])->name('formEditCorte');
 	Route::post('/corte/actualizar/{id}', [CorteController::class, 'update'])->name('formUpdateCorte');
-	Route::get('/corte/desactivar/{id}', [CorteController::class, 'desactivar']);
-	Route::get('/corte/activar/{id}', [CorteController::class, 'activar']);
+	Route::get('/corte/destroy/{id}', [CorteController::class, 'destroy']);
 });
 
 ///=================================================================================================Estudiantes
@@ -107,7 +106,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/estudiante/form', [EstudianteController::class, 'store'])->name('formStore');
 	Route::post('/estudiante/act/{id}', [EstudianteController::class, 'update'])->name('formUpdate');
 	Route::get('/estudiante/actu/{id}', [EstudianteController::class, 'edit'])->name('formEdit');
+	Route::get('/estudiante/delete/prof/{id}', [EstudianteController::class, 'delete']);
+	Route::get('/estudiante/delete/{id}', [EstudianteController::class, 'destroy']);
 
 
-	Route::get('/estudiante/delete/{id}/{est}', [EstudianteController::class, 'destroy']);
 });

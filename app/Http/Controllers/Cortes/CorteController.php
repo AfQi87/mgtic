@@ -18,20 +18,11 @@ class CorteController extends Controller
       return DataTables::of($corte)
         ->addColumn('accion', function ($corte) {
           $acciones = '';
-          $acciones .= '<a href="javascript:void(0)" onclick="editarCorte(' . $corte->id . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
-          if ($corte->estado_id == 1) {
-            $acciones .= '&nbsp<button type="button" id="' . $corte->id . '" name="delete" class="desCorte btn btn-danger"><i class="bi bi-x-lg"></i></button>';
-          } else {
-            $acciones .= '&nbsp<button type="button" id="' . $corte->id . '" name="delete" class="actCorte btn btn-success"><i class="bi bi-check-lg"></i></button>';
-          }
+          $acciones .= '<a href="javascript:void(0)" onclick="editarCorte(' . $corte->id_cohorte . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
+          $acciones .= '&nbsp<button type="button" id="' . $corte->id_cohorte . '" name="delete" class="desCorte btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
         })
-        
-        ->addColumn('estado', function ($corte) {
-          $estado = $corte->estados->estado;
-          return $estado;
-        })
-        ->rawColumns(['accion', 'estado'])
+        ->rawColumns(['accion'])
         ->make(true);
     }
     return view('pages/cortes/lista_cortes');
@@ -43,7 +34,7 @@ class CorteController extends Controller
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'nombre' => 'required|unique:Corte,nombre|max:100',
+      'nombre' => 'required|unique:cohorte,desc_cohorte|max:100',
       'fecha_inicio' => 'required',
       'fecha_finalizacion' => 'required',
     ]);
@@ -51,11 +42,9 @@ class CorteController extends Controller
       return ($validator->errors());
     } else {
       $corte = new Corte();
-      $corte->nombre = $request->nombre;
-      $corte->numEstudiantes = 0;
-      $corte->fecha_ini = $request->fecha_inicio;
+      $corte->desc_cohorte = $request->nombre;
+      $corte->fecha_inicio = $request->fecha_inicio;
       $corte->fecha_fin = $request->fecha_finalizacion;
-      $corte->estado_id = 1;
       $corte->save();
       return 0;
     }
@@ -75,7 +64,7 @@ class CorteController extends Controller
   public function update(Request $request, $id)
   {
     $validator = Validator::make($request->all(), [
-      'nombre' => "required|unique:Corte,nombre,$request->nombre,nombre|max:100",
+      'nombre' => "required|unique:cohorte,desc_cohorte,$request->nombre,desc_cohorte|max:100",
       'fecha_inicio' => 'required',
       'fecha_finalizacion' => 'required',
     ]);
@@ -83,8 +72,8 @@ class CorteController extends Controller
       return ($validator->errors());
     } else {
       $corte = Corte::findOrFail($id);
-      $corte->nombre = $request->nombre;
-      $corte->fecha_ini = $request->fecha_inicio;
+      $corte->desc_cohorte = $request->nombre;
+      $corte->fecha_inicio = $request->fecha_inicio;
       $corte->fecha_fin = $request->fecha_finalizacion;
       $corte->save();
       return 0;
@@ -93,22 +82,9 @@ class CorteController extends Controller
 
   public function destroy($id)
   {
-    //
-  }
-
-  public function desactivar($id)
-  {
     $corte = Corte::findOrFail($id);
-    $corte->estado_id = 2;
-    $corte->save();
+    $corte->delete();
     return 0;
   }
 
-  public function activar($id)
-  {
-    $corte = Corte::findOrFail($id);
-    $corte->estado_id = 1;
-    $corte->save();
-    return 0;
-  }
 }

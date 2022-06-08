@@ -12,13 +12,13 @@
           <div class="card-body">
             <div class="row">
               <div class="col-12 text-right">
-                <button type="button" id="btnregDocente" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalDocente">
+                <button type="button" id="btnregDocente" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalestudiante">
                   Registrar
                 </button>
               </div>
             </div>
             <!-- Modal Registro -->
-            <div class="modal fade" id="modalDocente" tabindex="-1" aria-labelledby="ModalUsuarioLabel" aria-hidden="true">
+            <div class="modal fade" id="modalestudiante" tabindex="-1" aria-labelledby="ModalUsuarioLabel" aria-hidden="true">
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                   <div class="modal-header">

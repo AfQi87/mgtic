@@ -259,7 +259,7 @@ class EstudianteController extends Controller
             $est_estudio->estudio = $estudios->id_estudio;
             $est_estudio->institucion = $request->instituciones[$i];
             $est_estudio->save();
-          }else{
+          } else {
             $estudio->nom_estudio = $request->profesionact[$i];
             $estudio->nivel_estudio = $request->nivel[$i];
             $estudio->save();
@@ -270,14 +270,35 @@ class EstudianteController extends Controller
     }
   }
 
-  public function destroy($id, $est)
+  public function destroy($id)
   {
-    $estudio = EstudianteEstudio::where('estudiante', $est)->where('estudio', $id)->first();
-    $estudio->delete();
+    $estudiosEst = EstudianteEstudio::where('estudiante', $id)->get();
 
-    $estudio = Estudio::findOrFail($id);
-    $estudio->delete();
+    foreach ($estudiosEst as $estudioEst) {
+      $estudio = Estudio::findOrFail($estudioEst->estudio);
+      $estudioEst->delete();
+      $estudio->delete();
+    }
+
+    $estudiante = Estudiante::findOrFail($id);
+    $estudiante->delete();
+
+    $persona = Persona::findOrFail($id);
+    $persona->delete();
 
     return 0;
+  }
+
+  public function delete($id)
+  {
+    // $estudio = EstudianteEstudio::where('estudio', $id)->first();
+    // $estudio->delete();
+
+    // $estudio = Estudio::findOrFail($id);
+    // $estudio->delete();
+
+    $estudio = EstudianteEstudio::where('estudio', '=', $id)->first();
+    $estudio->delete();
+    return $estudio;
   }
 }

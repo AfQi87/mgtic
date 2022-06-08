@@ -9,6 +9,7 @@ class Corte extends Model
 {
     use HasFactory;
     protected $table = 'cohorte';
+    protected $primaryKey = 'id_cohorte';
 
     
     public function estudiantes()

@@ -11,13 +11,8 @@ class EstudianteEstudio extends Model
 	protected $table = 'estudiante_has_estudio';
 
   protected $primaryKey = 'estudiante';
+	// $table->primary(['estudiante', 'estudio']);
 
-
-	public function estudios()
-	{
-		// return $this->belongsTo(Estudio::class, 'estudio', 'id_estudio');
-		return $this->BelongsToMany(Estudio::class, 'estudio');
-	}
 	public function insituciones()
 	{
 		return $this->belongsTo(Persona::class, 'institucion', 'id_institucion');

@@ -11161,6 +11161,7 @@ form {
   margin-bottom: 0;
 }
 
+
 .form-control {
   background: no-repeat center bottom, center calc(100% - 1px);
   background-size: 0 100%, 100% 100%;
@@ -11171,6 +11172,10 @@ form {
   padding-right: 0;
   border-radius: 0;
   font-size: 14px;
+}
+
+.textAreaD {
+  height: 150px;
 }
 
 .form-control:focus,
@@ -12929,11 +12934,6 @@ select.form-control {
   top: -10px;
 }
 
-textarea {
-  height: auto !important;
-  resize: none;
-  line-height: 1.428571 !important;
-}
 
 .form-group input[type=file] {
   opacity: 0;

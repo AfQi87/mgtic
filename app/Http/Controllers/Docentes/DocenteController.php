@@ -3,9 +3,19 @@
 namespace App\Http\Controllers\Docentes;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barrio;
+use App\Models\Beca;
 use App\Models\Campo;
+use App\Models\Corte;
 use App\Models\Docente;
+use App\Models\EstadoCivil;
+use App\Models\Institucion;
+use App\Models\Municipio;
+use App\Models\Nivel_Formacion;
 use App\Models\Profesion;
+use App\Models\Sexo;
+use App\Models\TipoDoc;
+use App\Models\TipoSangre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\Return_;
@@ -47,7 +57,17 @@ class DocenteController extends Controller
         ->rawColumns(['accion', 'fotoD', 'estado', 'campo'])
         ->make(true);
     }
-    return view('pages/docentes/ListaDocentes');
+    $tipos = TipoDoc::all();
+    $cortes = Corte::all();
+    $becas = Beca::all();
+    $sexos = Sexo::all();
+    $sangres = TipoSangre::all();
+    $nacimientos = Municipio::all();
+    $barrios = Barrio::all();
+    $estadosCivil = EstadoCivil::all();
+    $instituciones = Institucion::all();
+    $niveles = Nivel_Formacion::all();
+    return view('pages/docentes/ListaDocentes', compact('tipos', 'cortes', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'barrios', 'niveles', 'instituciones'));
   }
 
   public function create()

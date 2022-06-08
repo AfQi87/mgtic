@@ -136,7 +136,6 @@ function delay(n, element) {
   return new Promise(function (resolve) {
     $.get('/niveles', function (data) {
       for (i = 0; i < data.niveles.length; i++) {
-        console.log("nivel" + n)
         if (element == data.niveles[i].id_nivel) {
           $("#formActEstudiante #nivel" + n).append('<option selected value="' + data.niveles[i].id_nivel + '">' + data.niveles[i].desc_nivel + '</option>');
         } else {
@@ -220,7 +219,7 @@ function editarEstudiante(id) {
             if (result.isConfirmed) {
               console.log('elemento estudio: '+element.id_estudio)
               $.ajax({
-                url: "/estudiante/delete/" + element.id_estudio + "/" + datos.estudiante.ced_persona,
+                url: "/estudiante/delete/prof/" + element.id_estudio,
                 method: "GET",
                 success: function (response) {
                   console.log(response)
