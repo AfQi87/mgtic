@@ -19,7 +19,13 @@ class ProgramaSeeder extends Seeder
             [
                 'id_programa' => '1',
                 'nom_programa' => 'Ingeniería de sistemas',
-                'nivel' => 1,
+                'nivel' => 7,
+                'institucion' => '1'
+            ],
+            [
+                'id_programa' => '2',
+                'nom_programa' => 'Ingeniería civil',
+                'nivel' => 8,
                 'institucion' => '1'
             ]
 

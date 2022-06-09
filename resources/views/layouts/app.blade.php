@@ -90,6 +90,7 @@
     <script type="text/javascript" src="{{ url('/js/usuarios.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/funciones.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/cortes.js')}}"></script>
+    <script type="text/javascript" src="{{ url('/js/materias.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/actas.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/egresados.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/docentes.js')}}"></script>

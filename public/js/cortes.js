@@ -112,10 +112,10 @@ $(document).on('click', '.desCorte', function () {
         success: function (response) {
           if (response == 0) {
             $('#tablaCortes').DataTable().ajax.reload();
-            toastr.success("Registro Desactivado Correctamente", 'Correcto',
+            toastr.success("Registro Eliminado Correctamente", 'Correcto',
               { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           } else {
-            toastr.error("El egresado no se desactivo", 'Error',
+            toastr.error("La corte no se desactivo", 'Error',
               { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           }
         }
@@ -124,34 +124,3 @@ $(document).on('click', '.desCorte', function () {
   })
 });
 
-//=============================================================================================Activar Egresado
-
-$(document).on('click', '.actCorte', function () {
-  idCorte = $(this).attr('id');
-  Swal.fire({
-    title: 'Activar Egresado',
-    text: "¿Esta seguro que desea activar la corte?",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, activar!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      $.ajax({
-        url: "/corte/activar/" + idCorte,
-        method: "GET",
-        success: function (response) {
-          if (response == 0) {
-            $('#tablaCortes').DataTable().ajax.reload();
-            toastr.success("Registro Activado Correctamente", 'Correcto',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-          } else {
-            toastr.error("El egresado no se activo", 'Error',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-          }
-        }
-      });
-    }
-  })
-});

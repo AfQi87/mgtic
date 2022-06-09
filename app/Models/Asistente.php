@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Asistente extends Model
 {
     use HasFactory;
-    protected $table = 'asistente';
+    protected $table = 'participante';
     public function ListaAsistentes(){
         return $this->hasMany(ListaAsistente::class,'id');
     }

@@ -51,6 +51,12 @@
           <p>{{ __('Estudiantes') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'materias' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('materiasIndex') }}">
+          <i class="material-icons">content_paste</i>
+          <p>{{ __('Materias') }}</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

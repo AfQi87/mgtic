@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title " id="textArea">Listado Egresados</h4>
+            <h4 class="card-title " id="textArea">Listado Cortes</h4>
           </div>
           <div class="card-body">
             <div class="row">

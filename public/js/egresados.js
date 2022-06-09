@@ -16,9 +16,9 @@ $(document).ready(function () {
     },
     columns: [
       { data: "ced_persona", className: "text-center" },
-      { data: "nom_persona", className: "text-center" },
-      { data: "email_persona", className: "text-center correoCopiar" },
-      { data: "tel_persona", className: "text-center" },
+      { data: "nombre", className: "text-center" },
+      { data: "correo", className: "text-center correoCopiar" },
+      { data: "telefono", className: "text-center" },
       { data: "institucion", className: "text-center" },
       { data: "programa", className: "text-center" },
       { data: "accion", orderable: false, className: "text-center" },
@@ -55,6 +55,8 @@ $(document).on('click', '.cerrar', function () {
 
 $('#formregEgresado').submit(function (e) {
   e.preventDefault();
+  let = formData = new FormData($('#formregEgresado')[0]);
+
   var inst = $('#institucion').val();
   var val_inst = $('#instituciones').find('option[value="' + inst + '"]').data('ejemplo');
   if (val_inst == undefined) {
@@ -63,27 +65,39 @@ $('#formregEgresado').submit(function (e) {
   } else {
     var prog = $('#programa').val();
     var val_prog = $('#programas').find('option[value="' + prog + '"]').data('ejemplo');
+    formData.append('programa_id', val_prog);
+
     if (val_prog == undefined) {
       toastr.error("Debe seleccionar un programa", 'Error',
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     }
   }
-  var cedula = $("#cedula").val();
-  var nombre = $("#nombre").val();
-  var correo = $("#correo").val();
-  var telefono = $("#telefono").val();
-  var _token = $("meta[name='csrf-token']").attr("content");
+  var nacimiento;
+  var barrio;
+  var cont = 0;
+  var inst = $('#formregEgresado #nacimiento').val();
+  nacimiento = $('#formregEgresado #nacimientos').find('option[value="' + inst + '"]').data('ejemplo');
+  if (nacimiento == undefined) {
+    toastr.error("Debe seleccionar un lugar de nacimiento", 'Error',
+      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+    cont++;
+  } else {
+    var prog = $('#formregEgresado #barrio').val();
+    barrio = $('#formregEgresado #barrios').find('option[value="' + prog + '"]').data('ejemplo');
+    if (barrio == undefined) {
+      toastr.error("Debe seleccionar un programa", 'Error',
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+      cont++;
+    }
+  }
+  formData.append('nacimiento', nacimiento);
+  formData.append('barrio', barrio);
   $.ajax({
     method: "POST",
     url: "/egresados/form",
-    data: {
-      cedula: cedula,
-      nombre: nombre,
-      correo: correo,
-      telefono: telefono,
-      programa: val_prog,
-      _token: _token,
-    },
+    data: formData,
+    contentType: false,
+    processData: false,
     success: function (response) {
       if (response == 0) {
         $('.btn-close').click();
@@ -98,7 +112,7 @@ $('#formregEgresado').submit(function (e) {
     },
     error: function () {
       toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     }
   });
 });
@@ -108,12 +122,23 @@ function editarEgresado(id) {
 
   $.get('/egresados/form/' + id, function (datos) {
     console.log(datos);
-    $('#cedulaActDis').val(datos.persona.ced_persona);
-    $('#cedulaAct').val(datos.persona.ced_persona);
-    $('#nombreAct').val(datos.persona.nom_persona);
-    $('#correoAct').val(datos.persona.email_persona);
-    $('#telefonoAct').val(datos.persona.tel_persona);
-    $('#telefonoAct').val(datos.persona.tel_persona);
+    $('#formEgresadoAct #tipo_doc').val(datos.egresado.personas.tipo_doc);
+    $('#formEgresadoAct #documento').val(datos.egresado.ced_persona);
+    $('#formEgresadoAct #nombre').val(datos.egresado.personas.nom_persona);
+    $('#formEgresadoAct #correo').val(datos.egresado.personas.email_persona);
+    $('#formEgresadoAct #fecha').val(datos.egresado.personas.fecha_nac);
+    $('#formEgresadoAct #telefono').val(datos.egresado.personas.tel_persona);
+    $('#formEgresadoAct #celular').val(datos.egresado.personas.cel_persona);
+    $('#formEgresadoAct #direccion').val(datos.egresado.personas.direccion);
+    $('#formEgresadoAct #sexo').val(datos.egresado.personas.sexo);
+    $('#formEgresadoAct #estado_civil').val(datos.egresado.personas.estado_civil);
+    $('#formEgresadoAct #tipo_sangre').val(datos.egresado.personas.tipo_sangre);
+    $('#formEgresadoAct #tipo_sangre').val(datos.egresado.personas.tipo_sangre);
+    $('#formEgresadoAct #nacimiento').val(datos.egresado.personas.municipios.nom_municipio);
+    $('#formEgresadoAct #barrio').val(datos.egresado.personas.barrios.nom_barrio);
+
+    $('#formActEstudiante #estudio').val(datos.egresado.personas.id_estudio);
+
     $('#institucionAct').val(datos.institucion);
     var div = document.querySelector(".programaAct");
     while (div.firstChild) {
@@ -149,8 +174,9 @@ $("#institucionAct").on('input', function () {
 
 $('#formEgresadoAct').submit(function (e) {
   e.preventDefault();
-  var id = $('#cedulaAct').val();
 
+  var id = $('#formEgresadoAct #documento').val();
+  let = formData = new FormData($('#formEgresadoAct')[0]);
   var inst = $('#institucionAct').val();
   var val_inst = $('#institucionesAct').find('option[value="' + inst + '"]').data('ejemplo');
   if (val_inst == undefined) {
@@ -164,22 +190,30 @@ $('#formEgresadoAct').submit(function (e) {
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     }
   }
-  var cedula = $("#cedulaAct").val();
-  var nombre = $("#nombreAct").val();
-  var correo = $("#correoAct").val();
-  var telefono = $("#telefonoAct").val();
-  var _token = $("meta[name='csrf-token']").attr("content");
+  var nacimiento;
+  var barrio;
+  var inst = $('#ModalEgresadoAct #nacimiento').val();
+  nacimiento = $('#ModalEgresadoAct #nacimientos').find('option[value="' + inst + '"]').data('ejemplo');
+  if (nacimiento == undefined) {
+    toastr.error("Debe seleccionar un lugar de nacimiento", 'Error',
+      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+  } else {
+    var prog = $('#ModalEgresadoAct #barrio').val();
+    barrio = $('#ModalEgresadoAct #barrios').find('option[value="' + prog + '"]').data('ejemplo');
+    if (barrio == undefined) {
+      toastr.error("Debe seleccionar un programa", 'Error',
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+    }
+  }
+  formData.append('nacimiento', nacimiento);
+  formData.append('barrio', barrio);
+  formData.append('programa_id', val_prog);
   $.ajax({
     url: "/egresado/actualizar/" + id,
     method: "POST",
-    data: {
-      cedula: cedula,
-      nombre: nombre,
-      correo: correo,
-      telefono: telefono,
-      programa: val_prog,
-      _token: _token,
-    },
+    data: formData,
+    contentType: false,
+    processData: false,
     success: function (response) {
       if (response == 0) {
         $('#ModalEgresadoAct').modal('hide');
@@ -193,7 +227,7 @@ $('#formEgresadoAct').submit(function (e) {
     },
     error: function () {
       toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     }
   });
 });
@@ -250,7 +284,7 @@ $(document).on('click', '.deleteEgresado', function () {
         },
         error: function () {
           toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
-              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+            { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
         }
       });
     }

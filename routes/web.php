@@ -6,8 +6,10 @@ use App\Http\Controllers\Docentes\DocenteController;
 use App\Http\Controllers\Egresados\EgresadoController;
 use App\Http\Controllers\Estudiante\EstudianteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Materias\MateriaController;
 use App\Http\Controllers\UserController;
 use App\Mail\ContactenosMailable;
+use App\Models\Materia;
 use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -85,10 +87,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/egresados', [EgresadoController::class, 'index'])->name('egresadosIndex');
 	Route::get('/egresados/programas/{id}', [EgresadoController::class, 'programas'])->name('egresadosProg');
 	Route::post('/egresados/form', [EgresadoController::class, 'store'])->name('formStoreEgre');
-	Route::get('/egresados/form/{id}', [EgresadoController::class, 'edit'])->name('formEditEgre');
 	Route::post('/egresado/actualizar/{id}', [EgresadoController::class, 'update'])->name('formUpdateEgre');
 	Route::get('/egresado/delete/{id}', [EgresadoController::class, 'destroy']);
+	Route::get('/egresados/form/{id}', [EgresadoController::class, 'edit'])->name('formEditEgre');
 });
+
 
 ///=================================================================================================cortes
 Route::group(['middleware' => 'auth'], function () {
@@ -108,6 +111,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/estudiante/actu/{id}', [EstudianteController::class, 'edit'])->name('formEdit');
 	Route::get('/estudiante/delete/prof/{id}', [EstudianteController::class, 'delete']);
 	Route::get('/estudiante/delete/{id}', [EstudianteController::class, 'destroy']);
+});
 
-
+///=================================================================================================materias
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/materias', [MateriaController::class, 'index'])->name('materiasIndex');
+	Route::post('/materia/form', [MateriaController::class, 'store'])->name('formStoreMateria');
+	Route::get('/materia/form/{id}', [MateriaController::class, 'edit'])->name('formEditMateria');
+	Route::post('/materia/actualizar/{id}', [MateriaController::class, 'update'])->name('formUpdateCorte');
+	Route::get('/materia/destroy/{id}', [MateriaController::class, 'destroy']);
 });

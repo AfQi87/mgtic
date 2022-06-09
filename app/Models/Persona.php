@@ -16,6 +16,15 @@ class Persona extends Model
         return $this->hasMany(Estudiante::class, 'ced_persona');
     }
 
+    public function egresados()
+    {
+        return $this->hasMany(Egresado::class, 'ced_persona');
+    }
+    public function docentes()
+    {
+        return $this->hasMany(Docente::class, 'ced_persona');
+    }
+
     public function municipios()
     {
         return $this->belongsTo(Municipio::class, 'lugar_nac', 'id_municipio');
@@ -25,4 +34,6 @@ class Persona extends Model
     {
         return $this->belongsTo(Barrio::class, 'barrio', 'id_barrio');
     }
+
+    
 }
