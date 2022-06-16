@@ -108,10 +108,10 @@ class EstudianteController extends Controller
       return ($validator->errors());
     } else {
       if ($request->hasFile('foto')) {
-        // $file = $request->file('foto');
-        // $extension = $file->getClientOriginalExtension();
-        // $filename = date('YmdHis') . '.' . $extension;
-        // $file->move('images/estudiantes', $filename);
+        $file = $request->file('foto');
+        $extension = $file->getClientOriginalExtension();
+        $filename = $request->ced_persona . '.' . $extension;
+        $file->move('images/estudiantes', $filename);
       } else {
         $filename = '';
       }
@@ -156,8 +156,6 @@ class EstudianteController extends Controller
           $est_estudio->save();
         }
       }
-
-
       return 0;
     }
   }
@@ -173,13 +171,11 @@ class EstudianteController extends Controller
     $estudiante->personas;
     $estudiante->personas->barrios;
     $estudiante->personas->municipios;
-    // $profesiones = EstudianteEstudio::where('estudiante', $id)->get();
     $profesiones = EstudianteEstudio::select('id_institucion', 'nom_institucion', 'id_estudio', 'nom_estudio', 'id_nivel', 'desc_nivel')
       ->join('institucion', 'id_institucion', 'like', 'institucion')
       ->join('estudio', 'id_estudio', 'like', 'estudio')
       ->join('nivel', 'nivel_estudio', 'like', 'id_nivel')
       ->where('estudiante', $id)->get();
-    // $profesiones->intituciones;
     return response()->json(['estudiante' => $estudiante, 'profesiones' => $profesiones]);
   }
 
@@ -210,15 +206,15 @@ class EstudianteController extends Controller
     if ($validator->fails()) {
       return ($validator->errors());
     } else {
-      if ($request->hasFile('foto')) {
-        // $file = $request->file('foto');
-        // $extension = $file->getClientOriginalExtension();
-        // $filename = date('YmdHis') . '.' . $extension;
-        // $file->move('images/estudiantes', $filename);
-      } else {
-        $filename = '';
-      }
       $persona = Persona::findOrFail($id);
+      if ($request->hasFile('foto')) {
+        $file = $request->file('foto');
+        $extension = $file->getClientOriginalExtension();
+        $filename = $request->documento . '.' . $extension;
+        $file->move('images/estudiantes', $filename);
+      } else {
+        $filename = $persona->ced_persona;
+      }
       $persona->ced_persona = $request->documento;
       $persona->tipo_doc = $request->tipo_doc;
       $persona->nom_persona = $request->nombre;

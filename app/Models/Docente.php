@@ -7,17 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Docente extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'docente';
+  protected $table = 'docente';
 
-    public function estados(){
-        return $this->belongsTo(Estado::class,'estado_id','id');
-    }
-    public function profesiones(){
-        return $this->belongsTo(Profesion::class,'profesion_id','id');
-    }
-    public function campos(){
-        return $this->belongsTo(Campo::class,'campo_id','id');
+  protected $primaryKey = 'ced_persona';
+  public function personas()
+  {
+    return $this->belongsTo(Persona::class, 'ced_persona', 'ced_persona');
+  }
+  public function tipos()
+  {
+    return $this->belongsTo(Tipo::class, 'tipo', 'id_tipo');
+  }
+
+  public function Areas()
+    {
+        return $this->hasMany(DocenteAreaConocimiento::class, 'docente');
     }
 }

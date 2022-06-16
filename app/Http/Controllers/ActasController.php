@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Asistente;
 use App\Models\Acta;
+use App\Models\ActaComite;
 use App\Models\AsistenteComite;
 use App\Models\Conclusion;
+use App\Models\ConclusionComite;
 use App\Models\ListaAsistente;
 use App\Models\ListaAsistenteComite;
 use App\Models\Programacion;
+use App\Models\ProgramacionComite;
 use App\Models\Tarea;
 use App\Models\TareaComite;
 use Illuminate\Support\Facades\Validator;
@@ -68,7 +71,7 @@ class ActasController extends Controller
 	public function guardarActa(Request $request)
 	{
 		$acta = new Acta();
-		$acta->reunion_id  = $request->input('reunion');
+		$acta->tipo  = $request->input('reunion');
 		$acta->proceso = $request->input('proceso');
 		$acta->lugar = $request->input('lugar');
 		$acta->hora_inicio = $request->input('hora_ini');
@@ -83,8 +86,8 @@ class ActasController extends Controller
 			if ($request->asistente[$i] == NULL) {
 			} else {
 				$lit_asis = new ListaAsistente();
-				$lit_asis->acta_id = $acta->id;
-				$lit_asis->asistente_id = $request->asistente[$i];
+				$lit_asis->acta_mgtic = $acta->id_acta;
+				$lit_asis->participante = $request->asistente[$i];
 				$lit_asis->save();
 			}
 		}
@@ -95,8 +98,7 @@ class ActasController extends Controller
 			} else {
 				$tematica = new Programacion();
 				$tematica->tematica = $request->tematica[$i];
-				$tematica->asistente_id = 3;
-				$tematica->acta_id = $acta->id;
+				$tematica->acta = $acta->id_acta;
 				$tematica->save();
 			}
 		}
@@ -107,7 +109,7 @@ class ActasController extends Controller
 			} else {
 				$conclusion = new Conclusion();
 				$conclusion->conclusion = $request->conclusion[$i];
-				$conclusion->acta_id = $acta->id;
+				$conclusion->acta = $acta->id_acta;
 				$conclusion->save();
 			}
 		}
@@ -118,8 +120,8 @@ class ActasController extends Controller
 			} else {
 				$tarea = new Tarea();
 				$tarea->tarea = $request->tarea[$i];
-				$tarea->asistente_id = $request->responsable[$i];
-				$tarea->acta_id = $acta->id;
+				$tarea->participante = $request->responsable[$i];
+				$tarea->acta = $acta->id_acta;
 				$tarea->save();
 			}
 		}
@@ -128,8 +130,8 @@ class ActasController extends Controller
 
 	public function guardarActaComite(Request $request)
 	{
-		$acta = new Acta();
-		$acta->reunion_id  = $request->input('reunion');
+		$acta = new ActaComite();
+		$acta->tipo  = $request->input('reunion');
 		$acta->proceso = $request->input('proceso');
 		$acta->lugar = $request->input('lugar');
 		$acta->hora_inicio = $request->input('hora_ini');
@@ -139,13 +141,13 @@ class ActasController extends Controller
 
 		$total = 0;
 		$cont = count($request->asistente);
-		$acta = Acta::latest()->first();
+		$acta = ActaComite::latest()->first();
 		for ($i = 0; $i < $cont; $i++) {
 			if ($request->asistente[$i] == NULL) {
 			} else {
 				$lit_asis = new ListaAsistenteComite();
-				$lit_asis->acta_id = $acta->id;
-				$lit_asis->asistente_id = $request->asistente[$i];
+				$lit_asis->acta_comite = $acta->id;
+				$lit_asis->participante = $request->asistente[$i];
 				$lit_asis->save();
 			}
 		}
@@ -154,7 +156,7 @@ class ActasController extends Controller
 		for ($i = 0; $i < $cont; $i++) {
 			if ($request->tematica[$i] == NULL) {
 			} else {
-				$tematica = new Programacion();
+				$tematica = new ProgramacionComite();
 				$tematica->tematica = $request->tematica[$i];
 				$tematica->asistente_id = 3;
 				$tematica->acta_id = $acta->id;
@@ -166,7 +168,7 @@ class ActasController extends Controller
 		for ($i = 0; $i < $cont; $i++) {
 			if ($request->conclusion[$i] == NULL) {
 			} else {
-				$conclusion = new Conclusion();
+				$conclusion = new ConclusionComite();
 				$conclusion->conclusion = $request->conclusion[$i];
 				$conclusion->acta_id = $acta->id;
 				$conclusion->save();
@@ -189,13 +191,22 @@ class ActasController extends Controller
 
 	public function responsables()
 	{
-		$responsables = Asistente::all();
+		// $responsables = Asistente::all();
+		// $responsables->cargos;
+
+		$responsables = Asistente::select('persona', 'nom_persona', 'cargo', 'desc_cargo')
+      ->join('cargo', 'cargo', 'like', 'id_cargo')
+      ->join('persona', 'persona', 'like', 'ced_persona')
+			->get();
+
 		return response()->json(['responsables' => $responsables]);
 	}
 
 	public function responsablesComite()
 	{
-		$responsables = AsistenteComite::all();
+		// $responsables = AsistenteComite::all();
+		$responsables = Asistente::select('persona', 'cargo', 'desc_cargo')
+      ->join('cargo', 'cargo', 'like', 'id_cargo')->get();
 		return response()->json(['responsables' => $responsables]);
 	}
 

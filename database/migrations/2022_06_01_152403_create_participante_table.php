@@ -13,7 +13,7 @@ class CreateParticipanteTable extends Migration
    */
   public function up()
   {
-    Schema::create('participante', function (Blueprint $table) {
+    Schema::create('participante_mgtic', function (Blueprint $table) {
       $table->string('persona', 15);
       $table->unsignedInteger('cargo');
 
@@ -33,6 +33,6 @@ class CreateParticipanteTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('participante');
+    Schema::dropIfExists('participante_mgtic');
   }
 }

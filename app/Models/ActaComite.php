@@ -9,6 +9,8 @@ class ActaComite extends Model
 {
     use HasFactory;
     protected $table = 'acta_comite';
+    protected $primaryKey = 'id_acta';
+
     public function reuniones(){
         return $this->belongsTo(Reunion::class,'tipo','id_tipo');
     }

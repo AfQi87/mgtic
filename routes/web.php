@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\ActasController;
+use App\Http\Controllers\Asignaciones\AsignacionController;
 use App\Http\Controllers\Cortes\CorteController;
 use App\Http\Controllers\Docentes\DocenteController;
 use App\Http\Controllers\Egresados\EgresadoController;
 use App\Http\Controllers\Estudiante\EstudianteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Materias\MateriaController;
+use App\Http\Controllers\TrabajosGrado\TrabGradoController;
 use App\Http\Controllers\UserController;
 use App\Mail\ContactenosMailable;
 use App\Models\Materia;
@@ -72,14 +74,14 @@ Route::group(['middleware' => 'auth'], function () {
 ///=================================================================================================Docentes
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/docentes', [DocenteController::class, 'index'])->name('docentes');
-	Route::get('/docentes/form', [DocenteController::class, 'create'])->name('form');
 	Route::post('/docentes/form', [DocenteController::class, 'store'])->name('formStore');
 	Route::get('/docente/form/{id}', [DocenteController::class, 'edit'])->name('formEdit');
 	Route::post('/docente/actualizar/{id}', [DocenteController::class, 'update'])->name('formUpdate');
-	Route::get('/docente/delete/{id}', [DocenteController::class, 'delete'])->name('profesionDelete');
-	Route::get('/docente/show/{id}', [DocenteController::class, 'show'])->name('formShow');
-	Route::get('/docente/desactivar/{id}', [DocenteController::class, 'desactivar']);
-	Route::get('/docente/activar/{id}', [DocenteController::class, 'activar']);
+	Route::get('/docente/delete/prof/{id}', [DocenteController::class, 'delete'])->name('profesionDelete');
+	Route::get('/docente/delete/area/{id}', [DocenteController::class, 'deleteArea']);
+
+	Route::get('/docente/delete/{id}', [DocenteController::class, 'destroy']);
+
 });
 
 ///=================================================================================================egresados
@@ -120,4 +122,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/materia/form/{id}', [MateriaController::class, 'edit'])->name('formEditMateria');
 	Route::post('/materia/actualizar/{id}', [MateriaController::class, 'update'])->name('formUpdateCorte');
 	Route::get('/materia/destroy/{id}', [MateriaController::class, 'destroy']);
+});
+
+///=================================================================================================Asignación docente
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/asignacion', [AsignacionController::class, 'index'])->name('asignacionIndex');
+	Route::post('/asignacion/form', [AsignacionController::class, 'store'])->name('formStoreAsignacion');
+	Route::get('/asignacion/form/{id}/{mat}', [AsignacionController::class, 'edit'])->name('formEditAsignacion');
+	Route::post('/asignacion/actualizar/{id}/{mat}', [AsignacionController::class, 'update'])->name('formUpdateAsignacion');
+	Route::get('/asignacion/destroy/{id}/{mat}', [AsignacionController::class, 'destroy']);
+});
+
+///=================================================================================================Trabajos de grado
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/trabajos', [TrabGradoController::class, 'index'])->name('trabGradoIndex');
+	Route::post('/trabajos/form', [TrabGradoController::class, 'store'])->name('formStoreTrabGrado');
+	Route::get('/trabajos/form/{id}', [TrabGradoController::class, 'edit'])->name('formEditTrabGrado');
+	Route::post('/trabajos/actualizar/{id}', [TrabGradoController::class, 'update'])->name('formUpdateTrabGrado');
+
 });

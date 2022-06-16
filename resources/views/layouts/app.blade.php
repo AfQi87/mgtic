@@ -91,6 +91,8 @@
     <script type="text/javascript" src="{{ url('/js/funciones.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/cortes.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/materias.js')}}"></script>
+    <script type="text/javascript" src="{{ url('/js/asignaciones.js')}}"></script>
+    <script type="text/javascript" src="{{ url('/js/trabGrado.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/actas.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/egresados.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/docentes.js')}}"></script>

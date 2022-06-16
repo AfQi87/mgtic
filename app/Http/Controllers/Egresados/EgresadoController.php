@@ -83,15 +83,7 @@ class EgresadoController extends Controller
       'documento' => 'required|unique:persona,ced_persona|max:15',
       'nombre' => 'required|max:100',
       'correo' => 'required|unique:persona,email_persona|max:100|email',
-      'telefono' => 'required|min:7|max:20',
       'celular' => 'required|min:7|max:20',
-      'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
-      'sexo' => 'required',
-      'estado_civil' => 'required',
-      'tipo_sangre' => 'required',
-      'nacimiento' => 'required',
-      'barrio' => 'required',
-      'fecha' => 'required',
       'programa' => 'required',
     ]);
     if ($validator->fails()) {
@@ -102,15 +94,21 @@ class EgresadoController extends Controller
       $persona->tipo_doc = $request->tipo_doc;
       $persona->nom_persona = $request->nombre;
       $persona->email_persona = $request->correo;
-      $persona->tel_persona = $request->telefono;
+
+      if ($request->telefono == null) {
+        $persona->tel_persona = null;
+      } else {
+        $persona->tel_persona = $request->telefono;
+      }
+
       $persona->cel_persona = $request->celular;
-      $persona->sexo = $request->sexo;
-      $persona->estado_civil = $request->estado_civil;
-      $persona->tipo_sangre = $request->tipo_sangre;
-      $persona->fecha_nac = $request->fecha;
-      $persona->lugar_nac = $request->nacimiento;
-      $persona->direccion = $request->direccion;
-      $persona->barrio = $request->barrio;
+      $persona->sexo = null;
+      $persona->estado_civil = null;
+      $persona->tipo_sangre = null;
+      $persona->fecha_nac = null;
+      $persona->lugar_nac = null;
+      $persona->direccion = null;
+      $persona->barrio = null;
       $persona->save();
 
       $persona = new Egresado();

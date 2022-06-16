@@ -20,6 +20,9 @@ class CreateDocenteImparteMateriaTable extends Migration
       $table->unsignedInteger('cohorte');
       $table->date('fecha_inicio');
       $table->date('fecha_fin');
+      $table->string('num_resolucion', 100);
+      $table->date('fecha_resolucion');
+      $table->string('resolucion', 100);
 
 
       $table->foreign('docente')->references('ced_persona')->on('docente');

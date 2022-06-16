@@ -80,16 +80,14 @@
                               <th>Id</th>
                               <th>Nombre</th>
                               <th>Cargo</th>
-                              <th>Dependencia</th>
                               <th>Seleccionar</th>
                             </thead>
                             <tbody>
                               @foreach($asistentes as $asistente)
                               <tr>
-                                <td>{{ $asistente->id }}</td>
-                                <td>{{ $asistente->nombre }}</td>
-                                <td>{{ $asistente->cargo }}</td>
-                                <td>{{ $asistente->dependencia }}</td>
+                                <td>{{ $asistente->persona }}</td>
+                                <td>{{ $asistente->personas->nom_persona }}</td>
+                                <td>{{ $asistente->cargos->desc_cargo }}</td>
                                 <td class="text-center">
                                   <input type="checkbox" style="width: 15px;" class="asistente" value="{{ $asistente->id }}" name="asistente[]" id="asistente">
                                 </td>
@@ -197,7 +195,7 @@
                                   <select class="form-control" aria-label="Default select example" id="responsable1" name="responsable[]" required>
                                     <option selected>Seleccione una opción</option>
                                     @foreach($asistentes as $asistente)
-                                    <option value="{{$asistente->id}}" class="form-control">{{$asistente->cargo}}</option>
+                                    <option value="{{$asistente->persona}}" class="form-control">{{$asistente->personas->nom_persona}} - {{$asistente->cargos->desc_cargo}}</option>
                                     @endforeach
                                   </select>
                                 </td>

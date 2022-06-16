@@ -19,7 +19,7 @@ class CreateActaMgticHasParticipanteTable extends Migration
 
 
       $table->foreign('acta_mgtic')->references('id_acta')->on('acta_mgtic');
-      $table->foreign('participante')->references('persona')->on('participante');
+      $table->foreign('participante')->references('persona')->on('participante_mgtic');
 
       $table->primary(['acta_mgtic', 'participante']);
 

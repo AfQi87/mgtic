@@ -118,15 +118,7 @@ function agregar_programacion() {
   var cell2 = row.insertCell(0);
   cell2.innerHTML = '<textarea name="tematica[]" id="tematica" class="form-control" cols="30" rows="4" required></textarea>';
 
-  var cell3 = row.insertCell(1);
-  cell3.innerHTML = '<select class="form-control" aria-label="Default select example" id="responsable' + (cont_prog - 1) + '" name="responsable[]" required><option selected>Seleccione una opción</option>';
-  $.get('/responsables', function (datos) {
-    var id = "#responsable" + (cont_prog - 1);
-    for (i = 0; i < datos.responsables.length; i++) {
-      $("#responsable" + (cont_prog - 1)).append('<option value="' + datos.responsables[i].id + '">' + datos.responsables[i].nombre + ' - ' + datos.responsables[i].dependencia + '</option>');
-    }
-  })
-  var cell4 = row.insertCell(2);
+  var cell4 = row.insertCell(1);
   var button = document.createElement("button");
   button.textContent = "--";
   button.type = "button";
@@ -178,7 +170,7 @@ function agregar_tarea() {
   $.get('/responsables', function (datos) {
     var id = "#responsable" + (cont_tarea - 1);
     for (i = 0; i < datos.responsables.length; i++) {
-      $("#responsable" + (cont_tarea - 1)).append('<option value="' + datos.responsables[i].id + '">' + datos.responsables[i].cargo + '</option>');
+      $("#responsable" + (cont_tarea - 1)).append('<option value="' + datos.responsables[i].persona + '">' + datos.responsables[i].nom_persona + "-" + datos.responsables[i].desc_cargo + '</option>');
     }
   })
   var cell4 = row.insertCell(2);
@@ -229,7 +221,7 @@ function agregar_tareaC() {
   $.get('/responsablesComite', function (datos) {
     var id = "#responsable" + (cont_tarea - 1);
     for (i = 0; i < datos.responsables.length; i++) {
-      $("#responsable" + (cont_tarea - 1)).append('<option value="' + datos.responsables[i].id + '">' + datos.responsables[i].cargo + '</option>');
+      $("#responsable" + (cont_tarea - 1)).append('<option value="' + datos.responsables[i].persona + '">' + datos.responsables[i].desc_cargo + '</option>');
     }
   })
   var cell4 = row.insertCell(2);

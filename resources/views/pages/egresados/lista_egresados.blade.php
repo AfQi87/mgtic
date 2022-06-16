@@ -38,7 +38,7 @@
                               </div>
                               <div class="card-body ">
                                 <div class="row">
-                                  <div class="col-sm-8">
+                                  <div class="col-sm-12">
                                     <div class="row">
                                       <div class="col-sm-6">
                                         <div class="mb-3">
@@ -64,14 +64,10 @@
                                       <input type="text" class="form-control" id="nombre" name="nombre">
                                     </div>
                                     <div class="row">
-                                      <div class="mb-3 col-sm-8">
+                                      <div class="mb-3 col-sm-12">
                                         <label for="correo" class="form-label">Correo</label>
                                         <input type="email" class="form-control" id="correo" name="correo" aria-describedby="correoHelp">
                                         <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
-                                      </div>
-                                      <div class="mb-3 col-sm-4">
-                                        <label for="fecha" class="form-label">Fecha Nacimiento</label>
-                                        <input type="date" class="form-control" id="fecha" name="fecha">
                                       </div>
                                     </div>
                                     <div class="row">
@@ -86,82 +82,6 @@
                                           <div class="mb-3">
                                             <label for="celular" class="form-label">Celular</label>
                                             <input type="number" class="form-control" id="celular" name="celular">
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6 mt-3">
-                                        <label class="form-label" for="sexo">Sexo</label>
-                                        <select class="form-select" id="sexo" name="sexo" required>
-                                          <option selected>Seleccione una opción</option>
-                                          @foreach($sexos as $sexo)
-                                          <option value="{{$sexo->id_sexo}}">{{$sexo->descripcion}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-sm-6 mt-3">
-                                        <label class="form-label" for="estado_civil">Estado Civil</label>
-                                        <select class="form-select" id="estado_civil" name="estado_civil" required>
-                                          <option selected>Seleccione una opción</option>
-                                          @foreach($estadosCivil as $estado)
-                                          <option value="{{$estado->id_estado}}">{{$estado->descripcion}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-sm-6 mt-3">
-                                        <label class="form-label" for="tipo_sangre">Tipo de sangre</label>
-                                        <select class="form-select" id="tipo_sangre" name="tipo_sangre" required>
-                                          <option selected>Seleccione una opción</option>
-                                          @foreach($sangres as $sangre)
-                                          <option value="{{$sangre->id_tipo}}">{{$sangre->descripcion}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-sm-6 mt-3">
-                                        <div class="mb-3">
-                                          <label class="form-label" for="nacimiento">Lugar de nacimiento</label>
-                                          <input list="nacimientos" autocomplete="off" id="nacimiento" name="nacimiento" class="form-control" placeholder="Busca/Selecciona">
-                                          <datalist name="nacimientos" id="nacimientos" class="instEgresado" onclick="selectProgram()" required>
-                                            @foreach($nacimientos as $nacimiento)
-                                            <option data-ejemplo="{{ $nacimiento->id_municipio }}" value="{{ $nacimiento->nom_municipio }}"></option>
-                                            @endforeach
-                                          </datalist>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="mb-3">
-                                          <label for="direccion" class="form-label">Dirección residencia</label>
-                                          <input type="text" class="form-control" id="direccion" name="direccion">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="mb-3">
-                                          <label class="form-label" for="barrio">Barrio</label>
-                                          <input list="barrios" autocomplete="off" id="barrio" name="barrio" class="form-control" placeholder="Busca/Selecciona">
-                                          <datalist name="barrios" id="barrios" class="instEgresado" onclick="selectProgram()" required>
-                                            @foreach($barrios as $barrio)
-                                            <option data-ejemplo="{{ $barrio->id_barrio }}" value="{{ $barrio->nom_barrio }}"></option>
-                                            @endforeach
-                                          </datalist>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-4 mt-5">
-                                    <div>
-                                      <div class="row">
-                                        <div class="col-md-12">
-                                          <div class="card">
-                                            <div class="card-header card-header-primary">
-                                              <h4 class="card-title ">Fotografia</h4>
-                                            </div>
-                                            <div class="card-body">
-                                              <div class="rounded img-responsive mt-4" style="max-width: 280px">
-                                                <img id="imagenSeleccionada" src="avatar/avatar.png" style="max-width: 280px">
-                                              </div>
-                                              <div class="mb-3 mt-2">
-                                                <input type="file" class="form-control" id="foto" name="foto">
-                                              </div>
-                                            </div>
                                           </div>
                                         </div>
                                       </div>
@@ -221,7 +141,7 @@
                               </div>
                               <div class="card-body ">
                                 <div class="row">
-                                  <div class="col-sm-8">
+                                  <div class="col-sm-12">
                                     <div class="row">
                                       <div class="col-sm-6">
                                         <div class="mb-3">
@@ -247,14 +167,10 @@
                                       <input type="text" class="form-control" id="nombre" name="nombre">
                                     </div>
                                     <div class="row">
-                                      <div class="mb-3 col-sm-8">
+                                      <div class="mb-3 col-sm-12">
                                         <label for="correo" class="form-label">Correo</label>
                                         <input type="email" class="form-control" id="correo" name="correo" aria-describedby="correoHelp">
                                         <div id="correoHelp" class="form-text">El correo no puede estar repetido</div>
-                                      </div>
-                                      <div class="mb-3 col-sm-4">
-                                        <label for="fecha" class="form-label">Fecha Nacimiento</label>
-                                        <input type="date" class="form-control" id="fecha" name="fecha">
                                       </div>
                                     </div>
                                     <div class="row">
@@ -269,82 +185,6 @@
                                           <div class="mb-3">
                                             <label for="celular" class="form-label">Celular</label>
                                             <input type="number" class="form-control" id="celular" name="celular">
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6 mt-3">
-                                        <label class="form-label" for="sexo">Sexo</label>
-                                        <select class="form-select" id="sexo" name="sexo" required>
-                                          <option selected>Seleccione una opción</option>
-                                          @foreach($sexos as $sexo)
-                                          <option value="{{$sexo->id_sexo}}">{{$sexo->descripcion}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-sm-6 mt-3">
-                                        <label class="form-label" for="estado_civil">Estado Civil</label>
-                                        <select class="form-select" id="estado_civil" name="estado_civil" required>
-                                          <option selected>Seleccione una opción</option>
-                                          @foreach($estadosCivil as $estado)
-                                          <option value="{{$estado->id_estado}}">{{$estado->descripcion}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-sm-6 mt-3">
-                                        <label class="form-label" for="tipo_sangre">Tipo de sangre</label>
-                                        <select class="form-select" id="tipo_sangre" name="tipo_sangre" required>
-                                          <option selected>Seleccione una opción</option>
-                                          @foreach($sangres as $sangre)
-                                          <option value="{{$sangre->id_tipo}}">{{$sangre->descripcion}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-sm-6 mt-3">
-                                        <div class="mb-3">
-                                          <label class="form-label" for="nacimiento">Lugar de nacimiento</label>
-                                          <input list="nacimientos" autocomplete="off" id="nacimiento" name="nacimiento" class="form-control" placeholder="Busca/Selecciona">
-                                          <datalist name="nacimientos" id="nacimientos" class="instEgresado" onclick="selectProgram()" required>
-                                            @foreach($nacimientos as $nacimiento)
-                                            <option data-ejemplo="{{ $nacimiento->id_municipio }}" value="{{ $nacimiento->nom_municipio }}"></option>
-                                            @endforeach
-                                          </datalist>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="mb-3">
-                                          <label for="direccion" class="form-label">Dirección residencia</label>
-                                          <input type="text" class="form-control" id="direccion" name="direccion">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="mb-3">
-                                          <label class="form-label" for="barrio">Barrio</label>
-                                          <input list="barrios" autocomplete="off" id="barrio" name="barrio" class="form-control" placeholder="Busca/Selecciona">
-                                          <datalist name="barrios" id="barrios" class="instEgresado" onclick="selectProgram()" required>
-                                            @foreach($barrios as $barrio)
-                                            <option data-ejemplo="{{ $barrio->id_barrio }}" value="{{ $barrio->nom_barrio }}"></option>
-                                            @endforeach
-                                          </datalist>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-4 mt-5">
-                                    <div>
-                                      <div class="row">
-                                        <div class="col-md-12">
-                                          <div class="card">
-                                            <div class="card-header card-header-primary">
-                                              <h4 class="card-title ">Fotografia</h4>
-                                            </div>
-                                            <div class="card-body">
-                                              <div class="rounded img-responsive mt-4" style="max-width: 280px">
-                                                <img id="imagenSeleccionada" src="avatar/avatar.png" style="max-width: 280px">
-                                              </div>
-                                              <div class="mb-3 mt-2">
-                                                <input type="file" class="form-control" id="foto" name="foto">
-                                              </div>
-                                            </div>
                                           </div>
                                         </div>
                                       </div>

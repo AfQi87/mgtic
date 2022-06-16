@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Programacion extends Model
 {
     use HasFactory;
-    protected $table = 'programacion';
+    protected $table = 'tematica_mgtic';
+    protected $primaryKey = 'id_tematica';
+
     public function Asistentes(){
         return $this->belongsTo(Asistente::class,'asistente_id','id');
     }

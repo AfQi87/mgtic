@@ -50,15 +50,15 @@ $('#formRegEstudiante').submit(function (e) {
       toastr.error("Debe seleccionar un lugar de nacimiento", 'Error',
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
       cont++;
-    } else {
-      var prog = $('#barrio').val();
-      barrio = $('#barrios').find('option[value="' + prog + '"]').data('ejemplo');
-      if (barrio == undefined) {
-        toastr.error("Debe seleccionar un programa", 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-        cont++;
-      }
     }
+    var prog = $('#barrio').val();
+    barrio = $('#barrios').find('option[value="' + prog + '"]').data('ejemplo');
+    if (barrio == undefined) {
+      toastr.error("Debe seleccionar un barrio", 'Error',
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+      cont++;
+    }
+
     if (cont < 1) {
       formData.append('nacimiento', nacimiento);
       formData.append('barrio', barrio);
@@ -125,7 +125,6 @@ function agregarProfesionact() {
       toastr.error("Debe tener como minimo una Profesión", 'Error', { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     } else {
       event.target.parentNode.parentNode.remove();
-      contprofesion--;
     }
   })
 }
@@ -217,7 +216,7 @@ function editarEstudiante(id) {
             confirmButtonText: 'Si, eliminar!'
           }).then((result) => {
             if (result.isConfirmed) {
-              console.log('elemento estudio: '+element.id_estudio)
+              console.log('elemento estudio: ' + element.id_estudio)
               $.ajax({
                 url: "/estudiante/delete/prof/" + element.id_estudio,
                 method: "GET",
@@ -240,6 +239,7 @@ function editarEstudiante(id) {
     $('#ModalEstudianteAct').modal('toggle');
   })
 }
+
 $('#formActEstudiante').submit(function (e) {
   e.preventDefault();
   let = formData = new FormData($('#formActEstudiante')[0]);

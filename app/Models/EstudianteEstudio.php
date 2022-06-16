@@ -15,6 +15,6 @@ class EstudianteEstudio extends Model
 
 	public function insituciones()
 	{
-		return $this->belongsTo(Persona::class, 'institucion', 'id_institucion');
+		return $this->belongsTo(Institucion::class, 'institucion', 'id_institucion');
 	}
 }

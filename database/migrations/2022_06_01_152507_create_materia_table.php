@@ -18,6 +18,7 @@ class CreateMateriaTable extends Migration
       $table->string('nom_materia', 200);
       $table->integer('num_creditos');
       $table->integer('semestre');
+      $table->string('foa', 100);
       $table->unsignedInteger('area_form');
 
       $table->foreign('area_form')->references('id_area')->on('area_formacion');

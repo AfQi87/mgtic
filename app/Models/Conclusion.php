@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Conclusion extends Model
 {
     use HasFactory;
-    protected $table = 'conclusion';
+    protected $table = 'conclusion_mgtic';
 }

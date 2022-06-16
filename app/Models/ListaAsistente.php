@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ListaAsistente extends Model
 {
     use HasFactory;
-    protected $table = 'lista_asistente';
+    protected $table = 'acta_mgtic_has_participante';
     public function Asistentes(){
         return $this->belongsTo(Asistente::class,'asistente_id','id');
     }

@@ -49,12 +49,21 @@ class MateriaController extends Controller
     if ($validator->fails()) {
       return ($validator->errors());
     } else {
-      $corte = new Materia();
-      $corte->nom_materia = $request->nombre;
-      $corte->num_creditos = $request->creditos;
-      $corte->semestre = $request->semestre;
-      $corte->area_form = $request->area;
-      $corte->save();
+      if ($request->hasFile('foa')) {
+        $file = $request->file('foa');
+        $extension = $file->getClientOriginalExtension();
+        $filename = date('YmdHis') . '.' . $extension;
+        $file->move('documentos/materias', $filename);
+      } else {
+        $filename = '';
+      }
+      $materia = new Materia();
+      $materia->nom_materia = $request->nombre;
+      $materia->num_creditos = $request->creditos;
+      $materia->semestre = $request->semestre;
+      $materia->foa = $filename;
+      $materia->area_form = $request->area;
+      $materia->save();
       return 0;
     }
   }
@@ -82,10 +91,20 @@ class MateriaController extends Controller
     if ($validator->fails()) {
       return ($validator->errors());
     } else {
+      if ($request->hasFile('foa')) {
+        $file = $request->file('foa');
+        $extension = $file->getClientOriginalExtension();
+        $filename = date('YmdHis') . '.' . $extension;
+        $file->move('documentos/materias', $filename);
+      } else {
+        $mat = Materia::findOrFail($id);
+        $filename = $mat->foa;;
+      }
       $corte = Materia::findOrFail($id);
       $corte->nom_materia = $request->nombre;
       $corte->num_creditos = $request->creditos;
       $corte->semestre = $request->semestre;
+      $corte->foa = $filename;
       $corte->area_form = $request->area;
       $corte->save();
       return 0;

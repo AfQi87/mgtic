@@ -72,26 +72,6 @@ $('#formregEgresado').submit(function (e) {
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     }
   }
-  var nacimiento;
-  var barrio;
-  var cont = 0;
-  var inst = $('#formregEgresado #nacimiento').val();
-  nacimiento = $('#formregEgresado #nacimientos').find('option[value="' + inst + '"]').data('ejemplo');
-  if (nacimiento == undefined) {
-    toastr.error("Debe seleccionar un lugar de nacimiento", 'Error',
-      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-    cont++;
-  } else {
-    var prog = $('#formregEgresado #barrio').val();
-    barrio = $('#formregEgresado #barrios').find('option[value="' + prog + '"]').data('ejemplo');
-    if (barrio == undefined) {
-      toastr.error("Debe seleccionar un programa", 'Error',
-        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-      cont++;
-    }
-  }
-  formData.append('nacimiento', nacimiento);
-  formData.append('barrio', barrio);
   $.ajax({
     method: "POST",
     url: "/egresados/form",
@@ -126,16 +106,8 @@ function editarEgresado(id) {
     $('#formEgresadoAct #documento').val(datos.egresado.ced_persona);
     $('#formEgresadoAct #nombre').val(datos.egresado.personas.nom_persona);
     $('#formEgresadoAct #correo').val(datos.egresado.personas.email_persona);
-    $('#formEgresadoAct #fecha').val(datos.egresado.personas.fecha_nac);
     $('#formEgresadoAct #telefono').val(datos.egresado.personas.tel_persona);
     $('#formEgresadoAct #celular').val(datos.egresado.personas.cel_persona);
-    $('#formEgresadoAct #direccion').val(datos.egresado.personas.direccion);
-    $('#formEgresadoAct #sexo').val(datos.egresado.personas.sexo);
-    $('#formEgresadoAct #estado_civil').val(datos.egresado.personas.estado_civil);
-    $('#formEgresadoAct #tipo_sangre').val(datos.egresado.personas.tipo_sangre);
-    $('#formEgresadoAct #tipo_sangre').val(datos.egresado.personas.tipo_sangre);
-    $('#formEgresadoAct #nacimiento').val(datos.egresado.personas.municipios.nom_municipio);
-    $('#formEgresadoAct #barrio').val(datos.egresado.personas.barrios.nom_barrio);
 
     $('#formActEstudiante #estudio').val(datos.egresado.personas.id_estudio);
 
@@ -190,23 +162,7 @@ $('#formEgresadoAct').submit(function (e) {
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     }
   }
-  var nacimiento;
-  var barrio;
-  var inst = $('#ModalEgresadoAct #nacimiento').val();
-  nacimiento = $('#ModalEgresadoAct #nacimientos').find('option[value="' + inst + '"]').data('ejemplo');
-  if (nacimiento == undefined) {
-    toastr.error("Debe seleccionar un lugar de nacimiento", 'Error',
-      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-  } else {
-    var prog = $('#ModalEgresadoAct #barrio').val();
-    barrio = $('#ModalEgresadoAct #barrios').find('option[value="' + prog + '"]').data('ejemplo');
-    if (barrio == undefined) {
-      toastr.error("Debe seleccionar un programa", 'Error',
-        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-    }
-  }
-  formData.append('nacimiento', nacimiento);
-  formData.append('barrio', barrio);
+  
   formData.append('programa_id', val_prog);
   $.ajax({
     url: "/egresado/actualizar/" + id,
