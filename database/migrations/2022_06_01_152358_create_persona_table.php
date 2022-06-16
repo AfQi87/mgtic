@@ -18,15 +18,16 @@ class CreatePersonaTable extends Migration
       $table->unsignedInteger('tipo_doc');
       $table->string('nom_persona');
       $table->string('email_persona');
-      $table->string('tel_persona');
+      $table->string('tel_persona')->nullable();
       $table->string('cel_persona');
-      $table->unsignedInteger('sexo');
-      $table->unsignedInteger('estado_civil');
-      $table->unsignedInteger('tipo_sangre');
-      $table->date('fecha_nac');
-      $table->string('lugar_nac', 15);
-      $table->string('direccion', 100);
-      $table->unsignedInteger('barrio');
+      $table->unsignedInteger('sexo')->nullable();
+      $table->unsignedInteger('estado_civil')->nullable();
+      $table->unsignedInteger('tipo_sangre')->nullable();
+      $table->date('fecha_nac')->nullable();
+      $table->string('lugar_nac', 15)->nullable();
+      $table->string('direccion', 100)->nullable();
+      $table->unsignedInteger('barrio')->nullable();
+      $table->string('foto', 100)->nullable();
 
       $table->foreign('tipo_doc')->references('id_tipo')->on('tipo_id');
       $table->foreign('sexo')->references('id_sexo')->on('sexo');

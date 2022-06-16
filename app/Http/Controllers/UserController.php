@@ -106,7 +106,7 @@ class UserController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'name_act' => 'required|max:150',
-      'foto_act' => 'image|mimes:jpeg,png,jpg|max:2048',
+      'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
       'telefono_act' => 'required|min:10',
       'cargo_id_act' => 'required',
       'rol_id_act' => 'required',
@@ -115,8 +115,8 @@ class UserController extends Controller
       return ($validator->errors());
     } else {
       $user = User::findOrFail($id);
-      if ($request->hasFile('foto_act')) {
-        $file = $request->file('foto_act');
+      if ($request->hasFile('foto')) {
+        $file = $request->file('foto');
         $extension = $file->getClientOriginalExtension();
         $filename = date('YmdHis') . '.' . $extension;
         $file->move('images/', $filename);

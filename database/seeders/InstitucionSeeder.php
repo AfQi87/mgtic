@@ -19,7 +19,7 @@ class InstitucionSeeder extends Seeder
             [
                 'id_institucion' => '1',
                 'nom_institucion' => 'Universidad de Nariño',
-                'tipo' => 4,
+                'tipo' => 1,
                 'municipio' => '1',
                 'sector' => 1,
             ]

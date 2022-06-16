@@ -30,10 +30,20 @@ class Persona extends Model
         return $this->belongsTo(Municipio::class, 'lugar_nac', 'id_municipio');
     }
 
-    public function barrios()
+    public function tipodocs()
     {
-        return $this->belongsTo(Barrio::class, 'barrio', 'id_barrio');
+        return $this->belongsTo(TipoDoc::class, 'tipo_doc', 'id_tipo');
     }
-
-    
+    public function sexos()
+    {
+        return $this->belongsTo(Sexo::class, 'sexo', 'id_sexo');
+    }
+    public function tiposangre()
+    {
+        return $this->belongsTo(TipoSangre::class, 'tipo_sangre', 'id_tipo');
+    }
+    public function estadocivil()
+    {
+        return $this->belongsTo(EstadoCivil::class, 'estado_civil', 'id_estado');
+    }
 }

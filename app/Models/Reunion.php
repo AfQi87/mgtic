@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Reunion extends Model
 {
     use HasFactory;
-    protected $table = 'reunion';
+    protected $table = 'tipo_reunion';
     public function Actas(){
-        return $this->hasMany(Acta::class,'id');
+        return $this->hasMany(Acta::class,'id_tip');
     }
 }

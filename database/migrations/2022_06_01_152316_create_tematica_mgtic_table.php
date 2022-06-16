@@ -15,10 +15,10 @@ class CreateTematicaMgticTable extends Migration
   {
     Schema::create('tematica_mgtic', function (Blueprint $table) {
       $table->increments('id_tematica');
-      $table->unsignedInteger('acta');
       $table->text('tematica');
+      $table->unsignedInteger('acta');
 
-      $table->foreign('acta')->references('id_acta')->on('acta_comite');
+      $table->foreign('acta')->references('id_acta')->on('acta_mgtic');
       $table->timestamps();
     });
   }

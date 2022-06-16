@@ -89,7 +89,7 @@
                                 <td>{{ $asistente->personas->nom_persona }}</td>
                                 <td>{{ $asistente->cargos->desc_cargo }}</td>
                                 <td class="text-center">
-                                  <input type="checkbox" style="width: 15px;" class="asistente" value="{{ $asistente->id }}" name="asistente[]" id="asistente">
+                                  <input type="checkbox" style="width: 15px;" class="asistente" value="{{ $asistente->persona }}" name="asistente[]" id="asistente">
                                 </td>
                               </tr>
                               @endforeach

@@ -18,7 +18,7 @@ class CreateConclusionMgticTable extends Migration
       $table->unsignedInteger('acta');
       $table->text('conclusion');
 
-      $table->foreign('acta')->references('id_acta')->on('acta_comite');
+      $table->foreign('acta')->references('id_acta')->on('acta_mgtic');
       $table->timestamps();
     });
   }

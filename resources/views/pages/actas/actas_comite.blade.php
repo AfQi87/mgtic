@@ -118,7 +118,6 @@
                           <table class="table">
                             <thead class="text-primary">
                               <th>Tematica</th>
-                              <th>Responsable</th>
                               <th>
                                 <center>Eliminar</center>
                               </th>
@@ -126,14 +125,6 @@
                             <tbody id="tabla_programacion">
                               <tr>
                                 <td><textarea name="tematica[]" id="tematica" class="form-control" cols="30" rows="4" required></textarea></td>
-                                <td>
-                                  <select class="form-control" aria-label="Default select example" id="responsable1" name="responsable[]" required>
-                                    <option selected>Seleccione una opción</option>
-                                    @foreach($asistentes as $asistente)
-                                    <option value="{{ $asistente->persona }}">{{ $asistente->cargos->desc_cargo }}</option>
-                                    @endforeach
-                                  </select>
-                                </td>
                                 <td class="text-center"><button type="button" class="btn btn-danger" onclick="eliminar_programacion(1)">--</button></td>
                               </tr>
                             </tbody>
@@ -206,7 +197,7 @@
                                   <select class="form-control" aria-label="Default select example" id="responsable1" name="responsable[]" required>
                                     <option selected>Seleccione una opción</option>
                                     @foreach($asistentes as $asistente)
-                                    <option value="{{$asistente->persona}}" class="form-control">{{$asistente->cargos->desc_cargo}}</option>
+                                    <option value="{{$asistente->persona}}" class="form-control">{{$asistente->personas->nom_persona}} - {{$asistente->cargos->desc_cargo}}</option>
                                     @endforeach
                                   </select>
                                 </td>

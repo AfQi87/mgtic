@@ -38,13 +38,14 @@ class DocenteController extends Controller
       $docente = Docente::all();
       return DataTables::of($docente)
         ->addColumn('accion', function ($docente) {
-          $acciones = '<a href="javascript:void(0)" onclick="editarDocente(' . $docente->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
+          $acciones = '&nbsp<button type="button" onclick="verDocente(' . $docente->ced_persona . ')" name="verDocente" class="verDocente btn btn-info"><i class="bi bi-aspect-ratio"></i></i></button>';
+          $acciones .= '<a href="javascript:void(0)" onclick="editarDocente(' . $docente->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
           $acciones .= '&nbsp<button type="button" id="' . $docente->ced_persona . '" name="delete" class="deleteDocente btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
         })
         ->addColumn('fotoD', function ($docente) {
-          if ($docente->foto != null || $docente->foto != '') {
-            $foto = '<img src="/images/docentes/' . $docente->foto . '" alt="" class="zoom" width="80" height="80">';
+          if ($docente->personas->foto != null || $docente->personas->foto != '') {
+            $foto = '<img src="/images/docentes/' . $docente->personas->foto . '" alt="" class="zoom" width="80" height="80">';
           } else {
             $foto = '<img src="/avatar/avatar.png" alt="" class="zoom" width="80" height="80">';
           }
@@ -75,11 +76,10 @@ class DocenteController extends Controller
     $sexos = Sexo::all();
     $sangres = TipoSangre::all();
     $nacimientos = Municipio::all();
-    $barrios = Barrio::all();
     $estadosCivil = EstadoCivil::all();
     $instituciones = Institucion::all();
     $niveles = Nivel_Formacion::all();
-    return view('pages/docentes/ListaDocentes', compact('tipoDocs', 'tipos', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'barrios', 'niveles', 'instituciones'));
+    return view('pages/docentes/ListaDocentes', compact('tipoDocs', 'tipos', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'niveles', 'instituciones'));
   }
 
   public function store(Request $request)
@@ -96,7 +96,6 @@ class DocenteController extends Controller
       'estado_civil' => 'required',
       'tipo_sangre' => 'required',
       'nacimiento' => 'required',
-      'barrio' => 'required',
       'fecha' => 'required',
       'profesion' => 'required',
       'nivel' => 'required',
@@ -110,7 +109,7 @@ class DocenteController extends Controller
         $file = $request->file('foto');
         $extension = $file->getClientOriginalExtension();
         $filename = $request->documento . '.' . $extension;
-        $file->move('images/estudiantes', $filename);
+        $file->move('images/docentes', $filename);
       } else {
         $filename = '';
       }
@@ -127,7 +126,7 @@ class DocenteController extends Controller
       $persona->fecha_nac = $request->fecha;
       $persona->lugar_nac = $request->nacimiento;
       $persona->direccion = $request->direccion;
-      $persona->barrio = $request->barrio;
+      $persona->foto = $filename;
       $persona->save();
 
       $estudiante = new Docente();
@@ -174,7 +173,11 @@ class DocenteController extends Controller
   {
     $estudiante = Docente::findOrFail($id);
     $estudiante->personas;
-    $estudiante->personas->barrios;
+    $estudiante->tipos;
+    $estudiante->personas->tipodocs;
+    $estudiante->personas->tiposangre;
+    $estudiante->personas->estadocivil;
+    $estudiante->personas->sexos;
     $estudiante->personas->municipios;
     // $profesiones = EstudianteEstudio::where('estudiante', $id)->get();
     $profesiones = DocenteEstudio::select('id_institucion', 'nom_institucion', 'id_estudio', 'nom_estudio', 'id_nivel', 'desc_nivel')
@@ -203,7 +206,6 @@ class DocenteController extends Controller
       'estado_civil' => 'required',
       'tipo_sangre' => 'required',
       'nacimiento' => 'required',
-      'barrio' => 'required',
       'fecha' => 'required',
       'profesion' => 'required',
       'nivel' => 'required',
@@ -234,7 +236,7 @@ class DocenteController extends Controller
       $persona->fecha_nac = $request->fecha;
       $persona->lugar_nac = $request->nacimiento;
       $persona->direccion = $request->direccion;
-      $persona->barrio = $request->barrio;
+      $persona->foto = $filename;
       $persona->save();
 
       $estudiante = Docente::findOrFail($id);
@@ -303,6 +305,17 @@ class DocenteController extends Controller
     return 0;
   }
 
+  public function deleteArea($id)
+  {
+    $dAreaC = DocenteAreaConocimiento::where('area_con', 'like', $id);
+    $dAreaC->delete();
+
+    $area = AreaConocimiento::findOrFail($id);
+    $area->delete();
+
+    return 0;
+  }
+
   public function destroy($id)
   {
     $estudiosEst = DocenteEstudio::where('docente', $id)->get();
@@ -332,5 +345,4 @@ class DocenteController extends Controller
     $persona->delete();
     return 0;
   }
-
 }

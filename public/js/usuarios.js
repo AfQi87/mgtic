@@ -32,6 +32,13 @@ $(document).ready(function () {
     }
     reader.readAsDataURL(this.files[0]);
   });
+  $('#formActUsuario #foto').change(function () {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      $('#formActUsuario #imagenSeleccionada').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
 
 
 });
@@ -69,9 +76,9 @@ $('#formreguser').submit(function (e) {
     data: formData,
     contentType: false,
     processData: false,
-    beforeSend: function() {
+    beforeSend: function () {
       toastr.warning("Validando datos por favor espere", 'Espere',
-      { timeOut: 5000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        { timeOut: 5000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     },
     success: function (response) {
       if (response == 0) {
@@ -99,18 +106,10 @@ function editarUsuario(id) {
     $('#id_user_d').val(datos.usuario.id);
     $('#name_act').val(datos.usuario.name);
     $('#telefono_act').val(datos.usuario.telefono);
-    if (datos.usuario.foto != '' && datos.usuario.foto != null) {
-      var div = document.querySelector("#fotoact");
-      while (div.firstChild) {
-        div.removeChild(div.firstChild);
-      }
-      $('#fotoact').append('<center><img id="foto_mostrar" src="./images/' + datos.usuario.foto + '" alt="" width="280" height="335"></center><br><input type="file" class="form-control" id="foto_act" onclick="cambiar()" name="foto_act">');
+    if (datos.usuario.foto != '' || datos.usuario.foto != null) {
+      $('#formActUsuario #imagenSeleccionada').attr('src', 'images/' + datos.usuario.foto);
     } else {
-      var div = document.querySelector("#fotoact");
-      while (div.firstChild) {
-        div.removeChild(div.firstChild);
-      }
-      $('#fotoact').append('<center><img id="foto_mostrar" src="./avatar/avatar.png" alt="" width="280" height="335"></center><br><input type="file" class="form-control" id="foto_act" name="foto_act">');
+      $('#formActUsuario #imagenSeleccionada').attr('src', 'avatar/avatar.png');
     }
     const $cargo = document.querySelector("#cargo_id_act");
     for (let i = $cargo.options.length; i >= 0; i--) {

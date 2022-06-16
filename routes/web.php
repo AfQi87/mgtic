@@ -74,12 +74,12 @@ Route::group(['middleware' => 'auth'], function () {
 ///=================================================================================================Docentes
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/docentes', [DocenteController::class, 'index'])->name('docentes');
+	Route::get('/docente/{id}', [DocenteController::class, 'show']);
 	Route::post('/docentes/form', [DocenteController::class, 'store'])->name('formStore');
 	Route::get('/docente/form/{id}', [DocenteController::class, 'edit'])->name('formEdit');
 	Route::post('/docente/actualizar/{id}', [DocenteController::class, 'update'])->name('formUpdate');
 	Route::get('/docente/delete/prof/{id}', [DocenteController::class, 'delete'])->name('profesionDelete');
 	Route::get('/docente/delete/area/{id}', [DocenteController::class, 'deleteArea']);
-
 	Route::get('/docente/delete/{id}', [DocenteController::class, 'destroy']);
 
 });

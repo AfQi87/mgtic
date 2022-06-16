@@ -31,18 +31,17 @@ class EstudianteController extends Controller
       $estudiante = Estudiante::all();
       return DataTables::of($estudiante)
         ->addColumn('accion', function ($estudiante) {
-          $acciones = '';
+          $acciones = '&nbsp<button type="button" onclick="verEstudiante(' . $estudiante->ced_persona . ')" name="verEstudiante" class="verEstudiante btn btn-info"><i class="bi bi-aspect-ratio"></i></i></button>';
           $acciones .= '<a href="javascript:void(0)" onclick="editarEstudiante(' . $estudiante->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
           $acciones .= '&nbsp<button type="button" id="' . $estudiante->ced_persona . '" name="delete" class="deleteEstudiante btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
         })
         ->addColumn('fotoD', function ($estudiante) {
-          // if ($estudiante->foto != null || $estudiante->foto != '') {
-          //   $foto = '<img src="/images/estudiantes/' . $estudiante->foto . '" alt="" class="zoom" width="80" height="80">';
-          // } else {
-          //   $foto = '<img src="/avatar/avatar.png" alt="" class="zoom" width="80" height="80">';
-          // }
-          $foto = '<img src="/avatar/avatar.png" alt="" class="zoom" width="80" height="80">';
+          if ($estudiante->personas->foto != null || $estudiante->personas->foto != '') {
+            $foto = '<img src="/images/estudiantes/' . $estudiante->personas->foto . '" alt="" class="zoom" width="80" height="80">';
+          } else {
+            $foto = '<img src="/avatar/avatar.png" alt="" class="zoom" width="80" height="80">';
+          }
           return $foto;
         })
         ->addColumn('corte', function ($estudiante) {
@@ -87,7 +86,7 @@ class EstudianteController extends Controller
       'nombre' => 'required|max:100',
       'codigo' => 'required|max:15',
       'correo' => 'required|unique:persona,email_persona|max:100|email',
-      'correo' => "required|unique:Persona,email_persona,$request->correo,email_persona|max:100|email",
+      'correo' => "required|unique:persona,email_persona,$request->correo,email_persona|max:100|email",
       'telefono' => 'required|min:7|max:20',
       'celular' => 'required|min:7|max:20',
       'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
@@ -95,7 +94,6 @@ class EstudianteController extends Controller
       'estado_civil' => 'required',
       'tipo_sangre' => 'required',
       'nacimiento' => 'required',
-      'barrio' => 'required',
       'fecha' => 'required',
       'corte' => 'required',
       'beca' => 'required',
@@ -128,7 +126,7 @@ class EstudianteController extends Controller
       $persona->fecha_nac = $request->fecha;
       $persona->lugar_nac = $request->nacimiento;
       $persona->direccion = $request->direccion;
-      $persona->barrio = $request->barrio;
+      $persona->foto = $filename;
       $persona->save();
 
       $estudiante = new Estudiante();
@@ -169,7 +167,12 @@ class EstudianteController extends Controller
   {
     $estudiante = Estudiante::findOrFail($id);
     $estudiante->personas;
-    $estudiante->personas->barrios;
+    $estudiante->becas;
+    $estudiante->cortes;
+    $estudiante->personas->tipodocs;
+    $estudiante->personas->tiposangre;
+    $estudiante->personas->estadocivil;
+    $estudiante->personas->sexos;
     $estudiante->personas->municipios;
     $profesiones = EstudianteEstudio::select('id_institucion', 'nom_institucion', 'id_estudio', 'nom_estudio', 'id_nivel', 'desc_nivel')
       ->join('institucion', 'id_institucion', 'like', 'institucion')
@@ -194,7 +197,6 @@ class EstudianteController extends Controller
       'estado_civil' => 'required',
       'tipo_sangre' => 'required',
       'nacimiento' => 'required',
-      'barrio' => 'required',
       'fecha' => 'required',
       'corte' => 'required',
       'beca' => 'required',
@@ -213,7 +215,7 @@ class EstudianteController extends Controller
         $filename = $request->documento . '.' . $extension;
         $file->move('images/estudiantes', $filename);
       } else {
-        $filename = $persona->ced_persona;
+        $filename = $persona->foto;
       }
       $persona->ced_persona = $request->documento;
       $persona->tipo_doc = $request->tipo_doc;
@@ -227,7 +229,7 @@ class EstudianteController extends Controller
       $persona->fecha_nac = $request->fecha;
       $persona->lugar_nac = $request->nacimiento;
       $persona->direccion = $request->direccion;
-      $persona->barrio = $request->barrio;
+      $persona->foto = $filename;
       $persona->save();
 
       $estudiante = Estudiante::findOrFail($id);
@@ -287,14 +289,11 @@ class EstudianteController extends Controller
 
   public function delete($id)
   {
-    // $estudio = EstudianteEstudio::where('estudio', $id)->first();
-    // $estudio->delete();
+    $destudio = EstudianteEstudio::where('estudio', 'like', $id);
+    $destudio->delete();
 
-    // $estudio = Estudio::findOrFail($id);
-    // $estudio->delete();
-
-    $estudio = EstudianteEstudio::where('estudio', '=', $id)->first();
+    $estudio = Estudio::findOrFail($id);
     $estudio->delete();
-    return $estudio;
+    return 0;
   }
 }

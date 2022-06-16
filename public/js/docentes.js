@@ -24,6 +24,13 @@ $(document).ready(function () {
       { data: "accion", orderable: false, className: "text-center" },
     ]
   });
+  $('#formActDocente #foto').change(function () {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      $('#formActDocente #imagenSeleccionada').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
 });
 
 //=============================================================================================Registrar Docente
@@ -116,8 +123,7 @@ function agregarProfesion() {
   })
 
   var cell3 = row.insertCell(2);
-  cell3.innerHTML = '<input list="instituciones" autocomplete="off" id="institucion' + (contProfesion - 1) + '" name="institucion[]" class="form-control institucion" required placeholder="Busca/Selecciona">' +
-    '<datalist name="instituciones[]" id="instituciones" class="instEgresado" onclick="selectProgram()" required>';
+  cell3.innerHTML = '<input list="instituciones" autocomplete="off" id="institucion' + (contProfesion - 1) + '" name="institucion[]" class="form-control institucion" required placeholder="Busca/Selecciona">';
 
   var cell4 = row.insertCell(3);
   var button = document.createElement("button");
@@ -149,6 +155,16 @@ function eliminarProfesion(x) {
   }
 }
 
+function instituciones(n) {
+  return new Promise(function (resolve) {
+    if (n == undefined) {
+      toastr.error("Debe seleccionar una institucion", 'Error',
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+      cont++;
+    }
+    setTimeout(resolve, 100);
+  });
+}
 $('#formregDocente').submit(function (e) {
   e.preventDefault();
   let = formData = new FormData($('#formregDocente')[0]);
@@ -162,27 +178,14 @@ $('#formregDocente').submit(function (e) {
       { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     cont++;
   }
-  var prog = $('#barrio').val();
-  barrio = $('#barrios').find('option[value="' + prog + '"]').data('ejemplo');
-  if (barrio == undefined) {
-    toastr.error("Debe seleccionar un barrio", 'Error',
-      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-    cont++;
-  }
-  $('.institucion').each(function () {
+  $('.institucion').each(async function () {
     val_inst = $('#instituciones').find('option[value="' + $(this).val() + '"]').data('ejemplo');
     formData.append('instituciones[]', val_inst);
-
-    if (val_inst == undefined) {
-      toastr.error("Debe seleccionar una institucion", 'Error',
-        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-      cont++;
-    }
+    await instituciones(val_inst);
   });
 
   if (cont == 0) {
     formData.append('nacimiento', nacimiento);
-    formData.append('barrio', barrio);
     $.ajax({
       method: "POST",
       url: "/docentes/form",
@@ -301,13 +304,12 @@ function editarDocente(id) {
     $('#formActDocente #celular').val(datos.docente.personas.cel_persona);
     $('#formActDocente #direccion').val(datos.docente.personas.direccion);
     $('#formActDocente #tipo').val(datos.docente.personas.tipo_doc);
-
+    $('#formActDocente #imagenSeleccionada').attr('src', 'images/docentes/' + datos.docente.personas.foto);
     $('#formActDocente #sexo').val(datos.docente.personas.sexo);
     $('#formActDocente #estado_civil').val(datos.docente.personas.estado_civil);
     $('#formActDocente #tipo_sangre').val(datos.docente.personas.tipo_sangre);
     $('#formActDocente #tipo_sangre').val(datos.docente.personas.tipo_sangre);
     $('#formActDocente #nacimiento').val(datos.docente.personas.municipios.nom_municipio);
-    $('#formActDocente #barrio').val(datos.docente.personas.barrios.nom_barrio);
     $('#formActDocente #descripcion').val(datos.docente.descripcion);
     $('#formActDocente #cvlac').val(datos.docente.cvlac);
 
@@ -331,7 +333,7 @@ function editarDocente(id) {
       var cell2 = row.insertCell(1);
       cell2.innerHTML = '<select class="form-select" id="nivel' + contprofesion + '" required name="nivel[]" style="max-width: 250px" >';
       console.log('await');
-      
+
       await niveles(contprofesion, element.id_nivel);
 
       var cell3 = row.insertCell(2);
@@ -392,10 +394,11 @@ function editarDocente(id) {
 
     var y = 0;
     datos.areas.forEach(function (element) {
+      console.log(element)
       y++;
       var row = table.insertRow(table.rows.length);
       var cell1 = row.insertCell(0);
-      cell1.innerHTML = '<input type="hidden" class="form-control" value="' + element.area_con + '" id="area_conocimientoact" name="area_conocimientoact[]"><input type="text" name="area_conocimiento[]" id="area_conocimiento" value="'+element.nom_area_con+'" class="form-control" required>';
+      cell1.innerHTML = '<input type="hidden" class="form-control" value="' + element.area_con + '" id="area_conocimientoact" name="area_conocimientoact[]"><input type="text" name="area_conocimiento[]" id="area_conocimiento" value="' + element.nom_area_con + '" class="form-control" required>';
 
       var cell4 = row.insertCell(1);
       var button = document.createElement("button");
@@ -421,7 +424,7 @@ function editarDocente(id) {
           }).then((result) => {
             if (result.isConfirmed) {
               $.ajax({
-                url: "/docente/delete/area/" + element.id_estudio,
+                url: "/docente/delete/area/" + element.area_con,
                 method: "GET",
                 success: function (response) {
                   console.log(response)
@@ -456,13 +459,6 @@ $('#formActDocente').submit(function (e) {
       { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     cont++;
   }
-  var prog = $('#formActDocente #barrio').val();
-  barrio = $('#barrios').find('option[value="' + prog + '"]').data('ejemplo');
-  if (barrio == undefined) {
-    toastr.error("Debe seleccionar un barrio", 'Error',
-      { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-    cont++;
-  }
   $('.institucionact').each(function () {
     val_inst = $('#instituciones').find('option[value="' + $(this).val() + '"]').data('ejemplo');
     formData.append('instituciones[]', val_inst);
@@ -470,7 +466,6 @@ $('#formActDocente').submit(function (e) {
     if (val_inst == undefined) {
       toastr.error("Debe seleccionar una institucion", 'Error',
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-      cont++;
     }
   });
 
@@ -536,3 +531,76 @@ $(document).on('click', '.deleteDocente', function () {
     }
   })
 });
+
+
+function verDocente(id) {
+  $.get('/docente/form/' + id, function (datos) {
+    if (datos.docente.personas.foto == null || datos.docente.personas.foto == '') {
+      $('#fotoverdoc').attr('src', 'avatar/avatar.png');
+    } else {
+      $('#fotoverdoc').attr('src', 'images/docentes/' + datos.docente.personas.foto);
+    }
+    var div = document.querySelector("#datDocente");
+    while (div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+    $("#datDocente").append(
+      '<h3 class="card-title">' + datos.docente.personas.nom_persona + '</h3>' +
+      '<div class="row">' +
+      '<div class="card-body col-sm-6  mt-2">' +
+      '<p class="card-text">' + datos.docente.personas.tipodocs.nom_tipo + ' ' + datos.docente.personas.ced_persona + '</p>' +
+      '<p class="card-text">Correo: ' + datos.docente.personas.email_persona + '</p>' +
+      '<p class="card-text">Tel: ' + datos.docente.personas.tel_persona + '</p>' +
+      '<p class="card-text">Cel: ' + datos.docente.personas.cel_persona + '</p>' +
+      '<p class="card-text">Fecha nacimiento: ' + datos.docente.personas.fecha_nac + '</p>' +
+      '<p class="card-text">Lugar nacimiento: ' + datos.docente.personas.municipios.nom_municipio + '</p>' +
+      '<p class="card-text">Dirección: ' + datos.docente.personas.direccion + '</p>' +
+      '<p class="card-text">Sexo: ' + datos.docente.personas.sexos.descripcion + '</p>' +
+      '</div>' +
+      '<div class="card-body col-sm-6  mt-2">' +
+      '<p class="card-text">Estado Civil: ' + datos.docente.personas.estadocivil.descripcion + '</p>' +
+      '<p class="card-text">Tipo sangre: ' + datos.docente.personas.tiposangre.descripcion + '</p>' +
+      '<p class="card-text">Tipo docente: ' + datos.docente.tipos.tipo + '</p>' +
+      '<p class="card-text" style="overflow-y: scroll; max-height: 80px">Descripcion: ' + datos.docente.descripcion + ' </p>' +
+      '<p class="card-text" style="overflow-y: scroll; max-height: 80px">CVLAC: ' + datos.docente.cvlac + ' </p>' +
+      '</div></div>'
+    );
+    var div = document.querySelector("#profVer");
+    while (div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+    datos.profesiones.forEach(function (element) {
+      $("#profVer").append(
+        '<li>' +
+        '<div class="row">' +
+        '<div class="col-sm-4">' +
+        '<p>' + element.nom_estudio + '</p>' +
+        '</div>' +
+        '<div class="col-sm-4">' +
+        '<p>' + element.desc_nivel + '</p>' +
+        '</div>' +
+        '<div class="col-sm-4">' +
+        '<p>' + element.nom_institucion + '</p>' +
+        '</div>' +
+        '</div>' +
+        '</li>'
+      )
+    })
+    var div = document.querySelector("#areaVer");
+    while (div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+    datos.areas.forEach(function (element) {
+      $("#areaVer").append(
+        '<li>' +
+        '<div class="row">' +
+        '<div class="col-sm-12">' +
+        '<p>' + element.nom_area_con + '</p>' +
+        '</div>' +
+        '</div>' +
+        '</li>'
+      )
+    })
+  })
+  $('#modalVerDocente').modal('toggle');
+}

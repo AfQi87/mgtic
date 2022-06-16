@@ -23,6 +23,13 @@ $(document).ready(function () {
       { data: "accion", orderable: false, className: "text-center" },
     ]
   });
+  $('#formActEstudiante #foto').change(function () {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      $('#formActEstudiante #imagenSeleccionada').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
 });
 
 //=======================================================================Agregar Estudiante
@@ -51,17 +58,9 @@ $('#formRegEstudiante').submit(function (e) {
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
       cont++;
     }
-    var prog = $('#barrio').val();
-    barrio = $('#barrios').find('option[value="' + prog + '"]').data('ejemplo');
-    if (barrio == undefined) {
-      toastr.error("Debe seleccionar un barrio", 'Error',
-        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-      cont++;
-    }
 
     if (cont < 1) {
       formData.append('nacimiento', nacimiento);
-      formData.append('barrio', barrio);
       $.ajax({
         method: "POST",
         url: "/estudiante/form",
@@ -167,7 +166,11 @@ function editarEstudiante(id) {
     $('#formActEstudiante #tipo_sangre').val(datos.estudiante.personas.tipo_sangre);
     $('#formActEstudiante #tipo_sangre').val(datos.estudiante.personas.tipo_sangre);
     $('#formActEstudiante #nacimiento').val(datos.estudiante.personas.municipios.nom_municipio);
-    $('#formActEstudiante #barrio').val(datos.estudiante.personas.barrios.nom_barrio);
+    if (datos.estudiante.personas.foto == null || datos.estudiante.personas.foto == '') {
+      $('#formActEstudiante #imagenSeleccionada').attr('src', 'avatar/avatar.png');
+    } else {
+      $('#formActEstudiante #imagenSeleccionada').attr('src', 'images/estudiantes/' + datos.estudiante.personas.foto);
+    }
 
     $('#formActEstudiante #estudio').val(datos.estudiante.personas.id_estudio);
 
@@ -216,7 +219,6 @@ function editarEstudiante(id) {
             confirmButtonText: 'Si, eliminar!'
           }).then((result) => {
             if (result.isConfirmed) {
-              console.log('elemento estudio: ' + element.id_estudio)
               $.ajax({
                 url: "/estudiante/delete/prof/" + element.id_estudio,
                 method: "GET",
@@ -264,14 +266,6 @@ $('#formActEstudiante').submit(function (e) {
       toastr.error("Debe seleccionar un lugar de nacimiento", 'Error',
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
       cont++;
-    } else {
-      var prog = $('#formActEstudiante #barrio').val();
-      barrio = $('#formActEstudiante #barrios').find('option[value="' + prog + '"]').data('ejemplo');
-      if (barrio == undefined) {
-        toastr.error("Debe seleccionar un programa", 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-        cont++;
-      }
     }
     if (cont < 1) {
       formData.append('nacimiento', nacimiento);
@@ -336,3 +330,61 @@ $(document).on('click', '.deleteEstudiante', function () {
     }
   })
 });
+
+//================================================================Ver estudiante
+function verEstudiante(id) {
+  $.get('/estudiante/actu/' + id, function (datos) {
+    if (datos.estudiante.personas.foto == null || datos.estudiante.personas.foto == '') {
+      $('#fotoverest').attr('src', 'avatar/avatar.png');
+    } else {
+      $('#fotoverest').attr('src', 'images/estudiantes/' + datos.estudiante.personas.foto);
+    }
+    var div = document.querySelector("#datEstudiante");
+    while (div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+    $("#datEstudiante").append(
+      '<h3 class="card-title">' + datos.estudiante.personas.nom_persona + '</h3>' +
+      '<div class="row">' +
+      '<div class="card-body col-sm-6  mt-2">' +
+      '<p class="card-text">' + datos.estudiante.personas.tipodocs.nom_tipo + ' ' + datos.estudiante.personas.ced_persona + '</p>' +
+      '<p class="card-text">Correo: ' + datos.estudiante.personas.email_persona + '</p>' +
+      '<p class="card-text">Tel: ' + datos.estudiante.personas.tel_persona + '</p>' +
+      '<p class="card-text">Cel: ' + datos.estudiante.personas.cel_persona + '</p>' +
+      '<p class="card-text">Fecha nacimiento: ' + datos.estudiante.personas.fecha_nac + '</p>' +
+      '<p class="card-text">Lugar nacimiento: ' + datos.estudiante.personas.municipios.nom_municipio + '</p>' +
+      '<p class="card-text">Dirección: ' + datos.estudiante.personas.direccion + '</p>' +
+      '</div>' +
+      '<div class="card-body col-sm-6  mt-2">' +
+      '<p class="card-text">Sexo: ' + datos.estudiante.personas.sexos.descripcion + '</p>' +
+      '<p class="card-text">Estado Civil: ' + datos.estudiante.personas.estadocivil.descripcion + '</p>' +
+      '<p class="card-text">Tipo sangre: ' + datos.estudiante.personas.tiposangre.descripcion + '</p>' +
+      '<p class="card-text">Promocion: ' + datos.estudiante.cortes.desc_cohorte + '</p>' +
+      '<p class="card-text">Beca: ' + datos.estudiante.becas.desc_beca + '</p>' +
+      '<p class="card-text">Semestre: ' + datos.estudiante.semestre + '</p>' +
+      '</div></div>'
+    );
+    var div = document.querySelector("#profVerEst");
+    while (div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+    datos.profesiones.forEach(function (element) {
+      $("#profVerEst").append(
+        '<li>' +
+        '<div class="row">' +
+        '<div class="col-sm-4">' +
+        '<p>' + element.nom_estudio + '</p>' +
+        '</div>' +
+        '<div class="col-sm-4">' +
+        '<p>' + element.desc_nivel + '</p>' +
+        '</div>' +
+        '<div class="col-sm-4">' +
+        '<p>' + element.nom_institucion + '</p>' +
+        '</div>' +
+        '</div>' +
+        '</li>'
+      )
+    })
+  })
+  $('#modalVerEstudiante').modal('toggle');
+}

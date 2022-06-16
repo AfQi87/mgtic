@@ -221,7 +221,7 @@ function agregar_tareaC() {
   $.get('/responsablesComite', function (datos) {
     var id = "#responsable" + (cont_tarea - 1);
     for (i = 0; i < datos.responsables.length; i++) {
-      $("#responsable" + (cont_tarea - 1)).append('<option value="' + datos.responsables[i].persona + '">' + datos.responsables[i].desc_cargo + '</option>');
+      $("#responsable" + (cont_tarea - 1)).append('<option value="' + datos.responsables[i].persona + '">' + datos.responsables[i].nom_persona + "-" + datos.responsables[i].desc_cargo + '</option>');
     }
   })
   var cell4 = row.insertCell(2);

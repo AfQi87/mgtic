@@ -79,7 +79,6 @@ class ActasController extends Controller
 		$acta->hora_fin = $request->input('hora_fin');
 		$acta->save();
 
-		$total = 0;
 		$cont = count($request->asistente);
 		$acta = Acta::latest()->first();
 		for ($i = 0; $i < $cont; $i++) {
@@ -205,8 +204,10 @@ class ActasController extends Controller
 	public function responsablesComite()
 	{
 		// $responsables = AsistenteComite::all();
-		$responsables = Asistente::select('persona', 'cargo', 'desc_cargo')
-      ->join('cargo', 'cargo', 'like', 'id_cargo')->get();
+		$responsables = AsistenteComite::select('persona', 'nom_persona', 'cargo', 'desc_cargo')
+      ->join('cargo', 'cargo', 'like', 'id_cargo')
+      ->join('persona', 'persona', 'like', 'ced_persona')
+      ->get();
 		return response()->json(['responsables' => $responsables]);
 	}
 

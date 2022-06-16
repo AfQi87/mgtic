@@ -20,6 +20,10 @@ class Estudiante extends Model
   {
     return $this->belongsTo(Corte::class, 'cohorte', 'id_cohorte');
   }
+  public function becas()
+  {
+    return $this->belongsTo(Beca::class, 'beca', 'id_beca');
+  }
   public function personas()
   {
     return $this->belongsTo(Persona::class, 'ced_persona', 'ced_persona');

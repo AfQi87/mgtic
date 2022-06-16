@@ -131,21 +131,10 @@
                                           </datalist>
                                         </div>
                                       </div>
-                                      <div class="col-sm-6">
+                                      <div class="col-sm-12">
                                         <div class="mb-3">
-                                          <label for="direccion" class="form-label">Dirección residencia</label>
+                                          <label for="direccion" class="form-label">Dirección residencia y barrio</label>
                                           <input type="text" class="form-control" id="direccion" name="direccion">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="mb-3">
-                                          <label class="form-label" for="barrio">Barrio</label>
-                                          <input list="barrios" autocomplete="off" id="barrio" name="barrio" class="form-control" placeholder="Busca/Selecciona">
-                                          <datalist name="barrios" id="barrios" class="instEgresado" onclick="selectProgram()" required>
-                                            @foreach($barrios as $barrio)
-                                            <option data-ejemplo="{{ $barrio->id_barrio }}" value="{{ $barrio->nom_barrio }}"></option>
-                                            @endforeach
-                                          </datalist>
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
@@ -164,7 +153,7 @@
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="col-sm-4 mt-5">
+                                  <div class="col-sm-4 mt-5" style="max-width: 100%;">
                                     <div>
                                       <div class="row">
                                         <div class="col-md-12">
@@ -173,9 +162,7 @@
                                               <h4 class="card-title ">Fotografia</h4>
                                             </div>
                                             <div class="card-body">
-                                              <div class="rounded img-responsive mt-4" style="max-width: 280px">
-                                                <img id="imagenSeleccionada" src="avatar/avatar.png" style="max-width: 280px">
-                                              </div>
+                                              <img src="avatar/avatar.png" class="img-fluid rounded-start" id="imagenSeleccionada">
                                               <div class="mb-3 mt-2">
                                                 <input type="file" class="form-control" id="foto" name="foto">
                                               </div>
@@ -287,7 +274,76 @@
               </div>
             </div>
 
-            <!-- Modal Registro -->
+            <!-- Modal Ver -->
+            <div class="modal fade" id="modalVerDocente" tabindex="-1" aria-labelledby="ModalUsuarioLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container">
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <form id="mostrarDocente" class="form-horizontal">
+                            @csrf
+                            <div class="card ">
+                              <div class="card-header card-header-primary">
+                                <h4 class="card-title">Datos docente</h4>
+                              </div>
+                              <div class="card-body ">
+                                <div>
+                                  <div class="card mb-3" style="max-width: 100%;">
+                                    <div class="row g-0">
+                                      <div class="col-md-4">
+                                        <img id="fotoverdoc" src="/images/docentes/20220616095723.jpg" class="img-fluid rounded-start" alt="...">
+                                      </div>
+                                      <div class="col-md-8" id="datDocente">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="card ">
+                                    <div class="card-header card-header-primary" style="height: 50px;">
+                                      <h4 class="card-title">Profesiones</h4>
+                                    </div>
+                                    <div class="card-body">
+                                      <ul id="profVer"></ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="card ">
+                                    <div class="card-header card-header-primary" style="height: 50px;">
+                                      <h4 class="card-title">Areas de conocimiento</h4>
+                                    </div>
+                                    <div class="card-body ">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <ul id="areaVer"></ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal Actualizar -->
             <div class="modal fade" id="modalActDocente" tabindex="-1" aria-labelledby="ModalUsuarioLabel" aria-hidden="true">
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -303,7 +359,7 @@
                             @csrf
                             <div class="card ">
                               <div class="card-header card-header-primary">
-                                <h4 class="card-title">Agregar Docente</h4>
+                                <h4 class="card-title">Editar Docente</h4>
                               </div>
                               <div class="card-body ">
                                 <div class="row">
@@ -400,21 +456,10 @@
                                           </datalist>
                                         </div>
                                       </div>
-                                      <div class="col-sm-6">
+                                      <div class="col-sm-12">
                                         <div class="mb-3">
-                                          <label for="direccion" class="form-label">Dirección residencia</label>
+                                          <label for="direccion" class="form-label">Dirección residencia y barrio</label>
                                           <input type="text" class="form-control" id="direccion" name="direccion">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="mb-3">
-                                          <label class="form-label" for="barrio">Barrio</label>
-                                          <input list="barrios" autocomplete="off" id="barrio" name="barrio" class="form-control" placeholder="Busca/Selecciona">
-                                          <datalist name="barrios" id="barrios" class="instEgresado" onclick="selectProgram()" required>
-                                            @foreach($barrios as $barrio)
-                                            <option data-ejemplo="{{ $barrio->id_barrio }}" value="{{ $barrio->nom_barrio }}"></option>
-                                            @endforeach
-                                          </datalist>
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
@@ -442,9 +487,7 @@
                                               <h4 class="card-title ">Fotografia</h4>
                                             </div>
                                             <div class="card-body">
-                                              <div class="rounded img-responsive mt-4" style="max-width: 280px">
-                                                <img id="imagenSeleccionada" src="avatar/avatar.png" style="max-width: 280px">
-                                              </div>
+                                              <img src="" class="img-fluid rounded-start" id="imagenSeleccionada">
                                               <div class="mb-3 mt-2">
                                                 <input type="file" class="form-control" id="foto" name="foto">
                                               </div>
@@ -555,7 +598,6 @@
                 </div>
               </div>
             </div>
-
 
             <!-- Tabla -->
             <div class="table-responsive">

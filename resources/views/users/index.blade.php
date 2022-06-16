@@ -325,8 +325,10 @@
                                               </select>
                                             </div>
                                           </div>
-                                          <div class="col-sm-4">
-                                            <div class="mb-3 fotoact" id="fotoact">
+                                          <div class="col-sm-4 mt-5">
+                                            <img src="avatar/avatar.png" class="img-fluid rounded-start" id="imagenSeleccionada">
+                                            <div class="mb-3 mt-2">
+                                              <input type="file" class="form-control" id="foto" name="foto">
                                             </div>
                                           </div>
                                         </div>

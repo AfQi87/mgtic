@@ -41,14 +41,14 @@
                 <tbody>
                   @foreach($actas as $acta)
                   <tr>
-                    <td class="text-center">{{ $acta->id }}</td>
+                    <td class="text-center">{{ $acta->id_acta }}</td>
                     <!-- <td class="text-center">{{ $acta->asistentes }}</td> -->
-                    <td class="text-center">{{ $acta->reuniones->tipo }}</td>
+                    <td class="text-center">{{ $acta->reuniones->descripcion }}</td>
                     <td class="text-center">{{ $acta->proceso }}</td>
                     <td class="text-center">{{ $acta->fecha }}</td>
                     <td class="text-center">
-                      <a href="{{route('descargarActa', $acta->id)}}" class="btn btn-warning">PDF</a>
-                      <form action="{{route('elimActa', $acta->id)}}" class="confirmar" method="POST" style="display:inline">
+                      <a href="{{route('descargarActa', $acta->id_acta)}}" class="btn btn-warning">PDF</a>
+                      <form action="{{route('elimActa', $acta->id_acta)}}" class="confirmar" method="POST" style="display:inline">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
