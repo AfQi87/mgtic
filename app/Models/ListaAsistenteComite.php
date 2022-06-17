@@ -9,7 +9,8 @@ class ListaAsistenteComite extends Model
 {
     use HasFactory;
     protected $table = 'acta_comite_has_participante';
-    public function Asistentes(){
-        return $this->belongsTo(AsistenteComite::class,'asistente_id','id');
+
+    public function participantes(){
+        return $this->belongsTo(AsistenteComite::class,'participante','persona');
     }
 }

@@ -76,19 +76,19 @@
           <td style="border: black 1px solid" class="text-center">Tipo de reunión: </td>
           <td style="border: black 1px solid" class="text-center">Ordinaria: </td>
           <td style="border: black 1px solid; width:90px" class="text-center">
-            @if($acta->reunion_id == 1)
+            @if($acta->tipo == 1)
             X
             @endif
           </td>
           <td style="border: black 1px solid" class="text-center">Extraordinaria: </td>
           <td style="border: black 1px solid" class="text-center">
-            @if($acta->reunion_id == 2)
+            @if($acta->tipo == 2)
             X
             @endif
           </td>
           <td style="border: black 1px solid" class="text-center">Urgente: </td>
           <td style="border: black 1px solid" colspan="2" class="text-center">
-            @if($acta->reunion_id == 3)
+            @if($acta->tipo == 3)
             X
             @endif
           </td>
@@ -135,9 +135,9 @@
         @foreach($listaAsistentes as $key => $asistente)
         <tr>
           <td style="border: black 1px solid; width:50px;" align="center">{{ $key + 1 }}</td>
-          <td style="border: black 1px solid; width:270px; padding-left:10px">{{ $asistente->asistentes->nombre }}</td>
-          <td style="border: black 1px solid" align="center">{{ $asistente->asistentes->cargo }}</td>
-          <td style="border: black 1px solid; width:150px;" align="center">{{ $asistente->asistentes->dependencia }}</td>
+          <td style="border: black 1px solid; width:270px; padding-left:10px">{{ $asistente->participantes->personas->nom_persona }}</td>
+          <td style="border: black 1px solid" align="center">{{ $asistente->participantes->cargos->desc_cargo }}</td>
+          <td style="border: black 1px solid; width:150px;" align="center">{{ $asistentes != 0 ? 'Comité Curricular MGTIC' : 'Comité Curricular Maestrías Departamento de Sistemas'}}</td>
         </tr>
         @endforeach
       </tbody>
@@ -204,7 +204,7 @@
         <tr>
           <td style="border: black 1px solid; width:50px;" align="center">{{ $key + 1 }}</td>
           <td style="border: black 1px solid; width:400px; padding-left:10px">{{ $tarea->tarea }}</td>
-          <td style="border: black 1px solid" align="center">{{ $tarea->asistentes->cargo }}</td>
+          <td style="border: black 1px solid" align="center">{{ $tarea->asistentes->cargos->desc_cargo }}</td>
         </tr>
         @endforeach
       </tbody>

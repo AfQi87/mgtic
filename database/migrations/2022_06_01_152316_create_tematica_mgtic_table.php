@@ -13,12 +13,12 @@ class CreateTematicaMgticTable extends Migration
    */
   public function up()
   {
-    Schema::create('tematica_mgtic', function (Blueprint $table) {
+    Schema::create('tematica', function (Blueprint $table) {
       $table->increments('id_tematica');
       $table->text('tematica');
       $table->unsignedInteger('acta');
 
-      $table->foreign('acta')->references('id_acta')->on('acta_mgtic');
+      $table->foreign('acta')->references('id_acta')->on('acta');
       $table->timestamps();
     });
   }

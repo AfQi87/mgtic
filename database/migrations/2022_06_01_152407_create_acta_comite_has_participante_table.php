@@ -18,7 +18,7 @@ class CreateActaComiteHasParticipanteTable extends Migration
       $table->string('participante', 15);
 
 
-      $table->foreign('acta_comite')->references('id_acta')->on('acta_comite');
+      $table->foreign('acta_comite')->references('id_acta')->on('acta');
       $table->foreign('participante')->references('persona')->on('participante_comite');
 
       $table->primary(['acta_comite', 'participante']);

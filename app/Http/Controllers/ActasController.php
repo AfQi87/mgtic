@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Carbon;
+
 class ActasController extends Controller
 {
 	//
@@ -32,17 +33,17 @@ class ActasController extends Controller
 	{
 		$cont = 0;
 		$acta = Acta::findOrFail($id);
-		$listaAsistentes = ListaAsistente::where('acta_id', $id)->get();
+		$listaAsistentes = ListaAsistente::where('acta_mgtic', $id)->get();
 		$asistentes = $listaAsistentes->count();
-		if($asistentes == 0){
-			$listaAsistentes = ListaAsistenteComite::where('acta_id', $id)->get();
+		if ($asistentes == 0) {
+			$listaAsistentes = ListaAsistenteComite::where('acta_comite', $id)->get();
 		}
-		$programaciones = Programacion::where('acta_id', $id)->get();
-		$conclusiones = conclusion::where('acta_id', $id)->get();
-		$tareas = Tarea::where('acta_id', $id)->get();
+		$programaciones = Programacion::where('acta', $id)->get();
+		$conclusiones = conclusion::where('acta', $id)->get();
+		$tareas = Tarea::where('acta', $id)->get();
 		$cTarea = $tareas->count();
-		if($cTarea == 0){
-			$tareas = TareaComite::where('acta_id', $id)->get();
+		if ($cTarea == 0) {
+			$tareas = TareaComite::where('acta', $id)->get();
 		}
 		$fecha = Carbon::create($acta->fecha);
 		$horaIni = Carbon::create($acta->hora_inicio);
@@ -50,7 +51,7 @@ class ActasController extends Controller
 		$horaIni = $horaIni->format('h:i A');
 		$horaFin = $horaFin->format('h:i A');
 		$pdf = PDF::loadView('pages/actas/pdfActas', compact('cont', 'acta', 'listaAsistentes', 'asistentes', 'programaciones', 'conclusiones', 'tareas', 'fecha', 'horaIni', 'horaFin'));
-		return $pdf->download('Acta'.$acta->id.'.pdf');
+		return $pdf->download('Acta' . $acta->id . '.pdf');
 		// return view('pages/actas/pdfActas', compact('cont', 'acta', 'listaAsistentes', 'asistentes', 'programaciones', 'conclusiones', 'tareas', 'fecha', 'horaIni', 'horaFin'));
 	}
 
@@ -129,7 +130,7 @@ class ActasController extends Controller
 
 	public function guardarActaComite(Request $request)
 	{
-		$acta = new ActaComite();
+		$acta = new Acta();
 		$acta->tipo  = $request->input('reunion');
 		$acta->proceso = $request->input('proceso');
 		$acta->lugar = $request->input('lugar');
@@ -140,12 +141,12 @@ class ActasController extends Controller
 
 		$total = 0;
 		$cont = count($request->asistente);
-		$acta = ActaComite::latest()->first();
+		$acta = Acta::latest()->first();
 		for ($i = 0; $i < $cont; $i++) {
 			if ($request->asistente[$i] == NULL) {
 			} else {
 				$lit_asis = new ListaAsistenteComite();
-				$lit_asis->acta_comite = $acta->id;
+				$lit_asis->acta_comite = $acta->id_acta;
 				$lit_asis->participante = $request->asistente[$i];
 				$lit_asis->save();
 			}
@@ -155,10 +156,9 @@ class ActasController extends Controller
 		for ($i = 0; $i < $cont; $i++) {
 			if ($request->tematica[$i] == NULL) {
 			} else {
-				$tematica = new ProgramacionComite();
+				$tematica = new Programacion();
 				$tematica->tematica = $request->tematica[$i];
-				$tematica->asistente_id = 3;
-				$tematica->acta_id = $acta->id;
+				$tematica->acta = $acta->id_acta;
 				$tematica->save();
 			}
 		}
@@ -167,9 +167,9 @@ class ActasController extends Controller
 		for ($i = 0; $i < $cont; $i++) {
 			if ($request->conclusion[$i] == NULL) {
 			} else {
-				$conclusion = new ConclusionComite();
+				$conclusion = new Conclusion();
 				$conclusion->conclusion = $request->conclusion[$i];
-				$conclusion->acta_id = $acta->id;
+				$conclusion->acta = $acta->id_acta;
 				$conclusion->save();
 			}
 		}
@@ -180,8 +180,8 @@ class ActasController extends Controller
 			} else {
 				$tarea = new TareaComite();
 				$tarea->tarea = $request->tarea[$i];
-				$tarea->asistente_id = $request->responsable[$i];
-				$tarea->acta_id = $acta->id;
+				$tarea->responsable = $request->responsable[$i];
+				$tarea->acta = $acta->id_acta;
 				$tarea->save();
 			}
 		}
@@ -194,8 +194,8 @@ class ActasController extends Controller
 		// $responsables->cargos;
 
 		$responsables = Asistente::select('persona', 'nom_persona', 'cargo', 'desc_cargo')
-      ->join('cargo', 'cargo', 'like', 'id_cargo')
-      ->join('persona', 'persona', 'like', 'ced_persona')
+			->join('cargo', 'cargo', 'like', 'id_cargo')
+			->join('persona', 'persona', 'like', 'ced_persona')
 			->get();
 
 		return response()->json(['responsables' => $responsables]);
@@ -205,40 +205,41 @@ class ActasController extends Controller
 	{
 		// $responsables = AsistenteComite::all();
 		$responsables = AsistenteComite::select('persona', 'nom_persona', 'cargo', 'desc_cargo')
-      ->join('cargo', 'cargo', 'like', 'id_cargo')
-      ->join('persona', 'persona', 'like', 'ced_persona')
-      ->get();
+			->join('cargo', 'cargo', 'like', 'id_cargo')
+			->join('persona', 'persona', 'like', 'ced_persona')
+			->get();
 		return response()->json(['responsables' => $responsables]);
 	}
 
 	public function eliminar($id)
 	{
 		$acta = Acta::findOrFail($id);
-		$listaAsistentes = ListaAsistente::where('acta_id', $id)->get();
-		$listaAsistentesC = ListaAsistenteComite::where('acta_id', $id)->get();
-		$programaciones = Programacion::where('acta_id', $id)->get();
-		$conclusiones = Conclusion::where('acta_id', $id)->get();
-		$tareas = Tarea::where('acta_id', $id)->get();
-		$tareasComite = TareaComite::where('acta_id', $id)->get();
-
-		foreach($listaAsistentes as $asistente){
+		$listaAsistentes = ListaAsistente::where('acta_mgtic', $id)->get();
+		$listaAsistentesC = ListaAsistenteComite::where('acta_comite', $id)->get();
+		$programaciones = Programacion::where('acta', $id)->get();
+		$conclusiones = Conclusion::where('acta', $id)->get();
+		$tareas = Tarea::where('acta', $id)->get();
+		$tareasComite = TareaComite::where('acta', $id)->get();
+		foreach ($tareas as $tarea) {
+			$tarea->delete();
+		}
+		foreach ($tareasComite as $tarea) {
+			$tarea->delete();
+		}
+		foreach ($listaAsistentes as $asistente) {
 			$asistente->delete();
 		}
-		foreach($listaAsistentesC as $asistente){
+		foreach ($listaAsistentesC as $asistente) {
 			$asistente->delete();
 		}
-		foreach($programaciones as $programacion){
+		foreach ($programaciones as $programacion) {
 			$programacion->delete();
 		}
-		foreach($conclusiones as $conclusion){
+		foreach ($conclusiones as $conclusion) {
 			$conclusion->delete();
 		}
-		foreach($tareas as $tarea){
-			$tarea->delete();
-		}
-		foreach($tareasComite as $tarea){
-			$tarea->delete();
-		}
+
+
 		$acta->delete();
 		return back()->withStatus(__('Acta eliminada correctamente'));
 	}

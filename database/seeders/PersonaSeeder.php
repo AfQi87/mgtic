@@ -29,7 +29,6 @@ class PersonaSeeder extends Seeder
         'fecha_nac' => '1999-01-01',
         'lugar_nac' => 1,
         'direccion' => 'direccion persona 1',
-        'barrio' => 1,
         'foto' => ''
       ],
       [
@@ -45,7 +44,6 @@ class PersonaSeeder extends Seeder
         'fecha_nac' => '1999-01-01',
         'lugar_nac' => 1,
         'direccion' => 'direccion persona 2',
-        'barrio' => 1,
         'foto' => ''
       ],
       [
@@ -61,7 +59,6 @@ class PersonaSeeder extends Seeder
         'fecha_nac' => '1999-01-01',
         'lugar_nac' => 1,
         'direccion' => 'direccion persona 3',
-        'barrio' => 1,
         'foto' => ''
       ]
 

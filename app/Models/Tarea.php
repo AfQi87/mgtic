@@ -9,7 +9,9 @@ class Tarea extends Model
 {
     use HasFactory;
     protected $table = 'tarea_mgtic';
+    protected $primaryKey = 'id_tarea';
+
     public function Asistentes(){
-        return $this->belongsTo(Asistente::class,'asistente_id','id');
+        return $this->belongsTo(Asistente::class,'participante','persona');
     }
 }

@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Conclusion extends Model
 {
     use HasFactory;
-    protected $table = 'conclusion_mgtic';
+    protected $table = 'conclusion';
+    protected $primaryKey = 'id_conclusion';
+
 }

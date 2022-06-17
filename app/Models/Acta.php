@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Acta extends Model
 {
     use HasFactory;
-    protected $table = 'acta_mgtic';
+    protected $table = 'acta';
     protected $primaryKey = 'id_acta';
 
     public function reuniones(){

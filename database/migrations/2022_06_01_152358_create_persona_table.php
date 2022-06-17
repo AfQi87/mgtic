@@ -26,7 +26,6 @@ class CreatePersonaTable extends Migration
       $table->date('fecha_nac')->nullable();
       $table->string('lugar_nac', 15)->nullable();
       $table->string('direccion', 100)->nullable();
-      $table->unsignedInteger('barrio')->nullable();
       $table->string('foto', 100)->nullable();
 
       $table->foreign('tipo_doc')->references('id_tipo')->on('tipo_id');
@@ -34,7 +33,6 @@ class CreatePersonaTable extends Migration
       $table->foreign('estado_civil')->references('id_estado')->on('estado_civil');
       $table->foreign('tipo_sangre')->references('id_tipo')->on('tipo_sangre');
       $table->foreign('lugar_nac')->references('id_municipio')->on('municipio');
-      $table->foreign('barrio')->references('id_barrio')->on('barrio');
 
       $table->primary('ced_persona');
       $table->timestamps();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActaMgticTable extends Migration
+class CreateActaTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,7 +13,7 @@ class CreateActaMgticTable extends Migration
    */
   public function up()
   {
-    Schema::create('acta_mgtic', function (Blueprint $table) {
+    Schema::create('acta', function (Blueprint $table) {
       $table->increments('id_acta');
       $table->unsignedInteger('tipo');
       $table->string('proceso', 500);

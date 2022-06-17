@@ -9,8 +9,10 @@ class TareaComite extends Model
 {
     use HasFactory;
     protected $table = 'tarea_comite';
+    protected $primaryKey = 'id_tarea';
+
     public function Asistentes(){
-        return $this->belongsTo(AsistenteComite::class,'asistente_id','id');
+        return $this->belongsTo(AsistenteComite::class,'responsable','persona');
     }
     public $timestamps = false;
 }

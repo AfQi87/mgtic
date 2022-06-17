@@ -13,12 +13,12 @@ class CreateConclusionMgticTable extends Migration
    */
   public function up()
   {
-    Schema::create('conclusion_mgtic', function (Blueprint $table) {
+    Schema::create('conclusion', function (Blueprint $table) {
       $table->increments('id_conclusion');
       $table->unsignedInteger('acta');
       $table->text('conclusion');
 
-      $table->foreign('acta')->references('id_acta')->on('acta_mgtic');
+      $table->foreign('acta')->references('id_acta')->on('acta');
       $table->timestamps();
     });
   }
