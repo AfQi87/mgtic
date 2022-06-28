@@ -40,7 +40,11 @@ class DocenteController extends Controller
         ->addColumn('accion', function ($docente) {
           $acciones = '&nbsp<button type="button" onclick="verDocente(' . $docente->ced_persona . ')" name="verDocente" class="verDocente btn btn-info"><i class="bi bi-aspect-ratio"></i></i></button>';
           $acciones .= '<a href="javascript:void(0)" onclick="editarDocente(' . $docente->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
-          $acciones .= '&nbsp<button type="button" id="' . $docente->ced_persona . '" name="delete" class="deleteDocente btn btn-danger"><i class="bi bi-trash"></i></button>';
+          if ($docente->personas->estado_id == 1) {
+            $acciones .= '&nbsp<button type="button" id="' . $docente->ced_persona . '" name="delete" class="desDocente btn btn-danger"><i class="bi bi-trash"></i></button>';
+          }else {
+            $acciones .= '&nbsp<button type="button" id="' . $docente->ced_persona . '" name="delete" class="actDocente btn btn-success"><i class="bi bi-check-lg"></i></button>';
+          }
           return $acciones;
         })
         ->addColumn('fotoD', function ($docente) {
@@ -126,6 +130,7 @@ class DocenteController extends Controller
       $persona->fecha_nac = $request->fecha;
       $persona->lugar_nac = $request->nacimiento;
       $persona->direccion = $request->direccion;
+      $persona->estado_id = 1;
       $persona->foto = $filename;
       $persona->save();
 
@@ -181,14 +186,14 @@ class DocenteController extends Controller
     $estudiante->personas->municipios;
     // $profesiones = EstudianteEstudio::where('estudiante', $id)->get();
     $profesiones = DocenteEstudio::select('id_institucion', 'nom_institucion', 'id_estudio', 'nom_estudio', 'id_nivel', 'desc_nivel')
-      ->join('institucion', 'id_institucion', 'like', 'institucion')
-      ->join('estudio', 'id_estudio', 'like', 'estudio')
-      ->join('nivel', 'nivel_estudio', 'like', 'id_nivel')
-      ->where('docente', $id)->get();
+      ->join('institucion', 'id_institucion', '=', 'institucion')
+      ->join('estudio', 'id_estudio', '=', 'estudio')
+      ->join('nivel', 'nivel_estudio', '=', 'id_nivel')
+      ->where('docente', "$id")->get();
 
     $areas = DocenteAreaConocimiento::select('docente', 'area_con', 'nom_area_con')
-      ->join('area_conocimiento', 'area_con', 'like', 'id_area')
-      ->where('docente', $id)->get();
+      ->join('area_conocimiento', 'area_con', '=', 'id_area')
+      ->where('docente', "$id")->get();
     return response()->json(['docente' => $estudiante, 'profesiones' => $profesiones, 'areas' => $areas]);
   }
 
@@ -343,6 +348,22 @@ class DocenteController extends Controller
 
     $persona = Persona::findOrFail($id);
     $persona->delete();
+    return 0;
+  }
+
+  public function desactivar($id)
+  {
+    $persona = Persona::findOrFail($id);
+    $persona->estado_id = 2;
+    $persona->save();
+    return 0;
+  }
+
+  public function activar($id)
+  {
+    $persona = Persona::findOrFail($id);
+    $persona->estado_id = 1;
+    $persona->save();
     return 0;
   }
 }

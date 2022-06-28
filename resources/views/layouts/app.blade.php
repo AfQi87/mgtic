@@ -17,7 +17,7 @@
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
      {{-- <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />  --}}
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -97,7 +97,6 @@
     <script type="text/javascript" src="{{ url('/js/egresados.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/docentes.js')}}"></script>
     <script type="text/javascript" src="{{ url('/js/estudiantes.js')}}"></script>
-
 </body>
 
 </html>

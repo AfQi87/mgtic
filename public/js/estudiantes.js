@@ -295,27 +295,63 @@ $('#formActEstudiante').submit(function (e) {
   }
 });
 
-//=============================================================================================Eliminar Estudiante
+//=============================================================================================desactivar Estudiante
 var idEst;
-$(document).on('click', '.deleteEstudiante', function () {
+$(document).on('click', '.desEstudiante', function () {
   idEst = $(this).attr('id');
   Swal.fire({
-    title: 'Eliminar Estudiante',
-    text: "¿Esta seguro que desea eliminar el estudiante definitivamente?",
+    title: 'Desactivar Estudiante',
+    text: "¿Esta seguro que desea desactivar el estudiante?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, eliminar!'
+    confirmButtonText: 'Si, desactivar!'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: "/estudiante/delete/" + idEst,
+        url: "/estudiante/des/" + idEst,
         method: "GET",
         success: function (response) {
           if (response == 0) {
             $('#tablaEstudiantes').DataTable().ajax.reload();
-            toastr.success("Registro Eliminado Correctamente", 'Correcto',
+            toastr.success("Registro desactivado Correctamente", 'Correcto',
+              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          } else {
+            toastr.error("El estudiante no se desactivo", 'Error',
+              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          }
+        },
+        error: function () {
+          toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
+            { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        }
+      });
+    }
+  })
+});
+
+//=============================================================================================activar Estudiante
+var idEst;
+$(document).on('click', '.actEstudiante', function () {
+  idEst = $(this).attr('id');
+  Swal.fire({
+    title: 'Activar Estudiante',
+    text: "¿Esta seguro que desea activar el estudiante?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, activar!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: "/estudiante/act/" + idEst,
+        method: "GET",
+        success: function (response) {
+          if (response == 0) {
+            $('#tablaEstudiantes').DataTable().ajax.reload();
+            toastr.success("Registro activado Correctamente", 'Correcto',
               { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           } else {
             toastr.error("El estudiante no se activo", 'Error',
@@ -330,7 +366,6 @@ $(document).on('click', '.deleteEstudiante', function () {
     }
   })
 });
-
 //================================================================Ver estudiante
 function verEstudiante(id) {
   $.get('/estudiante/actu/' + id, function (datos) {

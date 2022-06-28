@@ -109,7 +109,9 @@
                                       <input list="estudiantes" autocomplete="off" id="estudiante" name="estudiante" class="form-control" placeholder="Busca/Selecciona">
                                       <datalist name="estudiantes" id="estudiantes" required>
                                         @foreach($estudiantes as $estudiante)
+                                        @if($estudiante->personas->estado_id == 1)
                                         <option data-ejemplo="{{ $estudiante->ced_persona }}" value="{{ $estudiante->personas->nom_persona }}"></option>
+                                        @endif
                                         @endforeach
                                       </datalist>
                                     </div>
@@ -120,7 +122,9 @@
                                       <input list="asesores" autocomplete="off" id="asesor" name="asesor" class="form-control" placeholder="Busca/Selecciona">
                                       <datalist name="asesores" id="asesores" required>
                                         @foreach($docentes as $docente)
+                                        @if($docente->personas->estado_id == 1)
                                         <option data-ejemplo="{{ $docente->ced_persona }}" value="{{ $docente->personas->nom_persona }}"></option>
+                                        @endif
                                         @endforeach
                                       </datalist>
                                     </div>
@@ -131,7 +135,9 @@
                                       <input list="jurados_1" autocomplete="off" id="jurado_1" name="jurado_1" class="form-control" placeholder="Busca/Selecciona">
                                       <datalist name="jurados_1" id="jurados_1" required>
                                         @foreach($docentes as $docente)
+                                        @if($docente->personas->estado_id == 1)
                                         <option data-ejemplo="{{ $docente->ced_persona }}" value="{{ $docente->personas->nom_persona }}"></option>
+                                        @endif
                                         @endforeach
                                       </datalist>
                                     </div>
@@ -142,7 +148,9 @@
                                       <input list="jurados_2" autocomplete="off" id="jurado_2" name="jurado_2" class="form-control" placeholder="Busca/Selecciona">
                                       <datalist name="jurados_2" id="jurados_2" required>
                                         @foreach($docentes as $docente)
+                                        @if($docente->personas->estado_id == 1)
                                         <option data-ejemplo="{{ $docente->ced_persona }}" value="{{ $docente->personas->nom_persona }}"></option>
+                                        @endif
                                         @endforeach
                                       </datalist>
                                     </div>
@@ -153,7 +161,9 @@
                                       <input list="jurados_3" autocomplete="off" id="jurado_3" name="jurado_3" class="form-control" placeholder="Busca/Selecciona">
                                       <datalist name="jurados_3" id="jurados_3" required>
                                         @foreach($docentes as $docente)
+                                        @if($docente->personas->estado_id == 1)
                                         <option data-ejemplo="{{ $docente->ced_persona }}" value="{{ $docente->personas->nom_persona }}"></option>
+                                        @endif
                                         @endforeach
                                       </datalist>
                                     </div>

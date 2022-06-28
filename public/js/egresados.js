@@ -1,46 +1,63 @@
 //=====================================================================Lista Egresados
 
+// $(document).ready(function () {
+//   $("#tablaEgresados").dataTable({
+//     "language": { "url": "//cdn.datatables.net/plug-ins/1.11.4/i18n/es_es.json" },
+//     headers: {
+//       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     },
+//     "serveSide": true,
+//     ajax: {
+//       url: "/api/egresados",
+//     },
+//     columns: [
+//       { data: "ced_persona", className: "text-center" },
+//       { data: "nombre", className: "text-center" },
+//       { data: "ced_persona", className: "text-center correoCopiar" },
+//       { data: "ced_persona", className: "text-center" },
+//       { data: "ced_persona", className: "text-center" },
+//       { data: "ced_persona", className: "text-center" },
+//       { data: "btn", className: "text-center" },
+//     ]
+//   });
+// });
 $(document).ready(function () {
-  $("#tablaEgresados").dataTable({
+  $('#tablaEgresados').DataTable({
     "language": { "url": "//cdn.datatables.net/plug-ins/1.11.4/i18n/es_es.json" },
     processing: true,
-    serversite: true,
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },
-    ajax: {
-      url: "/egresados",
-    },
-    success: function (response) {
-      console.log("response");
-    },
-    columns: [
+    "serverSide": true,
+    "ajax": "api/egresados",
+    "columns": [
       { data: "ced_persona", className: "text-center" },
       { data: "nombre", className: "text-center" },
       { data: "correo", className: "text-center correoCopiar" },
       { data: "telefono", className: "text-center" },
       { data: "institucion", className: "text-center" },
       { data: "programa", className: "text-center" },
-      { data: "accion", orderable: false, className: "text-center" },
+      { data: "estado", className: "text-center" },
+      { data: "btn", className: "text-center" },
     ]
   });
 });
 //================================================================================================Registrar Egresado
 $("#institucion").on('input', function () {
-  var val = $('#institucion').val();
-  var ejemplo = $('#instituciones').find('option[value="' + val + '"]').data('ejemplo');
+  var val = $('#formregEgresado #institucion').val();
+  var ejemplo = $('#formregEgresado #instituciones').find('option[value="' + val + '"]').data('ejemplo');
   if (ejemplo != undefined) {
     console.log(ejemplo);
     $.get('/egresados/programas/' + ejemplo, function (datos,) {
-      var div = document.querySelector(".programa");
+      var div = document.querySelector("#formregEgresado .programa");
       while (div.firstChild) {
         div.removeChild(div.firstChild);
       }
       console.log(datos);
-      $('.programa').append('<label class="form-label" for="programa">Programa</label><input autocomplete="off" list="programas" name="programa"  id="programa" class="form-control" placeholder="Busca / Selecciona"><datalist name="programas" id="programas" class="progEgresado">')
+      $('#formregEgresado .programa').append('<label class="form-label" for="programa">Programa</label><input autocomplete="off" list="programas" name="programa"  id="programa" class="form-control" placeholder="Busca / Selecciona"><datalist name="programas" id="programas" class="progEgresado">')
       datos.programas.forEach(element => {
         console.log(element);
-        $('#programas').append('<option data-ejemplo="' + element.id_programa + '" value="' + element.nom_programa + '"></option>')
+        $('#formregEgresado #programas').append('<option data-ejemplo="' + element.id_programa + '" value="' + element.nom_programa + '"></option>')
       });
     });
   }
@@ -162,7 +179,7 @@ $('#formEgresadoAct').submit(function (e) {
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
     }
   }
-  
+
   formData.append('programa_id', val_prog);
   $.ajax({
     url: "/egresado/actualizar/" + id,
@@ -211,30 +228,67 @@ function copiarCorreo() {
 }
 
 var idEgresado;
-//=============================================================================================Eliminar Egresado
+//=============================================================================================Desactivar Egresado
 
-$(document).on('click', '.deleteEgresado', function () {
+$(document).on('click', '.desEgresado', function () {
   idEgresado = $(this).attr('id');
   Swal.fire({
-    title: 'Eliminar Egresado',
-    text: "¿Esta seguro que desea eliminar el egresado definitivamente?",
+    title: 'Desactivar Egresado',
+    text: "¿Esta seguro que desea desactivar el egresado?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, eliminar!'
+    confirmButtonText: 'Si, desactivar!'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: "/egresado/delete/" + idEgresado,
+        url: "/egresado/des/" + idEgresado,
         method: "GET",
         success: function (response) {
           if (response == 0) {
             $('#tablaEgresados').DataTable().ajax.reload();
-            toastr.success("Registro Eliminado Correctamente", 'Correcto',
+            toastr.success("Registro desactivado Correctamente", 'Correcto',
               { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           } else {
-            toastr.error("El egresado no se activo", 'Error',
+            toastr.error("El egresado no se desactivo", 'Error',
+              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          }
+        },
+        error: function () {
+          toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
+            { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        }
+      });
+    }
+  })
+});
+
+
+//=============================================================================================Activar Egresado
+
+$(document).on('click', '.actEgresado', function () {
+  idEgresado = $(this).attr('id');
+  Swal.fire({
+    title: 'Activar Egresado',
+    text: "¿Esta seguro que desea activar el egresado?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, activar!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: "/egresado/act/" + idEgresado,
+        method: "GET",
+        success: function (response) {
+          if (response == 0) {
+            $('#tablaEgresados').DataTable().ajax.reload();
+            toastr.success("Registro activado Correctamente", 'Correcto',
+              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          } else {
+            toastr.error("El egresado no se actvo", 'Error',
               { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           }
         },

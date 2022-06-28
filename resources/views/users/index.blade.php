@@ -255,10 +255,8 @@
 
                                             </div>
                                           </div>
-                                          <div class="col-sm-4">
-                                            <div class="rounded img-responsive" style="max-width: 300px">
-                                              <img id="imagenSeleccionada" src="avatar/avatar.png" style="max-width: 300px">
-                                            </div>
+                                          <div class="col-sm-4 mt-5">
+                                            <img src="avatar/avatar.png" class="img-fluid rounded-start" id="imagenSeleccionada">
                                             <div class="mb-3 mt-2">
                                               <input type="file" class="form-control" id="foto" name="foto">
                                             </div>

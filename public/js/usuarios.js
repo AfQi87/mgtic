@@ -106,10 +106,11 @@ function editarUsuario(id) {
     $('#id_user_d').val(datos.usuario.id);
     $('#name_act').val(datos.usuario.name);
     $('#telefono_act').val(datos.usuario.telefono);
-    if (datos.usuario.foto != '' || datos.usuario.foto != null) {
-      $('#formActUsuario #imagenSeleccionada').attr('src', 'images/' + datos.usuario.foto);
-    } else {
+    console.log(datos)
+    if (datos.usuario.foto == '' || datos.usuario.foto == null) {
       $('#formActUsuario #imagenSeleccionada').attr('src', 'avatar/avatar.png');
+    } else {
+      $('#formActUsuario #imagenSeleccionada').attr('src', 'images/' + datos.usuario.foto);
     }
     const $cargo = document.querySelector("#cargo_id_act");
     for (let i = $cargo.options.length; i >= 0; i--) {

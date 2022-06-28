@@ -19,8 +19,9 @@ class CreateTareaMgticTable extends Migration
       $table->unsignedInteger('acta');
       $table->string('participante', 15);
 
-      $table->foreign('participante')->references('participante')->on('acta_mgtic_has_participante');
-      $table->foreign('acta')->references('acta_mgtic')->on('acta_mgtic_has_participante');
+      $table->foreign('participante')->references('persona')->on('participante_mgtic');
+      $table->foreign('acta')->references('id_acta')->on('acta');
+
 
       $table->timestamps();
     });

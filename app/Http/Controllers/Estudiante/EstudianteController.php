@@ -33,7 +33,11 @@ class EstudianteController extends Controller
         ->addColumn('accion', function ($estudiante) {
           $acciones = '&nbsp<button type="button" onclick="verEstudiante(' . $estudiante->ced_persona . ')" name="verEstudiante" class="verEstudiante btn btn-info"><i class="bi bi-aspect-ratio"></i></i></button>';
           $acciones .= '<a href="javascript:void(0)" onclick="editarEstudiante(' . $estudiante->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
-          $acciones .= '&nbsp<button type="button" id="' . $estudiante->ced_persona . '" name="delete" class="deleteEstudiante btn btn-danger"><i class="bi bi-trash"></i></button>';
+          if ($estudiante->personas->estado_id == 1) {
+            $acciones .= '&nbsp<button type="button" id="' . $estudiante->ced_persona . '" name="delete" class="desEstudiante btn btn-danger"><i class="bi bi-trash"></i></button>';
+          } else {
+            $acciones .= '&nbsp<button type="button" id="' . $estudiante->ced_persona . '" name="delete" class="actEstudiante btn btn-success"><i class="bi bi-check-lg"></i></button>';
+          }
           return $acciones;
         })
         ->addColumn('fotoD', function ($estudiante) {
@@ -65,11 +69,10 @@ class EstudianteController extends Controller
     $sexos = Sexo::all();
     $sangres = TipoSangre::all();
     $nacimientos = Municipio::all();
-    $barrios = Barrio::all();
     $estadosCivil = EstadoCivil::all();
     $instituciones = Institucion::all();
     $niveles = Nivel_Formacion::all();
-    return view('pages/estudiantes/lista_estudiantes', compact('tipos', 'cortes', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'barrios', 'niveles', 'instituciones'));
+    return view('pages/estudiantes/lista_estudiantes', compact('tipos', 'cortes', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'niveles', 'instituciones'));
   }
 
   public function niveles()
@@ -126,6 +129,7 @@ class EstudianteController extends Controller
       $persona->fecha_nac = $request->fecha;
       $persona->lugar_nac = $request->nacimiento;
       $persona->direccion = $request->direccion;
+      $persona->estado_id = 1;
       $persona->foto = $filename;
       $persona->save();
 
@@ -175,10 +179,10 @@ class EstudianteController extends Controller
     $estudiante->personas->sexos;
     $estudiante->personas->municipios;
     $profesiones = EstudianteEstudio::select('id_institucion', 'nom_institucion', 'id_estudio', 'nom_estudio', 'id_nivel', 'desc_nivel')
-      ->join('institucion', 'id_institucion', 'like', 'institucion')
-      ->join('estudio', 'id_estudio', 'like', 'estudio')
-      ->join('nivel', 'nivel_estudio', 'like', 'id_nivel')
-      ->where('estudiante', $id)->get();
+      ->join('institucion', 'id_institucion', '=', 'institucion')
+      ->join('estudio', 'id_estudio', '=', 'estudio')
+      ->join('nivel', 'nivel_estudio', '=', 'id_nivel')
+      ->where('estudiante', "$id")->get();
     return response()->json(['estudiante' => $estudiante, 'profesiones' => $profesiones]);
   }
 
@@ -268,22 +272,19 @@ class EstudianteController extends Controller
     }
   }
 
-  public function destroy($id)
+  public function desactivar($id)
   {
-    $estudiosEst = EstudianteEstudio::where('estudiante', $id)->get();
-
-    foreach ($estudiosEst as $estudioEst) {
-      $estudio = Estudio::findOrFail($estudioEst->estudio);
-      $estudioEst->delete();
-      $estudio->delete();
-    }
-
-    $estudiante = Estudiante::findOrFail($id);
-    $estudiante->delete();
-
     $persona = Persona::findOrFail($id);
-    $persona->delete();
+    $persona->estado_id = 2;
+    $persona->save();
+    return 0;
+  }
 
+  public function activar($id)
+  {
+    $persona = Persona::findOrFail($id);
+    $persona->estado_id = 1;
+    $persona->save();
     return 0;
   }
 

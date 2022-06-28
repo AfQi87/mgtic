@@ -46,4 +46,7 @@ class Persona extends Model
     {
         return $this->belongsTo(EstadoCivil::class, 'estado_civil', 'id_estado');
     }
+    public function estados(){
+        return $this->belongsTo(Estado::class,'estado_id','id');
+    }
 }

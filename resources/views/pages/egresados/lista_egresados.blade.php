@@ -234,6 +234,7 @@
                   <th>Telefono</th>
                   <th>Institución</th>
                   <th>Programa</th>
+                  <th>Estado</th>
                   <th>Más</th>
                 </thead>
                 <tfoot class=" text-primary">
@@ -243,6 +244,7 @@
                   <th>Telefono</th>
                   <th>Institución</th>
                   <th>Programa</th>
+                  <th>Estado</th>
                   <th>Más</th>
                 </tfoot>
               </table>
@@ -253,4 +255,6 @@
     </div>
   </div>
 </div>
+
+
 @endsection

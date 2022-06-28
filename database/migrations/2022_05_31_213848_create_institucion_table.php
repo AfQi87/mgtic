@@ -16,12 +16,12 @@ class CreateInstitucionTable extends Migration
         Schema::create('institucion', function (Blueprint $table) {
             $table->string('id_institucion', 15);
             $table->string('nom_institucion', 100);
-            $table->string('municipio', 15);
+            $table->string('pais', 15);
             $table->unsignedInteger('sector');
             $table->unsignedInteger('tipo');
 
             $table->primary('id_institucion');
-            $table->foreign('municipio')->references('id_municipio')->on('municipio');
+            $table->foreign('pais')->references('id_pais')->on('pais');
             $table->foreign('sector')->references('id_sector')->on('sector');
             $table->foreign('tipo')->references('id_tipo')->on('tipo_inst');
             $table->timestamps();

@@ -43,7 +43,9 @@
                                       <input list="docentes" autocomplete="off" id="docente" name="docente" class="form-control" placeholder="Busca/Selecciona">
                                       <datalist name="docentes" id="docentes" required>
                                         @foreach($docentes as $docente)
+                                        @if($docente->personas->estado_id == 1)
                                         <option data-ejemplo="{{ $docente->ced_persona }}" value="{{ $docente->personas->nom_persona }}"></option>
+                                        @endif
                                         @endforeach
                                       </datalist>
                                     </div>

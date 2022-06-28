@@ -26,6 +26,14 @@ class MateriaController extends Controller
           $area = $materia->areas->nom_area_form;
           return $area;
         })
+        ->addColumn('semestres', function ($materia) {
+          if ($materia->semestre == 0) {
+            $area = 'Electiva';
+          } else {
+            $area = $materia->semestre;
+          }
+          return $area;
+        })
         ->rawColumns(['accion', 'area'])
         ->make(true);
     }

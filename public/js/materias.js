@@ -17,7 +17,7 @@ $(document).ready(function () {
     columns: [
       { data: "nom_materia", className: "text-center" },
       { data: "num_creditos", className: "text-center" },
-      { data: "semestre", className: "text-center" },
+      { data: "semestres", className: "text-center" },
       { data: "area", className: "text-center" },
       { data: "accion", orderable: false, className: "text-center" },
     ]

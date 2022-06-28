@@ -496,30 +496,66 @@ $('#formActDocente').submit(function (e) {
 });
 
 
-//=============================================================================================Eliminar Docente
+//=============================================================================================desactivar Docente
 var idDoce;
-$(document).on('click', '.deleteDocente', function () {
+$(document).on('click', '.desDocente', function () {
   idDoce = $(this).attr('id');
   Swal.fire({
-    title: 'Eliminar Docente',
-    text: "¿Esta seguro que desea eliminar el docente definitivamente?",
+    title: 'Desactivar Docente',
+    text: "¿Esta seguro que desea desactivar el docente definitivamente?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, eliminar!'
+    confirmButtonText: 'Si, desactivar!'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: "/docente/delete/" + idDoce,
+        url: "/docente/des/" + idDoce,
         method: "GET",
         success: function (response) {
           if (response == 0) {
             $('#tablaDocentes').DataTable().ajax.reload();
-            toastr.success("Registro Eliminado Correctamente", 'Correcto',
+            toastr.success("Registro desactivado Correctamente", 'Correcto',
               { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           } else {
-            toastr.error("El estudiante no se activo", 'Error',
+            toastr.error("El docente no se desactivo", 'Error',
+              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          }
+        },
+        error: function () {
+          toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
+            { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        }
+      });
+    }
+  })
+});
+
+//=============================================================================================activar Docente
+var idDoce;
+$(document).on('click', '.actDocente', function () {
+  idDoce = $(this).attr('id');
+  Swal.fire({
+    title: 'Activar Docente',
+    text: "¿Esta seguro que desea activar el docente definitivamente?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, activar!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: "/docente/act/" + idDoce,
+        method: "GET",
+        success: function (response) {
+          if (response == 0) {
+            $('#tablaDocentes').DataTable().ajax.reload();
+            toastr.success("Registro activado Correctamente", 'Correcto',
+              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          } else {
+            toastr.error("El docente no se activo", 'Error',
               { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
           }
         },

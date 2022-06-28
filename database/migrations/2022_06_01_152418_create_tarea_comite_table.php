@@ -19,9 +19,8 @@ class CreateTareaComiteTable extends Migration
       $table->unsignedInteger('acta');
       $table->string('responsable', 15);
 
-
-      $table->foreign('responsable')->references('participante')->on('acta_comite_has_participante');
-      $table->foreign('acta')->references('acta_comite')->on('acta_comite_has_participante');
+      $table->foreign('responsable')->references('persona')->on('participante_comite');
+      $table->foreign('acta')->references('id_acta')->on('acta');
 
       $table->timestamps();
     });

@@ -10,8 +10,6 @@ class Institucion extends Model
     use HasFactory;
     protected $table = 'institucion';
 
-    protected $primaryKey = 'id_institucion';
-
     public function programas()
     {
         return $this->hasMany(Programa::class, 'id_institucion');

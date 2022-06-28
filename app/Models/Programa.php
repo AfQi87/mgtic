@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Programa extends Model
 {
     use HasFactory;
-    protected $table = 'Programa';
-    protected $primaryKey = 'id_programa';
+    protected $table = 'programa';
+    // protected $primaryKey = 'id_programa';
     public function Personas(){
         return $this->hasMany(Personas::class,'id_programa');
     }

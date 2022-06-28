@@ -11,6 +11,7 @@ use App\Http\Controllers\Materias\MateriaController;
 use App\Http\Controllers\TrabajosGrado\TrabGradoController;
 use App\Http\Controllers\UserController;
 use App\Mail\ContactenosMailable;
+use App\Models\Egresado;
 use App\Models\Materia;
 use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Mail;
@@ -80,18 +81,32 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/docente/actualizar/{id}', [DocenteController::class, 'update'])->name('formUpdate');
 	Route::get('/docente/delete/prof/{id}', [DocenteController::class, 'delete'])->name('profesionDelete');
 	Route::get('/docente/delete/area/{id}', [DocenteController::class, 'deleteArea']);
-	Route::get('/docente/delete/{id}', [DocenteController::class, 'destroy']);
+
+	Route::get('/docente/des/{id}', [DocenteController::class, 'desactivar']);
+	Route::get('/docente/act/{id}', [DocenteController::class, 'activar']);
 
 });
 
 ///=================================================================================================egresados
+// Route::get('/egresados', function (){
+// 	//return App\User::all();
+// 	return datatables()
+// 		->eloquent(Egresado::query())
+// 		->addColumn('btn', 'actions')
+// 		->rawColumns(['btn'])
+// 		->toJson();
+// });
+
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/egresados', [EgresadoController::class, 'index'])->name('egresadosIndex');
 	Route::get('/egresados/programas/{id}', [EgresadoController::class, 'programas'])->name('egresadosProg');
 	Route::post('/egresados/form', [EgresadoController::class, 'store'])->name('formStoreEgre');
 	Route::post('/egresado/actualizar/{id}', [EgresadoController::class, 'update'])->name('formUpdateEgre');
-	Route::get('/egresado/delete/{id}', [EgresadoController::class, 'destroy']);
 	Route::get('/egresados/form/{id}', [EgresadoController::class, 'edit'])->name('formEditEgre');
+
+	Route::get('/egresado/des/{id}', [EgresadoController::class, 'desactivar']);
+	Route::get('/egresado/act/{id}', [EgresadoController::class, 'activar']);
 });
 
 
@@ -112,7 +127,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/estudiante/act/{id}', [EstudianteController::class, 'update'])->name('formUpdate');
 	Route::get('/estudiante/actu/{id}', [EstudianteController::class, 'edit'])->name('formEdit');
 	Route::get('/estudiante/delete/prof/{id}', [EstudianteController::class, 'delete']);
-	Route::get('/estudiante/delete/{id}', [EstudianteController::class, 'destroy']);
+
+	Route::get('/estudiante/des/{id}', [EstudianteController::class, 'desactivar']);
+	Route::get('/estudiante/act/{id}', [EstudianteController::class, 'activar']);
 });
 
 ///=================================================================================================materias

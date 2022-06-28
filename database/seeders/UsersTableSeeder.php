@@ -15,14 +15,14 @@ class UsersTableSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('users')->delete();
+    // DB::table('users')->delete();
 
     DB::table('users')->insert([
-      'name' => 'Admin Admin',
-      'email' => 'admin@material.com',
+      'name' => 'Admin',
+      'email' => 'admin@admin.com',
       'email_verified_at' => now(),
       'password' => Hash::make('secret'),
-      'telefono' => '1234567890',
+      'telefono' => '000000000',
       'foto' => null,
       'cargo_id' => 1,
       'rol_id' => 1,
