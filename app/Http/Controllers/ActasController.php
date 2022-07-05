@@ -194,8 +194,8 @@ class ActasController extends Controller
 		// $responsables->cargos;
 
 		$responsables = Asistente::select('persona', 'nom_persona', 'cargo', 'desc_cargo')
-			->join('cargo', 'cargo', 'like', 'id_cargo')
-			->join('persona', 'persona', 'like', 'ced_persona')
+			->join('cargo', 'cargo', '=', 'id_cargo')
+			->join('persona', 'persona', '=', 'ced_persona')
 			->get();
 
 		return response()->json(['responsables' => $responsables]);
@@ -205,8 +205,8 @@ class ActasController extends Controller
 	{
 		// $responsables = AsistenteComite::all();
 		$responsables = AsistenteComite::select('persona', 'nom_persona', 'cargo', 'desc_cargo')
-			->join('cargo', 'cargo', 'like', 'id_cargo')
-			->join('persona', 'persona', 'like', 'ced_persona')
+			->join('cargo', 'cargo', '=', 'id_cargo')
+			->join('persona', 'persona', '=', 'ced_persona')
 			->get();
 		return response()->json(['responsables' => $responsables]);
 	}

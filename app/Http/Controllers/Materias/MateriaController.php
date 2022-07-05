@@ -17,7 +17,7 @@ class MateriaController extends Controller
       $materia = Materia::all();
       return DataTables::of($materia)
         ->addColumn('accion', function ($materia) {
-          $acciones = '';
+          $acciones = '&nbsp<button type="button" onclick="verMateria(' . $materia->id_materia . ')" name="verMateria" class="verMateria btn btn-info"><i class="bi bi-aspect-ratio"></i></i></button>';
           $acciones .= '<a href="javascript:void(0)" onclick="editarMateria(' . $materia->id_materia . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
           $acciones .= '&nbsp<button type="button" id="' . $materia->id_materia . '" name="delete" class="desMateria btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
@@ -49,6 +49,7 @@ class MateriaController extends Controller
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
+      'id' => 'required|unique:materia,id_materia|max:50',
       'nombre' => 'required|unique:materia,nom_materia|max:200',
       'creditos' => 'required',
       'semestre' => 'required',
@@ -66,6 +67,7 @@ class MateriaController extends Controller
         $filename = '';
       }
       $materia = new Materia();
+      $materia->id_materia = $request->id;
       $materia->nom_materia = $request->nombre;
       $materia->num_creditos = $request->creditos;
       $materia->semestre = $request->semestre;

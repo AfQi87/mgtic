@@ -27,7 +27,7 @@ class CreateDocenteImparteMateriaTable extends Migration
       $table->foreign('materia')->references('id_materia')->on('materia');
       $table->foreign('cohorte')->references('id_cohorte')->on('cohorte');
 
-      $table->primary(['docente', 'materia']);
+      $table->primary(['docente', 'materia', 'cohorte']);
       $table->timestamps();
     });
   }

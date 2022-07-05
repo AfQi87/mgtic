@@ -183,6 +183,24 @@
                                           <p class="card-category">Escriba los Estudios del Estudiante</p>
 
                                         </div>
+                                        <!-- Lista Profesiones -->
+                                        <div>
+                                          <datalist name="profesiones[]" id="profesiones" class="instEgresado" onclick="selectProgram()" required>
+                                            @foreach($profesiones as $profesion)
+                                            <option data-ejemplo="{{ $profesion->id_estudio }}" value="{{ $profesion->nom_estudio }}"></option>
+                                            @endforeach
+                                          </datalist>
+                                          <datalist name="instituciones[]" id="instituciones" class="instEgresado" onclick="selectProgram()" required>
+                                            @foreach($instituciones as $institucion)
+                                            <option data-ejemplo="{{ $institucion->id_institucion }}" value="{{ $institucion->nom_institucion }}"></option>
+                                            @endforeach
+                                          </datalist>
+                                          <datalist name="area_conocimientos[]" id="area_conocimientos" class="instEgresado" onclick="selectProgram()" required>
+                                            @foreach($area_conocimientos as $area_conocimiento)
+                                            <option data-ejemplo="{{ $area_conocimiento->id_area }}" value="{{ $area_conocimiento->nom_area_con }}"></option>
+                                            @endforeach
+                                          </datalist>
+                                        </div>
                                         <div class="card-body">
                                           <div class="table-responsive">
                                             <table class="table">
@@ -196,7 +214,9 @@
                                               </thead>
                                               <tbody id="tablaProfesion">
                                                 <tr>
-                                                  <td><textarea name="profesion[]" id="profesion" class="form-control" cols="30" rows="1" required></textarea></td>
+                                                  <td>
+                                                    <input list="profesiones" autocomplete="off" id="profesion" required name="profesion[]" class="profesion form-control" placeholder="Busca/Selecciona">
+                                                  </td>
                                                   <td>
                                                     <select class="form-select nivel" id="nivel" name="nivel[]" required style="max-width: 250px">
                                                       <option selected value="">Seleccione una opción</option>
@@ -206,12 +226,7 @@
                                                     </select>
                                                   </td>
                                                   <td>
-                                                    <input list="instituciones" autocomplete="off" id="institucion1" required name="institucion[]" class="institucion form-control" placeholder="Busca/Selecciona">
-                                                    <datalist name="instituciones[]" id="instituciones" class="instEgresado" onclick="selectProgram()" required>
-                                                      @foreach($instituciones as $institucion)
-                                                      <option data-ejemplo="{{ $institucion->id_institucion }}" value="{{ $institucion->nom_institucion }}"></option>
-                                                      @endforeach
-                                                    </datalist>
+                                                    <input list="instituciones" autocomplete="off" id="institucion" required name="institucion[]" class="institucion form-control" placeholder="Busca/Selecciona">
                                                   </td>
                                                   <td>
                                                     <center><button type="button" class="btn btn-danger" onclick="eliminarProfesion(1)">--</button></center>
@@ -245,7 +260,7 @@
                                               <tbody id="tablaArea">
                                                 <tr>
                                                   <td>
-                                                    <input type="text" name="area_conocimiento[]" id="area_conocimiento" class="form-control" required>
+                                                    <input list="area_conocimientos" autocomplete="off" id="area_conocimiento" required name="area_conocimiento[]" class="area_conocimiento form-control" placeholder="Busca/Selecciona">
                                                   </td>
                                                   <td>
                                                     <center><button type="button" class="btn btn-danger" onclick="eliminarArea(1)">--</button></center>
@@ -521,7 +536,7 @@
                                               </thead>
                                               <tbody id="tablaProfesionAct">
                                                 <tr>
-                                                  <td><textarea name="profesion[]" id="profesion" class="form-control" cols="30" rows="1" required></textarea></td>
+                                                  <td><input list="profesiones" autocomplete="off" id="profesion" required name="profesion[]" class="profesion form-control" placeholder="Busca/Selecciona"></td>
                                                   <td>
                                                     <select class="form-select nivel" id="nivel" name="nivel[]" required style="max-width: 250px">
                                                       <option selected value="">Seleccione una opción</option>
@@ -532,11 +547,6 @@
                                                   </td>
                                                   <td>
                                                     <input list="instituciones" autocomplete="off" id="institucion1" required name="institucion[]" class="institucion form-control" placeholder="Busca/Selecciona">
-                                                    <datalist name="instituciones[]" id="instituciones" class="instEgresado" onclick="selectProgram()" required>
-                                                      @foreach($instituciones as $institucion)
-                                                      <option data-ejemplo="{{ $institucion->id_institucion }}" value="{{ $institucion->nom_institucion }}"></option>
-                                                      @endforeach
-                                                    </datalist>
                                                   </td>
                                                   <td>
                                                     <center><button type="button" class="btn btn-danger" onclick="eliminarProfesion(1)">--</button></center>
@@ -570,7 +580,7 @@
                                               <tbody id="tablaAreaAct">
                                                 <tr>
                                                   <td>
-                                                    <input type="text" name="area_conocimiento[]" id="area_conocimiento" class="form-control" required>
+                                                    <input list="area_conocimientos" autocomplete="off" id="area_conocimiento" required name="area_conocimiento[]" class="area_conocimiento form-control" placeholder="Busca/Selecciona">
                                                   </td>
                                                   <td>
                                                     <center><button type="button" class="btn btn-danger" onclick="eliminarArea(1)">--</button></center>

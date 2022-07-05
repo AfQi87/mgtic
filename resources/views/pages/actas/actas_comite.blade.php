@@ -80,7 +80,6 @@
                               <th>Id</th>
                               <th>Nombre</th>
                               <th>Cargo</th>
-                              <th class="text-center">Dependencia</th>
                               <th>Seleccionar</th>
                             </thead>
                             <tbody>
@@ -89,7 +88,6 @@
                                 <td>{{ $asistente->persona }}</td>
                                 <td>{{ $asistente->personas->nom_persona }}</td>
                                 <td>{{ $asistente->cargos->desc_cargo }}</td>
-                                <td>{{ $asistente->cargo }}</td>
                                 <td class="text-center">
                                   <input type="checkbox" style="width: 15px;" class="asistente" value="{{ $asistente->persona }}" name="asistente[]" id="asistente">
                                 </td>
@@ -186,6 +184,7 @@
                           <table class="table">
                             <thead class="text-primary">
                               <th>Tarea</th>
+                              <th>Responsable</th>
                               <th>
                                 <center>Eliminar</center>
                               </th>

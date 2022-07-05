@@ -184,6 +184,7 @@
                           <table class="table">
                             <thead class="text-primary">
                               <th>Tarea</th>
+                              <th>Responsable</th>
                               <th>
                                 <center>Eliminar</center>
                               </th>

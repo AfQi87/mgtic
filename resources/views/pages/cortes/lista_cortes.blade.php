@@ -46,14 +46,13 @@
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="nombre" class="form-label">Fecha Inició</label>
-                                      <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" min="<?php date_default_timezone_set("America/lima");
-                                                                                                                          echo date("Y-m-d"); ?>" placeholder="Ingrese fecha de inició" required>
+                                      <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="Ingrese fecha de inició" required>
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="nombre" class="form-label">Fecha Finalización</label>
-                                      <input type="date" class="form-control" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Ingrese fecha de finalización" required>
+                                      <input type="date" class="form-control" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Ingrese fecha de finalización" min="<?php date_default_timezone_set("America/lima"); echo date("Y-m-d"); ?>">
                                     </div>
                                   </div>
                                 </div>
@@ -107,7 +106,7 @@
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="nombre" class="form-label">Fecha Finalización</label>
-                                      <input type="date" class="form-control" id="fecha_finalizacion_act" name="fecha_finalizacion" placeholder="Ingrese fecha de finalización" required>
+                                      <input type="date" class="form-control" id="fecha_finalizacion_act" name="fecha_finalizacion" placeholder="Ingrese fecha de finalización" min="<?php date_default_timezone_set("America/lima"); echo date("Y-m-d"); ?>">
                                     </div>
                                   </div>
                                 </div>

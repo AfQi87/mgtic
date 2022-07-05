@@ -37,10 +37,19 @@ $('#formRegEstudiante').submit(function (e) {
   e.preventDefault();
   let = formData = new FormData($('#formRegEstudiante')[0]);
   var cont = 0;
-  $('.institucion').each(function () {
+  $('#formRegEstudiante .institucion').each(function () {
     val_inst = $('#instituciones').find('option[value="' + $(this).val() + '"]').data('ejemplo');
     formData.append('instituciones[]', val_inst);
 
+    if (val_inst == undefined) {
+      toastr.error("Debe seleccionar una institucion", 'Error',
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+      cont++;
+    }
+  });
+  $('#formRegEstudiante .profesion').each(async function () {
+    val_prof = $('#profesiones').find('option[value="' + $(this).val() + '"]').data('ejemplo');
+    formData.append('profesiones[]', val_prof);
     if (val_inst == undefined) {
       toastr.error("Debe seleccionar una institucion", 'Error',
         { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
@@ -94,7 +103,7 @@ function agregarProfesionact() {
   var row = table.insertRow(table.rows.length);
 
   var cell1 = row.insertCell(0);
-  cell1.innerHTML = '<input type="hidden" class="form-control" id="profesion" name="profesion[]"><textarea name="profesionact[]" id="profesionact" class="form-control" cols="30" rows="1" required></textarea>';
+  cell1.innerHTML = '<input type="hidden" class="form-control" id="profesion" name="profesion[]"><input list="profesiones" autocomplete="off" id="profesionact' + contProfesion + '" name="profesionact[]" class="form-control profesionact" required placeholder="Busca/Selecciona">';
 
   var cell2 = row.insertCell(1);
   cell2.innerHTML = '<select class="form-select nivel" id="nivel' + contprofesion + '" required name="nivel[]" style="max-width: 250px" ><option selected>Seleccione una opción</option>';
@@ -190,7 +199,7 @@ function editarEstudiante(id) {
       x++;
       var row = table.insertRow(table.rows.length);
       var cell1 = row.insertCell(0);
-      cell1.innerHTML = '<input type="hidden" class="form-control" id="profesion" value="' + element.id_estudio + '" name="profesion[]"><textarea name="profesionact[]" id="profesionact" class="form-control" cols="30" rows="1" required>' + element.nom_estudio + '</textarea>';
+      cell1.innerHTML = '<input type="hidden" class="form-control" id="profesion" value="' + element.id_estudio + '" name="profesion[]"><input list="profesiones" autocomplete="off" id="profesionact' + contprofesion + '" name="profesionact[]" class="form-control profesionact" required value="' + element.nom_estudio + '">';
       var cell2 = row.insertCell(1);
       cell2.innerHTML = '<select class="form-select" id="nivel' + contprofesion + '" required name="nivel[]" style="max-width: 250px" >';
       await delay(contprofesion, element.id_nivel);
@@ -216,7 +225,8 @@ function editarEstudiante(id) {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminar!'
+            confirmButtonText: 'Si, eliminar!',
+            cancelButtonText: "Cancelar",
           }).then((result) => {
             if (result.isConfirmed) {
               $.ajax({
@@ -246,7 +256,7 @@ $('#formActEstudiante').submit(function (e) {
   e.preventDefault();
   let = formData = new FormData($('#formActEstudiante')[0]);
   var cont = 0;
-  $('.institucionact').each(function () {
+  $('#formActEstudiante .institucionact').each(function () {
     val_inst = $('#instituciones').find('option[value="' + $(this).val() + '"]').data('ejemplo');
     formData.append('instituciones[]', val_inst);
 
@@ -256,7 +266,15 @@ $('#formActEstudiante').submit(function (e) {
       cont++;
     }
   });
+  $('#formActEstudiante .profesionact').each(function () {
+    val_inst = $('#profesiones').find('option[value="' + $(this).val() + '"]').data('ejemplo');
+    formData.append('profesiones[]', val_inst);
 
+    if (val_inst == undefined) {
+      toastr.error("Debe seleccionar una profesion", 'Error',
+        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+    }
+  });
   if (cont < 1) {
     var nacimiento;
     var barrio;
@@ -306,7 +324,8 @@ $(document).on('click', '.desEstudiante', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, desactivar!'
+    confirmButtonText: 'Si, desactivar!',
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -342,7 +361,8 @@ $(document).on('click', '.actEstudiante', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, activar!'
+    confirmButtonText: 'Si, activar!',
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({

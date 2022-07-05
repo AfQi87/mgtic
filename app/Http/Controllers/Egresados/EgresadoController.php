@@ -25,6 +25,7 @@ class EgresadoController extends Controller
 {
   public function index(Request $request)
   {
+    
     $instituciones = Institucion::all();
     $tipos = TipoDoc::all();
     return view('pages/egresados/lista_egresados', compact('tipos', 'instituciones'));
@@ -32,15 +33,15 @@ class EgresadoController extends Controller
 
   public function indexDatos()
   {
-    return datatables()
-      ->eloquent($a = Egresado::query())
+    $a = Egresado::all();
+    return datatables::of($a)
       ->addColumn('btn', function ($a) {
-        $acciones = '<a href="javascript:void(0)" onclick="editarEgresado(' . $a->ced_persona .')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+        $acciones = '<a href="javascript:void(0)" onclick="editarEgresado(' . $a->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
         ';
         if ($a->personas->estado_id == 1) {
-          $acciones .= '&nbsp<button type="button" id="'. $a->ced_persona .'" name="delete" class="desEgresado btn btn-danger"><i class="bi bi-trash"></i></button>';
+          $acciones .= '&nbsp<button type="button" id="' . $a->ced_persona . '" name="delete" class="desEgresado btn btn-danger"><i class="bi bi-trash"></i></button>';
         } else {
-          $acciones .= '&nbsp<button type="button" id="'. $a->ced_persona .'" name="delete" class="actEgresado btn btn-success"><i class="bi bi-check-lg"></i></button>';
+          $acciones .= '&nbsp<button type="button" id="' . $a->ced_persona . '" name="delete" class="actEgresado btn btn-success"><i class="bi bi-check-lg"></i></button>';
         }
         return $acciones;
       })
@@ -69,7 +70,7 @@ class EgresadoController extends Controller
         return $estado;
       })
       ->rawColumns(['btn'])
-      ->toJson();
+      ->make(true);
   }
   public function programas($id)
   {
@@ -84,7 +85,6 @@ class EgresadoController extends Controller
       'documento' => 'required|unique:persona,ced_persona|max:15',
       'nombre' => 'required|max:100',
       'correo' => 'required|unique:persona,email_persona|max:100|email',
-      'celular' => 'required|min:7|max:20',
       'programa' => 'required',
     ]);
     if ($validator->fails()) {
@@ -97,12 +97,16 @@ class EgresadoController extends Controller
       $persona->email_persona = $request->correo;
 
       if ($request->telefono == null) {
-        $persona->tel_persona = null;
+        $persona->tel_persona = 'NR';
       } else {
         $persona->tel_persona = $request->telefono;
       }
 
-      $persona->cel_persona = $request->celular;
+      if ($request->celular == null) {
+        $persona->cel_persona = 'NR';
+      } else {
+        $persona->cel_persona = $request->celular;
+      }
       $persona->sexo = null;
       $persona->estado_civil = null;
       $persona->tipo_sangre = null;

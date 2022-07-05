@@ -14,35 +14,22 @@ class AsistenteSeeder extends Seeder
    */
   public function run()
   {
-    DB::table('asistente')->delete();
+    DB::table('participante_mgtic')->delete();
     $asistentes = [
       [
-        'nombre' => 'ESTRADA LUIS OBEYMAR',
-        'cargo' => 'Presidente Comité Curricular MGTIC',
-        'dependencia' => 'Comité Curricular MGTIC'
+        'persona' => '1111111111',
+        'cargo' => 2
       ],
       [
-        'nombre' => 'TIMARAN PEREIRA RICARDO',
-        'cargo' => 'Coordinador MGTIC',
-        'dependencia' => 'Comité Curricular MGTIC'
+        'persona' => '222222222',
+        'cargo' => 3
       ],
       [
-        'nombre' => 'BURGOS CESAR ESTEBAN',
-        'cargo' => 'Representante Profesoral',
-        'dependencia' => 'Comité Curricular MGTIC'
-      ],
-      [
-        'nombre' => 'ROSERO IBARRA JESUS',
-        'cargo' => 'Representante estudiantil Segunda Promoción MGTIC',
-        'dependencia' => 'Comité Curricular MGTIC'
-      ],
-      [
-        'nombre' => 'GUERRERO CALVACHE SANDRA MARCELA',
-        'cargo' => 'Asistente MGTIC',
-        'dependencia' => 'Comité Curricular MGTIC'
+        'persona' => '3333333333',
+        'cargo' => 1
       ]
 
     ];
-    DB::table('asistente')->insert($asistentes);
+    DB::table('participante_mgtic')->insert($asistentes);
   }
 }

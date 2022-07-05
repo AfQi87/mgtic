@@ -91,11 +91,7 @@ $('#formreguser').submit(function (e) {
         Object.keys(response).forEach(key => toastr.error(response[key], 'Error',
           { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" }));
       }
-    },
-    error: function () {
-      toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
-        { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
-    },
+    }
   });
 });
 //===============================================================Editar datos Usuario
@@ -179,7 +175,8 @@ $(document).on('click', '.desUser', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, desactivar!'
+    confirmButtonText: 'Si, desactivar!',
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({

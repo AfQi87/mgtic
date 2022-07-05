@@ -124,7 +124,8 @@ $(document).on('click', '.desMateria', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, eliminar!'
+    confirmButtonText: 'Si, eliminar!',
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -144,3 +145,26 @@ $(document).on('click', '.desMateria', function () {
     }
   })
 });
+
+//==========================================================Ver Materia
+function verMateria(id) {
+  $.get('/materia/form/' + id, function (datos) {
+    var n = 0;
+    $("#tablaVerMaterias tbody tr").each(function () {
+      n++;
+    });
+    for (i = n - 1; i >= 0; i--) {
+      $("#tablaVerMaterias tbody tr:eq('" + i + "')").remove();
+    };
+    $("#tablaVerMaterias").append(
+      '<tr>' +
+      '<td>'+datos.materia.nom_materia+'</td>' +
+      '<td>'+datos.materia.num_creditos+'</td>' +
+      '<td>'+datos.materia.semestre+'</td>' +
+      '<td>'+datos.materia.areas.nom_area_form+'</td>' +
+      '</tr>'
+    );
+    $('#verDocMateria').attr('src', 'documentos/materias/' + datos.materia.foa);
+  })
+  $('#modalVerMateria').modal('toggle');
+}

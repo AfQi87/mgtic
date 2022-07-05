@@ -92,7 +92,7 @@ $('#formRegasignacion').submit(function (e) {
 
 //=============================================================================================Actualizar Corte
 function editarAsignacion(id, mat) {
-  $.get('/asignacion/form/' + id + '/' + mat, function (datos,) {
+  $.get('/asignacion/form/' + id + '/' + mat, function (datos) {
     console.log(datos.asignacion[0].nom_persona)
 
     $('#formActAsignacion #id_ced').val(datos.asignacion[0].ced_persona);
@@ -182,12 +182,13 @@ $(document).on('click', '.desAsignacion', function () {
 
   Swal.fire({
     title: 'Eliminar Materia',
-    text: "¿Esta seguro que desea eliminar la materia?",
+    text: "¿Esta seguro que desea eliminar la asignacion?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, eliminar!'
+    confirmButtonText: 'Si, eliminar!',
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -207,4 +208,31 @@ $(document).on('click', '.desAsignacion', function () {
     }
   })
 });
+
+//==========================================================Ver Materia
+function verAsignacion(id, mat) {
+  $.get('/asignacion/form/' + id + '/' + mat, function (datos){
+    var n = 0;
+    $("#tablaVerAsignacion tbody tr").each(function () {
+      n++;
+    });
+    for (i = n - 1; i >= 0; i--) {
+      $("#tablaVerAsignacion tbody tr:eq('" + i + "')").remove();
+    };
+    $("#tablaVerAsignacion").append(
+      '<tr>' +
+      '<td>'+datos.asignacion[0].nom_persona+'</td>' +
+      '<td>'+datos.asignacion[0].nom_materia+'</td>' +
+      '<td>'+datos.asignacion[0].desc_cohorte+'</td>' +
+      '<td>'+datos.asignacion[0].fecha_inicio+'</td>' +
+      '<td>'+datos.asignacion[0].fecha_fin+'</td>' +
+      '<td>'+datos.asignacion[0].num_resolucion+'</td>' +
+      '<td>'+datos.asignacion[0].fecha_resolucion+'</td>' +
+      '</tr>'
+    );
+    console.log(datos.asignacion[0].resolucion)
+    $('#verDocAsignacion').attr('src', 'documentos/asigaciones/' + datos.asignacion[0].resolucion);
+  })
+  $('#modalVerAsignacion').modal('toggle');
+}
 

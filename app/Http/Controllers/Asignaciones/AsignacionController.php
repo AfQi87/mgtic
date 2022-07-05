@@ -19,7 +19,7 @@ class AsignacionController extends Controller
       $asignacion = Asignacion::all();
       return DataTables::of($asignacion)
         ->addColumn('accion', function ($asignacion) {
-          $acciones = '';
+          $acciones = '&nbsp<button type="button" onclick="verAsignacion(' . $asignacion->docente . ', ' . $asignacion->materia . ')" name="verAsignacion" class="verAsignacion btn btn-info"><i class="bi bi-aspect-ratio"></i></i></button>';
           $acciones .= '<a href="javascript:void(0)" onclick="editarAsignacion(' . $asignacion->docente . ', ' . $asignacion->materia . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
           $acciones .= '&nbsp<button type="button" id="' . $asignacion->docente . '" mat="' . $asignacion->materia . '" name="delete" class="desAsignacion btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
@@ -96,7 +96,7 @@ class AsignacionController extends Controller
   {
     // $asignacion = Asignacion::findOrFail($id);
 
-    $asignacion = Asignacion::select('nom_persona', 'docente.ced_persona', 'nom_materia', 'id_materia', 'id_cohorte', 'desc_cohorte', 'docente_imparte_materia.fecha_inicio', 'docente_imparte_materia.fecha_fin', 'num_resolucion', 'fecha_resolucion')
+    $asignacion = Asignacion::select('nom_persona', 'docente.ced_persona', 'nom_materia', 'id_materia', 'id_cohorte', 'desc_cohorte', 'docente_imparte_materia.fecha_inicio', 'docente_imparte_materia.fecha_fin', 'num_resolucion', 'fecha_resolucion', 'resolucion')
       ->join('docente', 'docente', 'docente.ced_persona')
       ->join('persona', 'docente.ced_persona', 'persona.ced_persona')
       ->join('materia', 'materia', 'id_materia')

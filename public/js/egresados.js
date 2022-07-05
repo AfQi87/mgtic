@@ -239,7 +239,8 @@ $(document).on('click', '.desEgresado', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, desactivar!'
+    confirmButtonText: 'Si, desactivar!',
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -276,7 +277,8 @@ $(document).on('click', '.actEgresado', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, activar!'
+    confirmButtonText: 'Si, activar!',
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({

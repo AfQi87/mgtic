@@ -219,6 +219,68 @@
               </div>
             </div>
 
+            <!-- Modal Ver -->
+            <div class="modal fade" id="modalVerAsignacion" tabindex="-1" aria-labelledby="ModalUsuarioLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container">
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card ">
+                            <div class="card-header card-header-primary">
+                              <h4 class="card-title">Datos Mateira</h4>
+                            </div>
+                            <div class="card-body ">
+                              <div>
+                                <div class="card mb-3" style="max-width: 100%;">
+                                  <div class="row g-0">
+                                    <table class="table table-bordered table-hover" id="tablaVerAsignacion">
+                                      <thead class=" text-primary text-center">
+                                        <th>Docente</th>
+                                        <th>Materia</th>
+                                        <th>Promoción</th>
+                                        <th>Fecha Inició</th>
+                                        <th>Fecha fin</th>
+                                        <th>Resolución</th>
+                                        <th>Fecha resolución</th>
+                                      </thead>
+                                      <tbody>
+
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-12">
+                                <div class="card ">
+                                  <div class="card-header card-header-primary" style="height: 50px;">
+                                    <h4 class="card-title">Foa</h4>
+                                  </div>
+                                  <div class="card-body">
+                                    <div class="col-sm-12">
+                                      <iframe id="verDocAsignacion" style="width: 100%; min-height: 500px" src="" frameborder="0"></iframe>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <!-- Tabla -->
             <div class="table-responsive">

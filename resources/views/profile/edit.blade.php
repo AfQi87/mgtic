@@ -41,9 +41,9 @@
                 <label class="col-sm-2 col-form-label">{{ __('Telefono') }}</label>
                 <div class="col-sm-7">
                   <div class="form-group{{ $errors->has('telefono') ? ' has-danger' : '' }}">
-                    <input class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" id="input-telefono" type="number" placeholder="{{ __('Telefono') }}" value="{{ old('telefono', auth()->user()->telefono) }}" required />
-                    @if ($errors->has('email'))
-                    <span id="email-error" class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
+                    <input class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" id="input-name" type="text" placeholder="{{ __('Telefono') }}" value="{{ old('telefono', auth()->user()->telefono) }}" required="true" aria-required="true" />
+                    @if ($errors->has('telefono'))
+                    <span id="name-error" class="error text-danger" for="input-name">{{ $errors->first('telefono') }}</span>
                     @endif
                   </div>
                 </div>

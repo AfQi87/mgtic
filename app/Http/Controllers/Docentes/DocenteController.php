@@ -42,7 +42,7 @@ class DocenteController extends Controller
           $acciones .= '<a href="javascript:void(0)" onclick="editarDocente(' . $docente->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
           if ($docente->personas->estado_id == 1) {
             $acciones .= '&nbsp<button type="button" id="' . $docente->ced_persona . '" name="delete" class="desDocente btn btn-danger"><i class="bi bi-trash"></i></button>';
-          }else {
+          } else {
             $acciones .= '&nbsp<button type="button" id="' . $docente->ced_persona . '" name="delete" class="actDocente btn btn-success"><i class="bi bi-check-lg"></i></button>';
           }
           return $acciones;
@@ -83,24 +83,21 @@ class DocenteController extends Controller
     $estadosCivil = EstadoCivil::all();
     $instituciones = Institucion::all();
     $niveles = Nivel_Formacion::all();
-    return view('pages/docentes/ListaDocentes', compact('tipoDocs', 'tipos', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'niveles', 'instituciones'));
+    $profesiones = Estudio::all();
+    $area_conocimientos = AreaConocimiento::all();
+    return view('pages/docentes/ListaDocentes', compact('tipoDocs', 'area_conocimientos', 'profesiones', 'tipos', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'niveles', 'instituciones'));
   }
 
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
       'tipo_doc' => 'required',
-      'documento' => 'required|max:15',
-      'nombre' => "required|unique:persona,ced_persona,$request->documento,ced_persona|max:100",
-      'correo' => "required|unique:persona,email_persona,$request->correo,email_persona|max:100|email",
+      'nombre' => 'required|max:15',
+      'documento' => "required|unique:persona,ced_persona|max:100",
+      'correo' => "required|unique:persona,email_persona|max:100|email",
       'telefono' => 'required|min:7|max:20',
       'celular' => 'required|min:7|max:20',
       'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
-      'sexo' => 'required',
-      'estado_civil' => 'required',
-      'tipo_sangre' => 'required',
-      'nacimiento' => 'required',
-      'fecha' => 'required',
       'profesion' => 'required',
       'nivel' => 'required',
       'instituciones' => 'required',
@@ -130,8 +127,9 @@ class DocenteController extends Controller
       $persona->fecha_nac = $request->fecha;
       $persona->lugar_nac = $request->nacimiento;
       $persona->direccion = $request->direccion;
-      $persona->estado_id = 1;
       $persona->foto = $filename;
+      $persona->estado_id = 1;
+
       $persona->save();
 
       $estudiante = new Docente();
@@ -144,11 +142,7 @@ class DocenteController extends Controller
       $cont = count($request->profesion);
       for ($i = 0; $i < $cont; $i++) {
         if ($request->profesion[$i] != NULL) {
-          $estudio = new Estudio();
-          $estudio->nom_estudio = $request->profesion[$i];
-          $estudio->nivel_estudio = $request->nivel[$i];
-          $estudio->save();
-          $estudios = Estudio::get()->last();
+          $estudios = Estudio::findOrFail($request->profesiones[$i]);
           $est_estudio = new DocenteEstudio();
           $est_estudio->docente = $request->documento;
           $est_estudio->estudio = $estudios->id_estudio;
@@ -160,10 +154,7 @@ class DocenteController extends Controller
       $cont = count($request->area_conocimiento);
       for ($i = 0; $i < $cont; $i++) {
         if ($request->area_conocimiento[$i] != NULL) {
-          $estudio = new AreaConocimiento();
-          $estudio->nom_area_con = $request->area_conocimiento[$i];
-          $estudio->save();
-          $estudios = AreaConocimiento::get()->last();
+          $estudios = AreaConocimiento::findOrFail($request->area_conocimientos[$i]);
           $est_estudio = new DocenteAreaConocimiento();
           $est_estudio->docente = $request->documento;
           $est_estudio->area_con = $estudios->id_area;
@@ -207,11 +198,6 @@ class DocenteController extends Controller
       'telefono' => 'required|min:7|max:20',
       'celular' => 'required|min:7|max:20',
       'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
-      'sexo' => 'required',
-      'estado_civil' => 'required',
-      'tipo_sangre' => 'required',
-      'nacimiento' => 'required',
-      'fecha' => 'required',
       'profesion' => 'required',
       'nivel' => 'required',
       'instituciones' => 'required',
@@ -251,48 +237,34 @@ class DocenteController extends Controller
       $estudiante->tipo = $request->tipo;
       $estudiante->save();
 
+      $destudios = DocenteEstudio::where('docente', $request->documento)->get();
+      foreach ($destudios as $destudio) {
+        $destudio->delete();
+      }
       $cont = count($request->profesionact);
       for ($i = 0; $i < $cont; $i++) {
         if ($request->profesionact[$i] != NULL) {
-          $estudio = Estudio::where('id_estudio', $request->profesion[$i])->first();
-          if ($estudio == null) {
-            $estudio = new Estudio();
-            $estudio->nom_estudio = $request->profesionact[$i];
-            $estudio->nivel_estudio = $request->nivel[$i];
-            $estudio->save();
-
-            $estudios = Estudio::get()->last();
-
-            $est_estudio = new DocenteEstudio();
-            $est_estudio->docente = $request->documento;
-            $est_estudio->estudio = $estudios->id_estudio;
-            $est_estudio->institucion = $request->instituciones[$i];
-            $est_estudio->save();
-          } else {
-            $estudio->nom_estudio = $request->profesionact[$i];
-            $estudio->nivel_estudio = $request->nivel[$i];
-            $estudio->save();
-          }
+          $est_estudio = new DocenteEstudio();
+          $est_estudio->docente = $request->documento;
+          $est_estudio->estudio = $request->profesiones[$i];
+          $est_estudio->institucion = $request->instituciones[$i];
+          $est_estudio->save();
         }
       }
+
+      $destudios = DocenteAreaConocimiento::where('docente', $request->documento)->get();
+      foreach ($destudios as $destudio) {
+        $destudio->delete();
+      }
+
       $cont = count($request->area_conocimiento);
 
       for ($i = 0; $i < $cont; $i++) {
         if ($request->area_conocimiento[$i] != NULL) {
-          $estudio = AreaConocimiento::where('id_area', $request->area_conocimientoact[$i])->first();
-          if ($estudio == null) {
-            $estudio = new AreaConocimiento();
-            $estudio->nom_area_con = $request->area_conocimiento[$i];
-            $estudio->save();
-            $estudios = AreaConocimiento::get()->last();
-            $est_estudio = new DocenteAreaConocimiento();
-            $est_estudio->docente = $request->documento;
-            $est_estudio->area_con = $estudios->id_area;
-            $est_estudio->save();
-          } else {
-            $estudio->nom_area_con = $request->area_conocimiento[$i];
-            $estudio->save();
-          }
+          $est_estudio = new DocenteAreaConocimiento();
+          $est_estudio->docente = $request->documento;
+          $est_estudio->area_con = $request->area_conocimientos[$i];
+          $est_estudio->save();
         }
       }
       return 0;
@@ -304,9 +276,6 @@ class DocenteController extends Controller
     $destudio = DocenteEstudio::where('estudio', 'like', $id);
     $destudio->delete();
 
-    $estudio = Estudio::findOrFail($id);
-    $estudio->delete();
-
     return 0;
   }
 
@@ -314,9 +283,6 @@ class DocenteController extends Controller
   {
     $dAreaC = DocenteAreaConocimiento::where('area_con', 'like', $id);
     $dAreaC->delete();
-
-    $area = AreaConocimiento::findOrFail($id);
-    $area->delete();
 
     return 0;
   }

@@ -28,6 +28,7 @@
               </div>
             </div>
             @endif
+
             <div class="table-responsive">
               <table class="table table-hover" id="tablaActas">
                 <thead class=" text-primary">
@@ -47,6 +48,7 @@
                     <td class="text-center">{{ $acta->proceso }}</td>
                     <td class="text-center">{{ $acta->fecha }}</td>
                     <td class="text-center">
+                      <!-- <button type="button" onclick="verActa('{{$acta->id_acta}}')" name="verActa" class="verActa btn btn-info"><i class="bi bi-aspect-ratio"></i></i></button> -->
                       <a href="{{route('descargarActa', $acta->id_acta)}}" class="btn btn-warning">PDF</a>
                       <form action="{{route('elimActa', $acta->id_acta)}}" class="confirmar" method="POST" style="display:inline">
                         {{ method_field('DELETE') }}

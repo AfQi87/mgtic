@@ -72,7 +72,8 @@ class EstudianteController extends Controller
     $estadosCivil = EstadoCivil::all();
     $instituciones = Institucion::all();
     $niveles = Nivel_Formacion::all();
-    return view('pages/estudiantes/lista_estudiantes', compact('tipos', 'cortes', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'niveles', 'instituciones'));
+    $profesiones = Estudio::all();
+    return view('pages/estudiantes/lista_estudiantes', compact('tipos', 'profesiones', 'cortes', 'becas', 'sexos', 'estadosCivil', 'sangres', 'nacimientos', 'niveles', 'instituciones'));
   }
 
   public function niveles()
@@ -85,11 +86,10 @@ class EstudianteController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'tipo_doc' => 'required',
-      'documento' => 'required|max:15',
+      'documento' => 'required|unique:persona,ced_persona|max:15',
       'nombre' => 'required|max:100',
       'codigo' => 'required|max:15',
       'correo' => 'required|unique:persona,email_persona|max:100|email',
-      'correo' => "required|unique:persona,email_persona,$request->correo,email_persona|max:100|email",
       'telefono' => 'required|min:7|max:20',
       'celular' => 'required|min:7|max:20',
       'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
@@ -144,13 +144,7 @@ class EstudianteController extends Controller
       $cont = count($request->profesion);
       for ($i = 0; $i < $cont; $i++) {
         if ($request->profesion[$i] != NULL) {
-          $estudio = new Estudio();
-          $estudio->nom_estudio = $request->profesion[$i];
-          $estudio->nivel_estudio = $request->nivel[$i];
-          $estudio->save();
-
-          $estudios = Estudio::get()->last();
-
+          $estudios = Estudio::findOrFail($request->profesiones[$i]);
           $est_estudio = new EstudianteEstudio();
           $est_estudio->estudiante = $request->documento;
           $est_estudio->estudio = $estudios->id_estudio;
@@ -244,28 +238,19 @@ class EstudianteController extends Controller
       $estudiante->beca = $request->beca;
       $estudiante->save();
 
+      $destudios = EstudianteEstudio::where('estudiante', $request->documento)->get();
+      foreach ($destudios as $destudio) {
+        $destudio->delete();
+      }
+
       $cont = count($request->profesionact);
       for ($i = 0; $i < $cont; $i++) {
         if ($request->profesionact[$i] != NULL) {
-          $estudio = Estudio::where('id_estudio', $request->profesion[$i])->first();
-          if ($estudio == null) {
-            $estudio = new Estudio();
-            $estudio->nom_estudio = $request->profesionact[$i];
-            $estudio->nivel_estudio = $request->nivel[$i];
-            $estudio->save();
-
-            $estudios = Estudio::get()->last();
-
-            $est_estudio = new EstudianteEstudio();
-            $est_estudio->estudiante = $request->documento;
-            $est_estudio->estudio = $estudios->id_estudio;
-            $est_estudio->institucion = $request->instituciones[$i];
-            $est_estudio->save();
-          } else {
-            $estudio->nom_estudio = $request->profesionact[$i];
-            $estudio->nivel_estudio = $request->nivel[$i];
-            $estudio->save();
-          }
+          $est_estudio = new EstudianteEstudio();
+          $est_estudio->estudiante = $request->documento;
+          $est_estudio->estudio = $request->profesiones[$i];
+          $est_estudio->institucion = $request->instituciones[$i];
+          $est_estudio->save();
         }
       }
       return 0;
@@ -293,8 +278,6 @@ class EstudianteController extends Controller
     $destudio = EstudianteEstudio::where('estudio', 'like', $id);
     $destudio->delete();
 
-    $estudio = Estudio::findOrFail($id);
-    $estudio->delete();
     return 0;
   }
 }

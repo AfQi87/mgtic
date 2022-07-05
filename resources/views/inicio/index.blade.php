@@ -594,108 +594,40 @@
             <div class="col-md-12">
               <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
                 <div class="carousel-inner" id="seccion_azul">
-                  <div class="carousel-item active" data-mdb-interval="3000">
+                  @foreach($docentes as $docente)
+                  <div class="carousel-item {{ $i == 1 ? ' active' : '' }} " data-mdb-interval="3000">
                     <div class="row">
                       <div class="col-md-2" align="center"> </div>
                       <div class="col-md-4" align="center">
                         <div class="card">
                           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="assets/img/31.jpg" class="img-fluid">
+                            <img src="{{$docente->personas->foto != null || $docente->personas->foto != '' ? 'images/docentes/'.$docente->personas->foto : 'avatar/avatar.png' }}" class="img-fluid">
                           </div>
                           <div class="card-body">
-                            <a href="https://www.linkedin.com/in/estebanburgosr/" a class="btn btn-primary btn-block" id="botones" target="_blank">Ver CVLAC</a>
+                            <a href="{{$docente->cvlac}}" a class="btn btn-primary btn-block" id="botones" target="_blank">Ver CVLAC</a>
                           </div>
                         </div>
 
                       </div>
                       <div class="col-md-5" align="center">
                         <br>
-                        <h3><B> Mg. Cesar Esteban Burgos</B> </h3>
+                        <h3><B> {{$docente->personas->nom_persona}}</B> </h3>
                         <h4> Docente </h4> <BR>
                         <p style="text-align: justify;">
-                          Magíster en Seguridad de la Información de la Universidad de los Andes, Ingeniero de Sistemas
-                          de la Universidad de Nariño
-                          Actualmente lidera e impulsa en su región el campo de la Seguridad de la Información,
-                          desempeñándose como Oficial de Seguridad de la Información en el
-                          sector financiero.
+                          {{$docente->descripcion}}
                         </p> <BR>
                         <p style="text-align: justify;">
                           <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: </b> Seguridad de la Información <br>
-                          <b> <i class="fas fa-envelope"></i> Correo: </b> estebanburgos@outlook.com <br>
-                          <b> <i class="fas fa-phone"></i> Teléfono: (+57) 301 7545762 </b>
+                          <b> <i class="fas fa-envelope"></i> Correo: </b> {{$docente->personas->email_persona}} <br>
+                          <b> <i class="fas fa-phone"></i> Teléfono: {{$docente->personas->tel_persona}} - {{$docente->personas->cel_persona}}</b>
                         </p>
                       </div>
                     </div>
                   </div>
-
-                  <div class="carousel-item" data-mdb-interval="3000">
-                    <div class="row">
-                      <div class="col-md-2" align="center"> </div>
-
-                      <div class="col-md-4" align="center">
-                        <div class="card">
-                          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="assets/img/29.jpg" class="img-fluid">
-                          </div>
-                          <div class="card-body">
-                            <a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001157337" a class="btn btn-primary btn-block" id="botones" target="_blank">Ver CVLAC</a>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-md-5" align="center">
-                        <br>
-                        <h3><B> Mg. Giovanni Hernández Pantoja</B> </h3>
-                        <h4> Docente </h4> <BR>
-                        <p style="text-align: justify;">
-                          Ingeniero de Sistemas y Magíster en Docencia Universitaria de la Universidad de Nariño y
-                          Especialista en Gerencia Informática de la Corporación Universitaria Remington Departamento de
-                          Sistemas.
-                        </p> <BR>
-                        <p style="text-align: justify;">
-                          <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: </b> Arquitecturas de Sistemas de
-                          Información <br>
-                          <b> <i class="fas fa-envelope"></i> Correo: </b> gihernandezp@udenar.edu.co <br>
-                          <b> <i class="fas fa-phone"></i> Teléfono: (+57) 300 6542483 </b>
-
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="carousel-item" data-mdb-interval="3000">
-                    <div class="row">
-                      <div class="col-md-2" align="center"> </div>
-
-                      <div class="col-md-4" align="center">
-                        <div class="card">
-                          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="assets/img/30.jpg" class="img-fluid">
-                          </div>
-                          <div class="card-body">
-                            <a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000021489" a class="btn btn-primary btn-block" id="botones" target="_blank">Ver CVLAC</a>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-md-5" align="center">
-                        <br>
-                        <h3><B> Mg. Franklin Eduardo Jimenez</B> </h3>
-                        <h4> Docente </h4> <BR>
-                        <p style="text-align: justify;">
-                          Ingeniero de Sistemas, Especialista en Gerencia Informática en Corporación Universitaria
-                          Remington y Magister en Software Libre-Desarrollador de Aplicaciones en Universidad Autónoma
-                          de Bucaramanga - Universitat Oberta de Catalunya
-                        </p> <BR>
-                        <p style="text-align: justify;">
-                          <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: </b> Computación en la nube <br>
-                          <b> <i class="fas fa-envelope"></i> Correo: </b> frank@udenar.edu.co <br>
-                          <b> <i class="fas fa-phone"></i> Teléfono: (+57) 300 6542483 </b>
-
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  <?php
+                  $i++;
+                  ?>
+                  @endforeach
                 </div>
 
                 <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls" data-mdb-slide="prev">

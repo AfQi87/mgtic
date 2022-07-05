@@ -255,3 +255,14 @@ function eliminar_tareaC(x) {
     bandera_tarea--;
   }
 }
+
+//==========================================================Ver Materia
+function verActa(id) {
+  // $.get('/materia/form/' + id, function (datos) {
+  //   var n = 0;
+  //   $("#nomActa").append('Acta MGTIC');
+  //   $("#nomActa").append('Acta Comite');
+  //   $('#verDocActa').attr('src', 'documentos/materias/' + datos.materia.foa);
+  // })
+  $('#modalVerActa').modal('toggle');
+}

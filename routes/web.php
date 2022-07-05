@@ -87,17 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-///=================================================================================================egresados
-// Route::get('/egresados', function (){
-// 	//return App\User::all();
-// 	return datatables()
-// 		->eloquent(Egresado::query())
-// 		->addColumn('btn', 'actions')
-// 		->rawColumns(['btn'])
-// 		->toJson();
-// });
-
-
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/egresados', [EgresadoController::class, 'index'])->name('egresadosIndex');
 	Route::get('/egresados/programas/{id}', [EgresadoController::class, 'programas'])->name('egresadosProg');

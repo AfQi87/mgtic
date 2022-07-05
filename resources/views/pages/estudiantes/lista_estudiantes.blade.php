@@ -193,7 +193,18 @@
                                           <button type="button" class="btn btn-success" onclick="agregarProfesion()" style="float: right;"><i class="bi bi-align-middle h5"></i></button>
                                           <h4 class="card-title ">Estudios</h4>
                                           <p class="card-category">Escriba los Estudios del Estudiante</p>
-
+                                        </div>
+                                        <div>
+                                          <datalist name="profesiones[]" id="profesiones" class="instEgresado" onclick="selectProgram()" required>
+                                            @foreach($profesiones as $profesion)
+                                            <option data-ejemplo="{{ $profesion->id_estudio }}" value="{{ $profesion->nom_estudio }}"></option>
+                                            @endforeach
+                                          </datalist>
+                                          <datalist name="instituciones[]" id="instituciones" class="instEgresado" onclick="selectProgram()" required>
+                                            @foreach($instituciones as $institucion)
+                                            <option data-ejemplo="{{ $institucion->id_institucion }}" value="{{ $institucion->nom_institucion }}"></option>
+                                            @endforeach
+                                          </datalist>
                                         </div>
                                         <div class="card-body">
                                           <div class="table-responsive">
@@ -208,7 +219,9 @@
                                               </thead>
                                               <tbody id="tablaProfesion">
                                                 <tr>
-                                                  <td><textarea name="profesion[]" id="profesion" class="form-control" cols="30" rows="1" required></textarea></td>
+                                                  <td>
+                                                    <input list="profesiones" autocomplete="off" id="profesion" required name="profesion[]" class="profesion form-control" placeholder="Busca/Selecciona">
+                                                  </td>
                                                   <td>
                                                     <select class="form-select nivel" id="nivel" name="nivel[]" required style="max-width: 250px">
                                                       <option selected value="">Seleccione una opción</option>

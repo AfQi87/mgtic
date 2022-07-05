@@ -16,7 +16,7 @@ class CreateTrabajoGradoTable extends Migration
     Schema::create('trabajo_grado', function (Blueprint $table) {
       $table->increments('id_tg');
       $table->string('nom_tg', 300);
-      $table->integer('num_acuerdo_jr');
+      $table->string('num_acuerdo_jr', 45);
       $table->string('acuerdo_js', 45);
       $table->date('fecha_ins');
       $table->string('num_acuerdo_apb', 45);
