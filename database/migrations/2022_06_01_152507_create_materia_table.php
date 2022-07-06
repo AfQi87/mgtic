@@ -14,13 +14,14 @@ class CreateMateriaTable extends Migration
   public function up()
   {
     Schema::create('materia', function (Blueprint $table) {
-      $table->increments('id_materia');
+      $table->integer('id_materia');
       $table->string('nom_materia', 200);
       $table->integer('num_creditos');
       $table->integer('semestre');
-      $table->string('foa', 100);
+      $table->string('foa', 100)->nullable();
       $table->unsignedInteger('area_form');
 
+      $table->primary('id_materia');
       $table->foreign('area_form')->references('id_area')->on('area_formacion');
 
       $table->timestamps();

@@ -33,8 +33,9 @@ class EgresadoController extends Controller
 
   public function indexDatos()
   {
-    $a = Egresado::all();
-    return datatables::of($a)
+    // $a = Egresado::query();
+    return datatables()
+      ->eloquent($a = Egresado::query())
       ->addColumn('btn', function ($a) {
         $acciones = '<a href="javascript:void(0)" onclick="editarEgresado(' . $a->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
         ';
@@ -70,7 +71,7 @@ class EgresadoController extends Controller
         return $estado;
       })
       ->rawColumns(['btn'])
-      ->make(true);
+      ->toJson();
   }
   public function programas($id)
   {

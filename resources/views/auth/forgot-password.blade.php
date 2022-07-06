@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="{{route('login')}}">
-                <img class="n-logo" src="./actas/Logo.png" alt="" width="120px" height="30px">
+                <img class="n-logo" src="actas/logo.png" alt="" width="120px" height="30px">
             </a>
         </x-slot>
 

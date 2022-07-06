@@ -36,7 +36,6 @@ class CorteController extends Controller
     $validator = Validator::make($request->all(), [
       'nombre' => 'required|unique:cohorte,desc_cohorte|max:100',
       'fecha_inicio' => 'required',
-      'fecha_finalizacion' => 'required',
     ]);
     if ($validator->fails()) {
       return ($validator->errors());
@@ -66,7 +65,6 @@ class CorteController extends Controller
     $validator = Validator::make($request->all(), [
       'nombre' => "required|unique:cohorte,desc_cohorte,$request->nombre,desc_cohorte|max:100",
       'fecha_inicio' => 'required',
-      'fecha_finalizacion' => 'required',
     ]);
     if ($validator->fails()) {
       return ($validator->errors());
