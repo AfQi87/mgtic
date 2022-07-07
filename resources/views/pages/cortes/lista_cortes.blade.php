@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title " id="textArea">Listado Cortes</h4>
+            <h4 class="card-title " id="textArea">Listado promoción</h4>
           </div>
           <div class="card-body">
             <div class="row">
@@ -33,7 +33,7 @@
                             @csrf
                             <div class="card ">
                               <div class="card-header card-header-primary">
-                                <h4 class="card-title">Agregar Corte</h4>
+                                <h4 class="card-title">Agregar promoción</h4>
                               </div>
                               <div class="card-body ">
                                 <div class="row">
@@ -86,7 +86,7 @@
                             @csrf
                             <div class="card ">
                               <div class="card-header card-header-primary">
-                                <h4 class="card-title">Actualizar Corte</h4>
+                                <h4 class="card-title">Actualizar promoción</h4>
                               </div>
                               <div class="card-body ">
                                 <div class="row">

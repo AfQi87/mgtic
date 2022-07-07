@@ -15,7 +15,7 @@ class CreateDocenteImparteMateriaTable extends Migration
   {
     Schema::create('docente_imparte_materia', function (Blueprint $table) {
       $table->string('docente', 15);
-      $table->unsignedInteger('materia');
+      $table->integer('materia');
       $table->unsignedInteger('cohorte');
       $table->date('fecha_inicio');
       $table->date('fecha_fin');

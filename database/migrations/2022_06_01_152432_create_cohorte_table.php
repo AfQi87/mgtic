@@ -17,8 +17,7 @@ class CreateCohorteTable extends Migration
       $table->increments('id_cohorte');
       $table->string('desc_cohorte', 100);
       $table->date('fecha_inicio');
-      $table->date('fecha_fin');
-
+      $table->date('fecha_fin')->nullable();
       $table->timestamps();
     });
   }

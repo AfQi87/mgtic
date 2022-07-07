@@ -15,8 +15,8 @@ class CreateDocenteTable extends Migration
   {
     Schema::create('docente', function (Blueprint $table) {
       $table->string('ced_persona', 15);
-      $table->text('descripcion');
-      $table->string('cvlac', 250);
+      $table->text('descripcion')->nullable();
+      $table->string('cvlac', 250)->nullable();
       $table->unsignedInteger('tipo');
 
 
