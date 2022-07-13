@@ -16,7 +16,7 @@ class CreateCohorteTable extends Migration
     Schema::create('cohorte', function (Blueprint $table) {
       $table->increments('id_cohorte');
       $table->string('desc_cohorte', 100);
-      $table->date('fecha_inicio');
+      $table->date('fecha_inicio')->nullable();
       $table->date('fecha_fin')->nullable();
       $table->timestamps();
     });

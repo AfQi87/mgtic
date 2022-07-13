@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title " id="textArea">Listado asignaciones Docente</h4>
+            <h4 class="card-title " id="textArea">Asignaciones Docente</h4>
           </div>
           <div class="card-body">
             <div class="row">
@@ -233,7 +233,7 @@
                         <div class="col-md-12">
                           <div class="card ">
                             <div class="card-header card-header-primary">
-                              <h4 class="card-title">Datos Mateira</h4>
+                              <h4 class="card-title">Datos Asignación docente</h4>
                             </div>
                             <div class="card-body ">
                               <div>

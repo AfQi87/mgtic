@@ -94,7 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/egresado/actualizar/{id}', [EgresadoController::class, 'update'])->name('formUpdateEgre');
 	Route::get('/egresados/form/{id}', [EgresadoController::class, 'edit'])->name('formEditEgre');
 
-	Route::get('/egresado/des/{id}', [EgresadoController::class, 'desactivar']);
+	Route::get('/egresado/des/{id}', [EgresadoController::class, 'destroy']);
 	Route::get('/egresado/act/{id}', [EgresadoController::class, 'activar']);
 });
 
@@ -145,5 +145,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/trabajos/form', [TrabGradoController::class, 'store'])->name('formStoreTrabGrado');
 	Route::get('/trabajos/form/{id}', [TrabGradoController::class, 'edit'])->name('formEditTrabGrado');
 	Route::post('/trabajos/actualizar/{id}', [TrabGradoController::class, 'update'])->name('formUpdateTrabGrado');
+	Route::get('/trabajos/des/{id}', [TrabGradoController::class, 'destroy']);
 
 });

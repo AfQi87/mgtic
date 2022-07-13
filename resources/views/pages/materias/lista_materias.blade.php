@@ -40,7 +40,7 @@
                                   <div class="col-sm-12">
                                     <div class="mb-3">
                                       <label for="id" class="form-label">ID materia</label>
-                                      <input type="text" class="form-control" id="id" name="id" placeholder="Ingrese id" required>
+                                      <input type="number" class="form-control" id="id" name="id" placeholder="Ingrese id" required>
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
@@ -137,7 +137,14 @@
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="semestre" class="form-label">Semestre</label>
-                                      <input type="number" class="form-control" id="semestre" name="semestre" placeholder="Ingrese el semestre" required>
+                                      <select class="form-select" id="semestre" name="semestre" required>
+                                        <option selected>Seleccione una opción</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="0">Electiva</option>
+                                      </select>
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
@@ -154,7 +161,7 @@
                                   <div class="col-sm-12">
                                     <div class="mb-3">
                                       <label for="foa" class="form-label">FOA</label>
-                                      <input type="file" class="form-control" accept=".pdf" id="foa" name="foa" placeholder="Ingrese el semestre" required>
+                                      <input type="file" class="form-control" accept=".pdf" id="foa" name="foa" placeholder="Ingrese el semestre">
                                     </div>
                                   </div>
                                 </div>
@@ -187,7 +194,7 @@
                         <div class="col-md-12">
                           <div class="card ">
                             <div class="card-header card-header-primary">
-                              <h4 class="card-title">Datos Mateira</h4>
+                              <h4 class="card-title">Datos Materia</h4>
                             </div>
                             <div class="card-body ">
                               <div>

@@ -22,7 +22,23 @@ class CorteController extends Controller
           $acciones .= '&nbsp<button type="button" id="' . $corte->id_cohorte . '" name="delete" class="desCorte btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
         })
-        ->rawColumns(['accion'])
+        ->addColumn('fechaFin', function ($corte) {
+          if ($corte->fecha_fin == null) {
+            $fin = '0000-00-00';
+          } else {
+            $fin = $corte->fecha_fin;
+          }
+          return $fin;
+        })
+        ->addColumn('fechaInicio', function ($corte) {
+          if ($corte->fecha_inicio == null) {
+            $ini = '0000-00-00';
+          } else {
+            $ini = $corte->fecha_inicio;
+          }
+          return $ini;
+        })
+        ->rawColumns(['accion', 'fechaFin', 'fechaInicio'])
         ->make(true);
     }
     return view('pages/cortes/lista_cortes');

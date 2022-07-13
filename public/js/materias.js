@@ -70,8 +70,8 @@ function editarMateria(id) {
     console.log(datos)
     $('#formActMateria #id_materia').val(datos.materia.id_materia);
     $('#formActMateria #nombre').val(datos.materia.nom_materia);
-    $('#formActMateria #semestre').val(datos.materia.num_creditos);
-    $('#formActMateria #creditos').val(datos.materia.semestre);
+    $('#formActMateria #semestre').val(datos.materia.semestre);
+    $('#formActMateria #creditos').val(datos.materia.num_creditos);
     $('#formActMateria #area').val(datos.materia.areas.nom_area_form);
 
     $('#modalMateriaAct').modal('toggle');
@@ -160,7 +160,7 @@ function verMateria(id) {
       '<tr>' +
       '<td>'+datos.materia.nom_materia+'</td>' +
       '<td>'+datos.materia.num_creditos+'</td>' +
-      '<td>'+datos.materia.semestre+'</td>' +
+      '<td>'+ (datos.materia.semestre != 0 ? datos.materia.semestre : 'Electiva') +'</td>' +
       '<td>'+datos.materia.areas.nom_area_form+'</td>' +
       '</tr>'
     );

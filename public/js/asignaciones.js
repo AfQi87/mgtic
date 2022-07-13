@@ -181,8 +181,8 @@ $(document).on('click', '.desAsignacion', function () {
   idMateria = $(this).attr('mat');
 
   Swal.fire({
-    title: 'Eliminar Materia',
-    text: "¿Esta seguro que desea eliminar la asignacion?",
+    title: 'Eliminar Asignación',
+    text: "¿Esta seguro que desea eliminar la asignación?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -209,7 +209,7 @@ $(document).on('click', '.desAsignacion', function () {
   })
 });
 
-//==========================================================Ver Materia
+//==========================================================Ver Asignacion
 function verAsignacion(id, mat) {
   $.get('/asignacion/form/' + id + '/' + mat, function (datos){
     var n = 0;

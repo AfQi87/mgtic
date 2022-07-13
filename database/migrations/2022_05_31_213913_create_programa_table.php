@@ -15,7 +15,7 @@ class CreateProgramaTable extends Migration
     {
         Schema::create('programa', function (Blueprint $table) {
             $table->string('id_programa', 15);
-            $table->string('nom_programa', 100);
+            $table->string('nom_programa', 300);
             $table->unsignedInteger('nivel');
             $table->string('institucion', 15);
 

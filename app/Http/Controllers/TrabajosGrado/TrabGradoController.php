@@ -23,7 +23,7 @@ class TrabGradoController extends Controller
         ->addColumn('accion', function ($trabGrado) {
           $acciones = '';
           $acciones .= '<a href="javascript:void(0)" onclick="editarTrabGrado(' . $trabGrado->id_tg . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>';
-          $acciones .= '&nbsp<button type="button" id="' . $trabGrado->id_tg . ' name="delete" class="desAsignacion btn btn-danger"><i class="bi bi-trash"></i></button>';
+          $acciones .= '&nbsp<button type="button" id="' . $trabGrado->id_tg . '" name="delete" class="destgrado btn btn-danger"><i class="bi bi-trash"></i></button>';
           return $acciones;
         })
         ->addColumn('estudiante', function ($trabGrado) {
@@ -59,14 +59,7 @@ class TrabGradoController extends Controller
     $validator = Validator::make($request->all(), [
       'nombre' => 'required',
       'numero_acuerdo' => 'required',
-      'acuerdo' => 'required',
       'fecha_inscripcion' => 'required',
-      'numero_acuerdo_inicio' => 'required',
-      'acuerdo_inicio' => 'required',
-      'fecha_aprobacion' => 'required',
-      'fecha_entrega' => 'required',
-      'puntuacion' => 'required',
-      'calificacion' => 'required',
       'estado' => 'required',
       'estudiante' => 'required',
       'asesor' => 'required',
@@ -138,11 +131,6 @@ class TrabGradoController extends Controller
       'nombre' => 'required',
       'numero_acuerdo' => 'required',
       'fecha_inscripcion' => 'required',
-      'numero_acuerdo_inicio' => 'required',
-      'fecha_aprobacion' => 'required',
-      'fecha_entrega' => 'required',
-      'puntuacion' => 'required',
-      'calificacion' => 'required',
       'estado' => 'required',
       'estudiante' => 'required',
       'asesor' => 'required',
@@ -194,6 +182,8 @@ class TrabGradoController extends Controller
 
   public function destroy($id)
   {
-    //
+    $trabGrado = TrabajoGrado::findOrFail($id);
+    $trabGrado->delete();
+    return 0;
   }
 }

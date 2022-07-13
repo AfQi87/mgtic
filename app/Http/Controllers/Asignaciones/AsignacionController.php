@@ -60,7 +60,6 @@ class AsignacionController extends Controller
       'fecha_fin' => 'required',
       'numero_resolucion' => 'required',
       'fecha_resolucion' => 'required',
-      'resolucion' => 'required',
     ]);
     if ($validator->fails()) {
       return ($validator->errors());

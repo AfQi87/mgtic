@@ -63,7 +63,7 @@ $('#formRegTrabGrado').submit(function (e) {
 
   var jurado_2;
   var jur2 = $('#formRegTrabGrado #jurado_2').val();
-  jurado_2 = $('#formRegTrabGrado #jurados_2').find('option[value="' + jur1 + '"]').data('ejemplo');
+  jurado_2 = $('#formRegTrabGrado #jurados_2').find('option[value="' + jur2 + '"]').data('ejemplo');
   if (jurado_2 == undefined) {
     toastr.error("Debe seleccionar un jurado_2", 'Error',
       { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
@@ -173,7 +173,7 @@ $('#formActTrabGrado').submit(function (e) {
 
   var jurado_2;
   var jur2 = $('#formActTrabGrado #jurado_2').val();
-  jurado_2 = $('#formActTrabGrado #jurados_2').find('option[value="' + jur1 + '"]').data('ejemplo');
+  jurado_2 = $('#formActTrabGrado #jurados_2').find('option[value="' + jur2 + '"]').data('ejemplo');
   if (jurado_2 == undefined) {
     toastr.error("Debe seleccionar un jurado_2", 'Error',
       { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
@@ -181,8 +181,8 @@ $('#formActTrabGrado').submit(function (e) {
   }
 
   var jurado_3;
-  var jur1 = $('#formActTrabGrado #jurado_3').val();
-  jurado_3 = $('#formActTrabGrado #jurados_3').find('option[value="' + jur1 + '"]').data('ejemplo');
+  var jur3 = $('#formActTrabGrado #jurado_3').val();
+  jurado_3 = $('#formActTrabGrado #jurados_3').find('option[value="' + jur3 + '"]').data('ejemplo');
   if (jurado_3 == undefined) {
     toastr.error("Debe seleccionar un jurado_3", 'Error',
       { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
@@ -221,4 +221,44 @@ $('#formActTrabGrado').submit(function (e) {
       }
     });
   }
+});
+
+
+var idtgradoe;
+//=============================================================================================Desactivar Egresado
+
+$(document).on('click', '.destgrado', function () {
+  idtgradoe = $(this).attr('id');
+  Swal.fire({
+    title: 'Eliminar trabajo de grado',
+    text: "¿Esta seguro que desea eliminar el trabajo de grado?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, eliminar!',
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: "/trabajos/des/" + idtgradoe,
+        method: "GET",
+        success: function (response) {
+          console.log(response);
+          if (response == 0) {
+            $('#tablaTrabGrado').DataTable().ajax.reload();
+            toastr.success("Registro eliminado Correctamente", 'Correcto',
+              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          } else {
+            toastr.error("El registro no se elimino", 'Error',
+              { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+          }
+        },
+        error: function () {
+          toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
+            { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
+        }
+      });
+    }
+  })
 });
