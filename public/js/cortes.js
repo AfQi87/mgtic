@@ -16,8 +16,8 @@ $(document).ready(function () {
     },
     columns: [
       { data: "desc_cohorte", className: "text-center" },
-      { data: "fecha_inicio", className: "text-center correoCopiar" },
-      { data: "fecha_fin", className: "text-center" },
+      { data: "fechaInicio", className: "text-center correoCopiar" },
+      { data: "fechaFin", className: "text-center" },
       { data: "accion", orderable: false, className: "text-center" },
     ]
   });

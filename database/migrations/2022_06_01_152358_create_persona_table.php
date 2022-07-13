@@ -27,12 +27,14 @@ class CreatePersonaTable extends Migration
       $table->string('lugar_nac', 15)->nullable();
       $table->string('direccion', 100)->nullable();
       $table->string('foto', 100)->nullable();
+      $table->unsignedInteger('estado_id')->default(1)->nullable();
 
       $table->foreign('tipo_doc')->references('id_tipo')->on('tipo_id');
       $table->foreign('sexo')->references('id_sexo')->on('sexo');
       $table->foreign('estado_civil')->references('id_estado')->on('estado_civil');
       $table->foreign('tipo_sangre')->references('id_tipo')->on('tipo_sangre');
       $table->foreign('lugar_nac')->references('id_municipio')->on('municipio');
+      $table->foreign('estado_id')->references('id')->on('estado');
 
       $table->primary('ced_persona');
       $table->timestamps();

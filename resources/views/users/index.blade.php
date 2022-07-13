@@ -117,7 +117,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('cortesIndex') }}">
                 <i class="material-icons">content_paste</i>
-                <p>{{ __('Cortes') }}</p>
+                <p>{{ __('Promociones') }}</p>
               </a>
             </li>
             <li class="nav-item">

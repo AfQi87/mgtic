@@ -139,7 +139,6 @@ class ActasController extends Controller
 		$acta->hora_fin = $request->input('hora_fin');
 		$acta->save();
 
-		$total = 0;
 		$cont = count($request->asistente);
 		$acta = Acta::latest()->first();
 		for ($i = 0; $i < $cont; $i++) {

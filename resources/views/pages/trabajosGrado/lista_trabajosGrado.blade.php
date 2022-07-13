@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title " id="textArea">Listado asignaciones Docente</h4>
+            <h4 class="card-title " id="textArea">Trabajos de grado</h4>
           </div>
           <div class="card-body">
             <div class="row">
@@ -138,7 +138,7 @@
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="acuerdo" class="form-label">Acuerdo</label>
-                                      <input type="file" class="form-control" id="acuerdo" name="acuerdo" accept=".pdf" required>
+                                      <input type="file" class="form-control" id="acuerdo" name="acuerdo" accept=".pdf">
                                     </div>
                                   </div>
 
@@ -147,19 +147,19 @@
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="numero_acuerdo_inicio" class="form-label">Número de acuerdo</label>
-                                      <input type="text" class="form-control" id="numero_acuerdo_inicio" name="numero_acuerdo_inicio" placeholder="Ingrese el numero del acuerdo de inicio" required>
+                                      <input type="text" class="form-control" id="numero_acuerdo_inicio" name="numero_acuerdo_inicio" placeholder="Ingrese el numero del acuerdo de inicio">
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="fecha_aprobacion" class="form-label">Fecha de aprobacion</label>
-                                      <input type="date" class="form-control" id="fecha_aprobacion" name="fecha_aprobacion" required>
+                                      <input type="date" class="form-control" id="fecha_aprobacion" name="fecha_aprobacion">
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="acuerdo_inicio" class="form-label">Acuerdo</label>
-                                      <input type="file" class="form-control" id="acuerdo_inicio" name="acuerdo_inicio" required>
+                                      <input type="file" class="form-control" id="acuerdo_inicio" name="acuerdo_inicio">
                                     </div>
                                   </div>
 
@@ -168,19 +168,19 @@
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="fecha_entrega" class="form-label">Fecha de entrega</label>
-                                      <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" required>
+                                      <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega">
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="puntuacion" class="form-label">Puntuación</label>
-                                      <input type="number" class="form-control" id="puntuacion" name="puntuacion" placeholder="Ingrese puntuacion entre 0 - 100" required>
+                                      <input type="number" class="form-control" id="puntuacion" name="puntuacion" placeholder="Ingrese puntuacion entre 0 - 100">
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label for="calificacion" class="form-label">Calificación</label>
-                                      <input type="text" class="form-control" id="calificacion" name="calificacion" placeholder="Ingrese calificación valida" required>
+                                      <input type="text" class="form-control" id="calificacion" name="calificacion" placeholder="Ingrese calificación valida">
                                     </div>
                                   </div>
                                 </div>
@@ -199,7 +199,7 @@
               </div>
             </div>
 
-            <!-- Modal Registro -->
+            <!-- Modal actualizar -->
             <div class="modal fade" id="modalActTrabGrados" tabindex="-1" aria-labelledby="ModalCorteLabel" aria-hidden="true">
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -215,7 +215,7 @@
                             @csrf
                             <div class="card ">
                               <div class="card-header card-header-primary">
-                                <h4 class="card-title">Trabajo de Grado</h4>
+                                <h4 class="card-title">Actualizar trabajo de Grado</h4>
                               </div>
                               <div class="card-body ">
                                 <div class="row">
@@ -224,66 +224,6 @@
                                     <div class="mb-3">
                                       <label for="nombre" class="form-label">Nombre</label>
                                       <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del trabajo de grado" required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="numero_acuerdo" class="form-label">Número de acuerdo de jurados</label>
-                                      <input type="text" class="form-control" id="numero_acuerdo" name="numero_acuerdo" placeholder="Ingrese el número de acuerdo de jurados" required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="acuerdo" class="form-label">Acuerdo</label>
-                                      <input type="file" class="form-control" id="acuerdo" name="acuerdo" accept=".pdf">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="fecha_inscripcion" class="form-label">Fecha Inscripción trabajo de grado</label>
-                                      <input type="date" class="form-control" id="fecha_inscripcion" name="fecha_inscripcion" required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="numero_acuerdo_inicio" class="form-label">Número de acuerdo inicio</label>
-                                      <input type="text" class="form-control" id="numero_acuerdo_inicio" name="numero_acuerdo_inicio" placeholder="Ingrese el numero del acuerdo de inicio" required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="acuerdo_inicio" class="form-label">Acuerdo de incio</label>
-                                      <input type="file" class="form-control" id="acuerdo_inicio" name="acuerdo_inicio">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="fecha_aprobacion" class="form-label">Fecha de aprobacion</label>
-                                      <input type="date" class="form-control" id="fecha_aprobacion" name="fecha_aprobacion" required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="fecha_entrega" class="form-label">Fecha de entrega</label>
-                                      <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="puntuacion" class="form-label">Puntuación</label>
-                                      <input type="number" class="form-control" id="puntuacion" name="puntuacion" placeholder="Ingrese puntuacion entre 0 - 100" required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="calificacion" class="form-label">Calificación</label>
-                                      <input type="text" class="form-control" id="calificacion" name="calificacion" placeholder="Ingrese calificación valida" required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="estado" class="form-label">Estado</label>
-                                      <input type="text" class="form-control" id="estado" name="estado" placeholder="Ingrese el estado valido" required>
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
@@ -306,6 +246,33 @@
                                         <option data-ejemplo="{{ $docente->ced_persona }}" value="{{ $docente->personas->nom_persona }}"></option>
                                         @endforeach
                                       </datalist>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="estado" class="form-label">Estado</label>
+                                      <select class="form-select" id="estado" name="estado" required>
+                                        <option selected>Seleccione una opción</option>
+                                        <option value="1">Inscrito</option>
+                                        <option value="2">En ejecución</option>
+                                        <option value="3">Cancelado</option>
+                                        <option value="4">Finalizado</option>
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <h4 class="mt-2 mb-4">Asignación jurados</h4>
+
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="numero_acuerdo" class="form-label">Número de acuerdo</label>
+                                      <input type="text" class="form-control" id="numero_acuerdo" name="numero_acuerdo" placeholder="Ingrese el número de acuerdo de jurados" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="fecha_inscripcion" class="form-label">Fecha Acuerdo</label>
+                                      <input type="date" class="form-control" id="fecha_inscripcion" name="fecha_inscripcion" required>
                                     </div>
                                   </div>
                                   <div class="col-sm-6">
@@ -341,7 +308,54 @@
                                       </datalist>
                                     </div>
                                   </div>
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="acuerdo" class="form-label">Acuerdo</label>
+                                      <input type="file" class="form-control" id="acuerdo" name="acuerdo" accept=".pdf">
+                                    </div>
+                                  </div>
 
+                                  <h4 class="mt-2 mb-4">Aprobación</h4>
+
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="numero_acuerdo_inicio" class="form-label">Número de acuerdo</label>
+                                      <input type="text" class="form-control" id="numero_acuerdo_inicio" name="numero_acuerdo_inicio" placeholder="Ingrese el numero del acuerdo de inicio">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="fecha_aprobacion" class="form-label">Fecha de aprobación</label>
+                                      <input type="date" class="form-control" id="fecha_aprobacion" name="fecha_aprobacion">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="acuerdo_inicio" class="form-label">Acuerdo</label>
+                                      <input type="file" class="form-control" id="acuerdo_inicio" name="acuerdo_inicio">
+                                    </div>
+                                  </div>
+
+                                  <h4 class="mt-2 mb-4">Evaluación</h4>
+
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="fecha_entrega" class="form-label">Fecha de entrega</label>
+                                      <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="puntuacion" class="form-label">Puntuación</label>
+                                      <input type="number" class="form-control" id="puntuacion" name="puntuacion" placeholder="Ingrese puntuacion entre 0 - 100">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="mb-3">
+                                      <label for="calificacion" class="form-label">Calificación</label>
+                                      <input type="text" class="form-control" id="calificacion" name="calificacion" placeholder="Ingrese calificación valida">
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>

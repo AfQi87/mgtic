@@ -589,19 +589,21 @@
         <!--- Seccion Planta Docente-->
         <div class="container">
           <!--- Divide el contenedor en filas-->
-          <div class="row">
+          <div class="row" >
             <!-- Fila 1: Planta Docente -->
             <div class="col-md-12">
               <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
-                <div class="carousel-inner" id="seccion_azul">
+                <div class="carousel-inner" id="seccion_azul" style="height: 800px">
                   @foreach($docentes as $docente)
+                  @if ($docente->ced_persona == '12967500')
+                  @else
                   <div class="carousel-item {{ $i == 1 ? ' active' : '' }} " data-mdb-interval="3000">
                     <div class="row">
                       <div class="col-md-2" align="center"> </div>
                       <div class="col-md-4" align="center">
                         <div class="card">
                           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{$docente->personas->foto != null || $docente->personas->foto != '' ? 'images/docentes/'.$docente->personas->foto : 'avatar/avatar.png' }}" class="img-fluid">
+                            <img src="{{$docente->personas->foto != null || $docente->personas->foto != '' ? 'avatar/avatar.png' : 'avatar/avatar.png' }}" class="img-fluid mt-2" style="height: 500px; width: 400px">
                           </div>
                           <div class="card-body">
                             <a href="{{$docente->cvlac}}" a class="btn btn-primary btn-block" id="botones" target="_blank">Ver CVLAC</a>
@@ -612,8 +614,9 @@
                       <div class="col-md-5" align="center">
                         <br>
                         <h3><B> {{$docente->personas->nom_persona}}</B> </h3>
+                        <h3><B> {{$docente->ced_persona}}</B> </h3>
                         <h4> Docente </h4> <BR>
-                        <p style="text-align: justify;">
+                        <p style="text-align: justify; overflow: auto; height: 400px">
                           {{$docente->descripcion}}
                         </p> <BR>
                         <p style="text-align: justify;">
@@ -624,6 +627,7 @@
                       </div>
                     </div>
                   </div>
+                  @endif
                   <?php
                   $i++;
                   ?>

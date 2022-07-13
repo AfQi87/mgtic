@@ -34,41 +34,19 @@ class EgresadoController extends Controller
   public function indexDatos()
   {
     // $a = Egresado::query();
-    return datatables()
-      ->eloquent($a = Egresado::query())
+    $a = Egresado::select('egresado.ced_persona', 'nom_persona', 'email_persona', 'tel_persona', 'nom_programa', 'estado', 'nom_institucion')
+			->join('persona', 'egresado.ced_persona', '=', 'persona.ced_persona')
+			->join('programa', 'egresado.programa', '=', 'id_programa')
+			->join('estado', 'persona.estado_id', '=', 'id')
+			->join('institucion', 'programa.institucion', '=', 'id_institucion')
+			->get();
+    return datatables::of($a)
+      // ->eloquent($a = Egresado::query())
       ->addColumn('btn', function ($a) {
         $acciones = '<a href="javascript:void(0)" onclick="editarEgresado(' . $a->ced_persona . ')" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
         ';
-        if ($a->personas->estado_id == 1) {
-          $acciones .= '&nbsp<button type="button" id="' . $a->ced_persona . '" name="delete" class="desEgresado btn btn-danger"><i class="bi bi-trash"></i></button>';
-        } else {
-          $acciones .= '&nbsp<button type="button" id="' . $a->ced_persona . '" name="delete" class="actEgresado btn btn-success"><i class="bi bi-check-lg"></i></button>';
-        }
+        $acciones .= '&nbsp<button type="button" id="' . $a->ced_persona . '" name="delete" class="desEgresado btn btn-danger"><i class="bi bi-trash"></i></button>';
         return $acciones;
-      })
-      ->addColumn('nombre', function ($a) {
-        $nombre = $a->personas->nom_persona;
-        return $nombre;
-      })
-      ->addColumn('correo', function ($a) {
-        $nombre = $a->personas->email_persona;
-        return $nombre;
-      })
-      ->addColumn('telefono', function ($a) {
-        $nombre = $a->personas->tel_persona;
-        return $nombre;
-      })
-      ->addColumn('institucion', function ($a) {
-        $nombre = $a->programas->instituciones->nom_institucion;
-        return $nombre;
-      })
-      ->addColumn('programa', function ($a) {
-        $nombre = $a->programas->nom_programa;
-        return $nombre;
-      })
-      ->addColumn('estado', function ($a) {
-        $estado = $a->personas->estados->estado;
-        return $estado;
       })
       ->rawColumns(['btn'])
       ->toJson();
@@ -198,6 +176,12 @@ class EgresadoController extends Controller
     $persona = Persona::findOrFail($id);
     $persona->estado_id = 1;
     $persona->save();
+    return 0;
+  }
+  public function destroy($id)
+  {
+    $persona = Egresado::findOrFail($id);
+    $persona->delete();
     return 0;
   }
 }
