@@ -619,7 +619,7 @@
                           {{$docente->descripcion}}
                         </p> <BR>
                         <p style="text-align: justify;">
-                          <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: </b> Seguridad de la Información <br>
+                          <!-- <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: </b>  <br> -->
                           <b> <i class="fas fa-envelope"></i> Correo: </b> {{$docente->personas->email_persona}} <br>
                           <b> <i class="fas fa-phone"></i> Teléfono: {{$docente->personas->tel_persona}} - {{$docente->personas->cel_persona}}</b>
                         </p>
