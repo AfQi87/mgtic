@@ -753,7 +753,7 @@
         <a href="https://www.facebook.com/maestria.ticudenar.7" class="me-4 text-reset" target="_blank">
           <i class="fab fa-facebook-f fa-2x"></i>
         </a>
-        <a href="https://api.whatsapp.com/send?phone=573105273727" class="me-4 text-reset" target="_blank">
+        <a href="https://api.whatsapp.com/send?phone=573044709512" class="me-4 text-reset" target="_blank">
           <i class="fab fa-whatsapp fa-2x"></i>
         </a>
         <a href="https://www.instagram.com/mgtic/" class="me-4 text-reset" target="_blank">
