@@ -593,7 +593,7 @@
             <!-- Fila 1: Planta Docente -->
             <div class="col-md-12">
               <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
-                <div class="carousel-inner" id="seccion_azul" style="height: 800px">
+                <div class="carousel-inner" id="seccion_azul" style="height: 800px;  overflow: auto;">
                   @foreach($docentes as $docente)
                   @if ($docente->ced_persona == '12967500')
                   @else
@@ -615,13 +615,18 @@
                         <br>
                         <h3><B> {{$docente->personas->nom_persona}}</B> </h3>
                         <h4> Docente </h4> <BR>
-                        <p style="text-align: justify; overflow: auto; height: 400px">
+                        <p style="text-align: justify; overflow: auto; height: 380px">
                           {{$docente->descripcion}}
                         </p> <BR>
-                        <p style="text-align: justify;">
-                          <!-- <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: </b>  <br> -->
-                          <b> <i class="fas fa-envelope"></i> Correo: </b> {{$docente->personas->email_persona}} <br>
-                          <b> <i class="fas fa-phone"></i> Teléfono: {{$docente->personas->tel_persona}} - {{$docente->personas->cel_persona}}</b>
+                        <p style="text-align: left;">
+                          <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: <br>
+                          <ul>
+                          @foreach($docente->Areas as $area)
+                            <li style="text-align: left;">{{$area->areasC->nom_area_con}}</li>
+                          @endforeach
+                          </ul>
+                          <b style="text-align: left;"> <i class="fas fa-envelope"></i> Correo: </b> {{$docente->personas->email_persona}} <br>
+                          <b style="text-align: left;"> <i class="fas fa-phone"></i> Teléfono: {{$docente->personas->tel_persona}} - {{$docente->personas->cel_persona}}</b>
                         </p>
                       </div>
                     </div>
@@ -753,7 +758,7 @@
         <a href="https://www.facebook.com/maestria.ticudenar.7" class="me-4 text-reset" target="_blank">
           <i class="fab fa-facebook-f fa-2x"></i>
         </a>
-        <a href="https://api.whatsapp.com/send?phone=573044709512" class="me-4 text-reset" target="_blank">
+        <a href="https://api.whatsapp.com/send?phone=573105273727" class="me-4 text-reset" target="_blank">
           <i class="fab fa-whatsapp fa-2x"></i>
         </a>
         <a href="https://www.instagram.com/mgtic/" class="me-4 text-reset" target="_blank">
