@@ -619,7 +619,7 @@
                           {{$docente->descripcion}}
                         </p> <BR>
                         <p style="text-align: justify;">
-                          <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: </b> Seguridad de la Información <br>
+                          <!-- <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: </b>  <br> -->
                           <b> <i class="fas fa-envelope"></i> Correo: </b> {{$docente->personas->email_persona}} <br>
                           <b> <i class="fas fa-phone"></i> Teléfono: {{$docente->personas->tel_persona}} - {{$docente->personas->cel_persona}}</b>
                         </p>
@@ -753,7 +753,7 @@
         <a href="https://www.facebook.com/maestria.ticudenar.7" class="me-4 text-reset" target="_blank">
           <i class="fab fa-facebook-f fa-2x"></i>
         </a>
-        <a href="https://api.whatsapp.com/send?phone=573105273727" class="me-4 text-reset" target="_blank">
+        <a href="https://api.whatsapp.com/send?phone=573044709512" class="me-4 text-reset" target="_blank">
           <i class="fab fa-whatsapp fa-2x"></i>
         </a>
         <a href="https://www.instagram.com/mgtic/" class="me-4 text-reset" target="_blank">
