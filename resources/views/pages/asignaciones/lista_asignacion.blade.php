@@ -140,6 +140,7 @@
                                 <div class="row">
                                   <input type="hidden" id="id_ced" name="id_ced">
                                   <input type="hidden" id="id_mat" name="id_mat">
+                                  <input type="hidden" id="id_corte" name="id_corte">
                                   <div class="col-sm-6">
                                     <div class="mb-3">
                                       <label class="form-label" for="docente">Docente</label>
@@ -238,7 +239,7 @@
                             <div class="card-body ">
                               <div>
                                 <div class="card mb-3" style="max-width: 100%;">
-                                  <div class="row g-0">
+                                  <div class="row g-0 table-responsive">
                                     <table class="table table-bordered table-hover" id="tablaVerAsignacion">
                                       <thead class=" text-primary text-center">
                                         <th>Docente</th>

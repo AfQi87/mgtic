@@ -9,7 +9,7 @@ class Asignacion extends Model
 {
     use HasFactory;
     protected $table = 'docente_imparte_materia';
-    protected $primaryKey = 'docente';
+    protected $primaryKey = 'cohorte';
 
     public function docentes()
     {

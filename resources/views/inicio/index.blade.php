@@ -603,7 +603,7 @@
                       <div class="col-md-4" align="center">
                         <div class="card">
                           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{$docente->personas->foto != null || $docente->personas->foto != '' ? 'avatar/avatar.png' : 'avatar/avatar.png' }}" class="img-fluid mt-2" style="height: 500px; width: 400px">
+                            <img src="{{$docente->personas->foto != null || $docente->personas->foto != '' ? 'images/docentes/'.$docente->personas->foto : 'avatar/avatar.png' }}" class="img-fluid mt-2" style="height: 500px; width: 400px">
                           </div>
                           <div class="card-body">
                             <a href="{{$docente->cvlac}}" a class="btn btn-primary btn-block" id="botones" target="_blank">Ver CVLAC</a>
@@ -614,7 +614,6 @@
                       <div class="col-md-5" align="center">
                         <br>
                         <h3><B> {{$docente->personas->nom_persona}}</B> </h3>
-                        <h3><B> {{$docente->ced_persona}}</B> </h3>
                         <h4> Docente </h4> <BR>
                         <p style="text-align: justify; overflow: auto; height: 400px">
                           {{$docente->descripcion}}

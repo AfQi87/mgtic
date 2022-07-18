@@ -134,9 +134,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/asignacion', [AsignacionController::class, 'index'])->name('asignacionIndex');
 	Route::post('/asignacion/form', [AsignacionController::class, 'store'])->name('formStoreAsignacion');
-	Route::get('/asignacion/form/{id}/{mat}', [AsignacionController::class, 'edit'])->name('formEditAsignacion');
-	Route::post('/asignacion/actualizar/{id}/{mat}', [AsignacionController::class, 'update'])->name('formUpdateAsignacion');
-	Route::get('/asignacion/destroy/{id}/{mat}', [AsignacionController::class, 'destroy']);
+	Route::get('/asignacion/form/{id}/{mat}/{corte}', [AsignacionController::class, 'edit'])->name('formEditAsignacion');
+	Route::post('/asignacion/actualizar/{id}/{mat}/{corte}', [AsignacionController::class, 'update'])->name('formUpdateAsignacion');
+	Route::get('/asignacion/destroy/{id}/{mat}/{corte}', [AsignacionController::class, 'destroy']);
 });
 
 ///=================================================================================================Trabajos de grado

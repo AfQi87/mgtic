@@ -91,12 +91,13 @@ $('#formRegasignacion').submit(function (e) {
 });
 
 //=============================================================================================Actualizar Corte
-function editarAsignacion(id, mat) {
-  $.get('/asignacion/form/' + id + '/' + mat, function (datos) {
+function editarAsignacion(id, mat, corte) {
+  $.get('/asignacion/form/' + id + '/' + mat + '/' + corte, function (datos) {
     console.log(datos.asignacion[0].nom_persona)
 
     $('#formActAsignacion #id_ced').val(datos.asignacion[0].ced_persona);
     $('#formActAsignacion #id_mat').val(datos.asignacion[0].id_materia);
+    $('#formActAsignacion #id_corte').val(datos.asignacion[0].id_cohorte);
 
     $('#formActAsignacion #docente').val(datos.asignacion[0].nom_persona);
     $('#formActAsignacion #materia').val(datos.asignacion[0].nom_materia);
@@ -148,9 +149,10 @@ $('#formActAsignacion').submit(function (e) {
     formData.append('corte', corte);
     var ced = $('#formActAsignacion #id_ced').val();
     var mate = $('#formActAsignacion #id_mat').val();
+    var corte = $('#formActAsignacion #id_corte').val();
     $.ajax({
       method: "POST",
-      url: "/asignacion/actualizar/" + ced + "/" + mate,
+      url: "/asignacion/actualizar/" + ced + "/" + mate + "/" + corte,
       data: formData,
       contentType: false,
       processData: false,
@@ -165,10 +167,6 @@ $('#formActAsignacion').submit(function (e) {
           Object.keys(response).forEach(key => toastr.error(response[key], 'Error',
             { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" }));
         }
-      },
-      error: function () {
-        toastr.error("Por favor vuelva a intentarlo mas tarde", 'Error',
-          { timeOut: 3000, "closeButton": true, "progressBar": true, "positionClass": "toast-bottom-right" })
       }
     });
   }
@@ -179,6 +177,7 @@ var idMateria;
 $(document).on('click', '.desAsignacion', function () {
   idDocente = $(this).attr('id');
   idMateria = $(this).attr('mat');
+  idCorte = $(this).attr('corte');
 
   Swal.fire({
     title: 'Eliminar Asignación',
@@ -192,7 +191,7 @@ $(document).on('click', '.desAsignacion', function () {
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: "/asignacion/destroy/" + idDocente + "/" + idMateria,
+        url: "/asignacion/destroy/" + idDocente + "/" + idMateria + "/" + idCorte,
         method: "GET",
         success: function (response) {
           if (response == 0) {
@@ -210,8 +209,8 @@ $(document).on('click', '.desAsignacion', function () {
 });
 
 //==========================================================Ver Asignacion
-function verAsignacion(id, mat) {
-  $.get('/asignacion/form/' + id + '/' + mat, function (datos){
+function verAsignacion(id, mat, corte) {
+  $.get('/asignacion/form/' + id + '/' + mat + '/' + corte, function (datos){
     var n = 0;
     $("#tablaVerAsignacion tbody tr").each(function () {
       n++;
