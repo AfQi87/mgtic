@@ -586,73 +586,73 @@
             </div>
           </div>
         </div>
-        <!--- Seccion Planta Docente-->
-        <div class="container">
-          <!--- Divide el contenedor en filas-->
-          <div class="row" >
-            <!-- Fila 1: Planta Docente -->
-            <div class="col-md-12">
-              <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
-                <div class="carousel-inner" id="seccion_azul" style="height: 800px;  overflow: auto;">
-                  @foreach($docentes as $docente)
+      </div>
+    </div>
+    <!--- Fin Seccion Planta Coordinador-->
+    
+    <!--- Seccion Planta Docente-->
+    <div class="container" >
+      <!--- Divide el contenedor en filas-->
+        <div class="row">
+        <!-- Fila 1: Planta Docente -->
+          <div class="col-md-12" >
+            <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
+              <div class="carousel-inner" id="seccion_azul" style="height: 700px;  overflow: auto;" >
+                @foreach($docentes as $docente)
                   @if ($docente->ced_persona == '12967500')
                   @else
-                  <div class="carousel-item {{ $i == 1 ? ' active' : '' }} " data-mdb-interval="3000">
-                    <div class="row">
-                      <div class="col-md-2" align="center"> </div>
-                      <div class="col-md-4" align="center">
-                        <div class="card">
-                          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{$docente->personas->foto != null || $docente->personas->foto != '' ? 'images/docentes/'.$docente->personas->foto : 'avatar/avatar.png' }}" class="img-fluid mt-2" style="height: 500px; width: 400px">
-                          </div>
-                          <div class="card-body">
-                            <a href="{{$docente->cvlac}}" a class="btn btn-primary btn-block" id="botones" target="_blank">Ver CVLAC</a>
-                          </div>
+                <div class="carousel-item {{ $i == 1 ? ' active' : '' }} " data-mdb-interval="3000">
+                  <div class="row">
+                    <div class="col-md-2" align="center"> </div>                  
+                    <div class="col-md-4" align="center"> 
+                      <div class="card">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                          <img src="{{$docente->personas->foto != null || $docente->personas->foto != '' ? 'images/docentes/'.$docente->personas->foto : 'avatar/avatar.png' }}" class="img-fluid mt-2" style="height: 450px; width: 300px">
                         </div>
-
-                      </div>
-                      <div class="col-md-5" align="center">
-                        <br>
-                        <h3><B> {{$docente->personas->nom_persona}}</B> </h3>
-                        <h4> Docente </h4> <BR>
-                        <p style="text-align: justify; overflow: auto; height: 380px">
-                          {{$docente->descripcion}}
-                        </p> <BR>
-                        <p style="text-align: left;">
-                          <b> <i class="fas fa-laptop"></i> Áreas de conocimiento: <br>
-                          <ul>
-                          @foreach($docente->Areas as $area)
-                            <li style="text-align: left;">{{$area->areasC->nom_area_con}}</li>
-                          @endforeach
-                          </ul>
-                          <b style="text-align: left;"> <i class="fas fa-envelope"></i> Correo: </b> {{$docente->personas->email_persona}} <br>
-                          <b style="text-align: left;"> <i class="fas fa-phone"></i> Teléfono: {{$docente->personas->tel_persona}} - {{$docente->personas->cel_persona}}</b>
-                        </p>
+                        <div class="card-body">
+                          <a href="{{$docente->cvlac}}" a class="btn btn-primary btn-block" id="botones" target="_blank">Ver CVLAC</a>
+                        </div>
                       </div>
                     </div>
+                    <div class="col-md-5" align="center"> <br>
+                      <h3><B> {{$docente->personas->nom_persona}}</B>  </h3> 
+                      <h4> Docente </h4> <BR> 
+                      <p style="text-align: justify; overflow: auto; height: 280px; font-size:15px;" >
+                        {{$docente->descripcion}}
+                      </p> 
+                      <p style="text-align: left;">
+                        <i class="fas fa-laptop"></i> Áreas de conocimiento: <br>
+                        <ul style="text-align: left;">
+                        @foreach($docente->Areas as $area)
+                          <li > {{$area->areasC->nom_area_con}}</li>
+                        @endforeach
+                        </ul>
+                      </p>
+                      <p style="text-align: left;font-size:15px;">
+                        <b style="text-align: left;"> <i class="fas fa-envelope"></i> Correo: </b> {{$docente->personas->email_persona}} <br>
+                        <b style="text-align: left;"> <i class="fas fa-phone"></i> Teléfono: {{$docente->personas->cel_persona}}</b>
+                      </p>
+                      
+                    </div>  
                   </div>
+                </div>
                   @endif
                   <?php
                   $i++;
                   ?>
-                  @endforeach
-                </div>
-
-                <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls" data-mdb-slide="prev">
-                  <i class="fas fa-angle-left fa-2x"></i>
-                </button>
-                <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleControls" data-mdb-slide="next">
-                  <i class="fas fa-angle-right fa-2x"></i>
-                </button>
-              </div>
+                @endforeach            
+              <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls" data-mdb-slide="prev">
+                <i class="fas fa-angle-left fa-2x"></i>
+              </button>
+              <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleControls" data-mdb-slide="next">
+                <i class="fas fa-angle-right fa-2x"></i>
+              </button>
             </div>
-
           </div>
         </div>
-        <!--- Fin Seccion Planta Docente-->
-      </div>
     </div>
-    <!--- Fin Seccion Planta Coordinador-->
+    <!--- Fin Seccion Planta Docente-->
+    
 
     <!--- SECCION  Contactos-->
     <div class="main">
@@ -758,7 +758,7 @@
         <a href="https://www.facebook.com/maestria.ticudenar.7" class="me-4 text-reset" target="_blank">
           <i class="fab fa-facebook-f fa-2x"></i>
         </a>
-        <a href="https://api.whatsapp.com/send?phone=573105273727" class="me-4 text-reset" target="_blank">
+        <a href="https://api.whatsapp.com/send?phone=573044709512" class="me-4 text-reset" target="_blank">
           <i class="fab fa-whatsapp fa-2x"></i>
         </a>
         <a href="https://www.instagram.com/mgtic/" class="me-4 text-reset" target="_blank">

@@ -112,7 +112,7 @@
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
-                    <button type="button" class="btn btn-danger cerrar" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger cerrar" data-bs-dismiss="modal">Cerrar</button>
                   </div>
                 </div>
               </div>
@@ -214,7 +214,7 @@
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
-                    <button type="button" class="btn btn-danger cerrar" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger cerrar" data-bs-dismiss="modal">Cerrar</button>
                   </div>
                 </div>
               </div>
@@ -234,7 +234,7 @@
                         <div class="col-md-12">
                           <div class="card ">
                             <div class="card-header card-header-primary">
-                              <h4 class="card-title">Datos Asignación docente</h4>
+                              <h4 class="card-title">Datos Asignación Docente</h4>
                             </div>
                             <div class="card-body ">
                               <div>
@@ -245,8 +245,8 @@
                                         <th>Docente</th>
                                         <th>Materia</th>
                                         <th>Promoción</th>
-                                        <th>Fecha Inició</th>
-                                        <th>Fecha fin</th>
+                                        <th>Fecha Inicio</th>
+                                        <th>Fecha Fin</th>
                                         <th>Resolución</th>
                                         <th>Fecha resolución</th>
                                       </thead>
