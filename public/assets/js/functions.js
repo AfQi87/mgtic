@@ -43,6 +43,15 @@ $(document).ready(function() {
     }
   }
 
+  function scrollInscriptions() {
+
+    if ($('.section-inscriptions').length != 0) {
+      $("html, body").animate({
+        scrollTop: $('.section-inscriptions').offset().top
+      }, 100);
+    }
+  }
+
   function scrollRequirementsGrade() {
 
     if ($('.section-requirements-grade').length != 0) {

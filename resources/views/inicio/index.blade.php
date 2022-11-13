@@ -89,6 +89,13 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)" onclick="scrollInscription()">
+              <i class="fa-regular fa-pen-to-square"></i>
+              <p>Inscripciones</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" href="javascript:void(0)" onclick="scrollRequirementsGrade() ">
               <i class="fas fa-user-graduate fa-2x"></i>
               <p>Requisitos de Grado</p>
@@ -486,6 +493,36 @@
       </div>
     </div>
     <!-- Fin Sección Requisitos de Admisión -->
+
+    <!-- Sección Inscripciones -->
+    <div class="main">
+      <div class="section section-inscriptions">
+        <div id="seccion_azul">
+          <div class="container">
+            <br>
+            <h1 style="text-align: center;"> Inscripciones</h1>
+            <!--- Divide el contenedor en filas-->
+            <div class="row">
+              <div class="col-md-6" align="center">
+                <img src="assets/img/inscripcion.jpg" class="img-fluid">
+              </div>
+              <div class="col-md-6" align="center">
+                <h3 style="text-align: center;">Fechas: 24 de Octubre de 2022 al 31 de Enero de 2023</h3>
+                <br>
+                <h3 style="text-align: center;">Valor: 295.600$</h3>
+                <br>
+                <h3 style="text-align: center;">Pago Pin: <a href="http://ci.udenar.edu.co/pines_vipri">http://ci.udenar.edu.co/pines_vipri</a></h3>
+              </div>
+              <div class="row">
+                <div class="col-md-12" align="center"> <br> <br></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Sección Inscripciones-->
+
 
     <!-- Sección Requisitos de Grado -->
     <div class="main">
