@@ -758,7 +758,10 @@
         <a href="https://www.facebook.com/maestria.ticudenar.7" class="me-4 text-reset" target="_blank">
           <i class="fab fa-facebook-f fa-2x"></i>
         </a>
-        <a href="https://api.whatsapp.com/send?phone=573044709512" class="me-4 text-reset" target="_blank">
+        <a href="https://api.whatsapp.com/send?phone=573001971510" class="me-4 text-reset" target="_blank">
+          <i class="fab fa-whatsapp fa-2x"></i>
+        </a>
+        <a href="https://api.whatsapp.com/send?phone=573014667415" class="me-4 text-reset" target="_blank">
           <i class="fab fa-whatsapp fa-2x"></i>
         </a>
         <a href="https://www.instagram.com/mgtic/" class="me-4 text-reset" target="_blank">
@@ -805,7 +808,7 @@
               <i class="fas fa-envelope me-3"></i>
               mgtic@udenar.edu.co
             </p>
-            <p><i class="fas fa-phone me-3"></i> (+57) 304 470 9512</p>
+            <p><i class="fas fa-phone me-3"></i> (+57) 300 197 1510</p>
           </div>
           <!-- Grid column -->
         </div>
