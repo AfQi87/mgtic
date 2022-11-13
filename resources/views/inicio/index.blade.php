@@ -89,7 +89,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" onclick="scrollInscription()">
+            <a class="nav-link" href="javascript:void(0)" onclick="scrollInscriptions()">
               <i class="fa-regular fa-pen-to-square"></i>
               <p>Inscripciones</p>
             </a>
@@ -208,7 +208,7 @@
                     <i class="fas fa-file-invoice-dollar fa-5x "></i>
                     <p style="text-align: center; font-size: 0.75rem;">
                       <br><b> Valor Inscripción:</b> <br>
-                      $268.600 COP
+                      $295.600 COP
                     </p>
                   </div>
                 </div>
@@ -509,7 +509,7 @@
               <div class="col-md-6" align="center">
                 <h3 style="text-align: center;">Fechas: 24 de Octubre de 2022 al 31 de Enero de 2023</h3>
                 <br>
-                <h3 style="text-align: center;">Valor: 295.600$</h3>
+                <h3 style="text-align: center;">Valor: $295.600 COP</h3>
                 <br>
                 <h3 style="text-align: center;">Pago Pin: <a href="http://ci.udenar.edu.co/pines_vipri">http://ci.udenar.edu.co/pines_vipri</a></h3>
               </div>
