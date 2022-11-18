@@ -90,7 +90,7 @@
 
           <li class="nav-item">
             <a class="nav-link" href="javascript:void(0)" onclick="scrollInscriptions()">
-              <i class="fa-regular fa-pen-to-square"></i>
+              <i class="fas fa-pen-to-square fa-2x"></i>
               <p>Inscripciones</p>
             </a>
           </li>
@@ -468,22 +468,6 @@
                 </p>
 
               </div>
-
-              <div class="row">
-                <div class="col-md-12" align="center"> <br> </div>
-                <!--Fila 2: Botones-->
-                <div class="col-md-6" align="center">
-                  <!-- Boton Pin Vipri -->
-                  <a class="btn btn-primary btn-block" id="botones" href="http://ci.udenar.edu.co/pines_vipri/" target="_blank"> Iniciar Proceso de Inscripción </a>
-                </div>
-
-                <div class="col-md-6" align="center">
-                  <!-- Boton Video Tutorial -->
-                  <button class="btn btn-primary btn-block" id="botones" data-toggle="modal" data-target="#myModal">
-                    Ver Tutorial de Inscripción
-                  </button>
-                </div>
-              </div>
               <div class="row">
                 <div class="col-md-12" align="center"> <br> </div>
               </div>
@@ -497,7 +481,7 @@
     <!-- Sección Inscripciones -->
     <div class="main">
       <div class="section section-inscriptions">
-        <div id="seccion_azul">
+        <div id="seccion_blanca">
           <div class="container">
             <br>
             <h1 style="text-align: center;"> Inscripciones</h1>
@@ -511,8 +495,27 @@
                 <br>
                 <h3 style="text-align: center;">Valor: $295.600 COP</h3>
                 <br>
-                <h3 style="text-align: center;">Pago Pin: <a href="http://ci.udenar.edu.co/pines_vipri">http://ci.udenar.edu.co/pines_vipri</a></h3>
               </div>
+
+
+              <div class="row">
+                
+                <div class="col-md-12" align="center"> <br> </div>
+                <!--Fila 2: Botones-->
+                <div class="col-md-6" align="center">
+                  <!-- Boton Pin Vipri -->
+                  <a class="btn btn-primary btn-block" id="botones" href="http://ci.udenar.edu.co/pines_vipri/" target="_blank"> Pago Pin </a>
+                </div>
+
+                <div class="col-md-6" align="center">
+                  <!-- Boton Video Tutorial -->
+                  <button class="btn btn-primary btn-block" id="botones" data-toggle="modal" data-target="#myModal">
+                    Ver Tutorial de Inscripción
+                  </button>
+                </div>
+
+              </div>
+
               <div class="row">
                 <div class="col-md-12" align="center"> <br> <br></div>
               </div>

@@ -60,8 +60,6 @@ $(document).ready(function() {
       }, 100);
     }
   }
-
-
  
 
   function scrollTeachers() {
