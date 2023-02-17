@@ -114,7 +114,7 @@
 
           <li class="nav-item">
             <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
-              <i class="fas fa-info-circle fa-2x"></i>
+              <i class="fa-sharp fa-solid fa-scroll"></i>
               <p>Contactos</p>
             </a>
           </li>
@@ -481,7 +481,7 @@
     <!-- Sección Inscripciones -->
     <div class="main">
       <div class="section section-inscriptions">
-        <div id="seccion_blanca">
+        <div id="seccion_azul">
           <div class="container">
             <br>
             <h1 style="text-align: center;"> Inscripciones</h1>
@@ -491,7 +491,10 @@
                 <img src="assets/img/inscripcion.jpg" class="img-fluid">
               </div>
               <div class="col-md-6" align="center">
+                <br>
+                <br>
                 <h3 style="text-align: center;">Fechas: 24 de Octubre de 2022 al 31 de Enero de 2023</h3>
+                <br>
                 <br>
                 <h3 style="text-align: center;">Valor: $295.600 COP</h3>
                 <br>
@@ -530,7 +533,7 @@
     <!-- Sección Requisitos de Grado -->
     <div class="main">
       <div class="section section-requirements-grade">
-        <div id="seccion_azul">
+        <div id="seccion_blanca">
           <div class="container">
             <br>
             <h1 style="text-align: center;"> Requisitos de Grado</h1>
@@ -581,7 +584,7 @@
     <!--- Seccion Planta Coordinador-->
 
     <div class="main">
-      <div class="section section-teachers" id="seccion_blanca">
+      <div class="section section-teachers" id="seccion_azul">
         <!-- Fila 1: Planta Docente -->
         <div class="container">
           <h1 style="text-align: center;"> Planta Docente</h1>
@@ -637,7 +640,7 @@
         <!-- Fila 1: Planta Docente -->
           <div class="col-md-12" >
             <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
-              <div class="carousel-inner" id="seccion_azul" style="height: 700px;  overflow: auto;" >
+              <div class="carousel-inner" id="seccion_blanca" style="height: 700px;  overflow: auto;" >
                 @foreach($docentes as $docente)
                   @if ($docente->ced_persona == '12967500')
                   @else
